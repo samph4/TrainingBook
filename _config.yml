@@ -1,7 +1,7 @@
 # Book settings
 title: Ai Training Manual for Maisie & Filipe
-author: Samuel Thompson MEng
-logo: logo.png
+author: Samuel Thompson
+logo: EdLogo.png
 
 latex:
   latex_documents:

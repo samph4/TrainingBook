@@ -1,5 +1,16 @@
 - file: intro
-- file: content
-  sections:
-    - file: markdown
-    - file: notebooks
+
+- part: JupyterBook
+  chapters:
+  - file: markdown
+  - file: notebooks
+  
+- part: Machine Learning Examples
+  chapters:
+  - file: Examples/1_MNIST_MLP
+  - file: Examples/2_MNIST_CNN
+
+- part: Python Support
+  chapters:
+  - file: Python Help/Introduction to Python
+  - file: Python Help/Useful Python Commands
