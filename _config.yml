@@ -1,0 +1,8 @@
+# Book settings
+title: Ai Training Manual for Maisie & Filipe
+author: Samuel Thompson MEng
+logo: logo.png
+
+latex:
+  latex_documents:
+    targetname: book.tex
