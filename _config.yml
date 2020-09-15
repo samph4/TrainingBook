@@ -6,3 +6,9 @@ logo: EdLogo.png
 latex:
   latex_documents:
     targetname: book.tex
+    
+# Information about where the book exists on the web
+repository:
+  url                       : https://github.com/samph4/TrainingBook
+html:
+  use_repository_button: true

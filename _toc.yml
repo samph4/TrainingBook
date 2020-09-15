@@ -7,10 +7,12 @@
   
 - part: Machine Learning Examples
   chapters:
-  - file: Examples/1_MNIST_MLP
+  - file: Examples/1_MNIST_MLP   
   - file: Examples/2_MNIST_CNN
+  - file: Examples/3_LSTM
 
 - part: Python Support
   chapters:
   - file: Python Help/Introduction to Python
   - file: Python Help/Useful Python Commands
+  - file: Python Help/Glossary
