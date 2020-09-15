@@ -6,7 +6,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>1 - MNIST MLP Network &#8212; Ai Training Manual for Maisie &amp; Filipe</title>
+    <title>3 - LSTM Network &#8212; Ai Training Manual for Maisie &amp; Filipe</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" integrity="sha384-KA6wR/X5RY4zFAHpv/CnoG2UW1uogYfdnP67Uv7eULvTveboZJg0qUpmJZb5VqzN" crossorigin="anonymous">
     <link href="../_static/css/index.css" rel="stylesheet">
     <link rel="stylesheet" href="../_static/sphinx-book-theme.css" type="text/css" />
@@ -37,8 +37,8 @@
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="2 - MNIST CNN Network" href="2_MNIST_CNN.html" />
-    <link rel="prev" title="Content with notebooks" href="../notebooks.html" />
+    <link rel="next" title="Introduction to Python" href="../Python%20Help/Introduction%20to%20Python.html" />
+    <link rel="prev" title="2 - MNIST CNN Network" href="2_MNIST_CNN.html" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="docsearch:language" content="en">
@@ -101,8 +101,8 @@
  </span>
 </p>
 <ul class="current nav sidenav_l1">
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
+ <li class="toctree-l1">
+  <a class="reference internal" href="1_MNIST_MLP.html">
    1 - MNIST MLP Network
   </a>
  </li>
@@ -111,8 +111,8 @@
    2 - MNIST CNN Network
   </a>
  </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="3_LSTM.html">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
    3 - LSTM Network
   </a>
  </li>
@@ -180,7 +180,7 @@
         <!-- ipynb file if we had a myst markdown file -->
         
         <!-- Download raw file -->
-        <a class="dropdown-buttons" href="../_sources/Examples/1_MNIST_MLP.ipynb"><button type="button"
+        <a class="dropdown-buttons" href="../_sources/Examples/3_LSTM.ipynb"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
                 data-placement="left">.ipynb</button></a>
         <!-- Download PDF via print -->
@@ -217,7 +217,7 @@
         aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
     <div class="dropdown-buttons">
         
-        <a class="binder-button" href="https://mybinder.org/v2/gh/samph4/TrainingBook/master?urlpath=tree/Examples/1_MNIST_MLP.ipynb"><button type="button"
+        <a class="binder-button" href="https://mybinder.org/v2/gh/samph4/TrainingBook/master?urlpath=tree/Examples/3_LSTM.ipynb"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
                 data-placement="left"><img class="binder-button-logo"
                     src="../_static/images/logo_binder.svg"
@@ -225,7 +225,7 @@
         
         
         
-        <a class="colab-button" href="https://colab.research.google.com/github/samph4/TrainingBook/blob/master/Examples/1_MNIST_MLP.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
+        <a class="colab-button" href="https://colab.research.google.com/github/samph4/TrainingBook/blob/master/Examples/3_LSTM.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
                 title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
                     src="../_static/images/logo_colab.png"
                     alt="Interact on Colab">Colab</button></a>
@@ -305,8 +305,8 @@
         
               <div>
                 
-  <div class="section" id="mnist-mlp-network">
-<h1>1 - MNIST MLP Network<a class="headerlink" href="#mnist-mlp-network" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="lstm-network">
+<h1>3 - LSTM Network<a class="headerlink" href="#lstm-network" title="Permalink to this headline">¶</a></h1>
 <p>Adapted from this tutorial -&gt;
 https://www.machinecurve.com/index.php/2019/07/27/how-to-create-a-basic-mlp-classifier-with-the-keras-sequential-api/</p>
 <p><code class="docutils literal notranslate"><span class="pre">github.com/samph4</span></code></p>
@@ -315,7 +315,7 @@ https://www.machinecurve.com/index.php/2019/07/27/how-to-create-a-basic-mlp-clas
 <h2>Preface<a class="headerlink" href="#preface" title="Permalink to this headline">¶</a></h2>
 <p>By the end of this notebook you (hopefully) should have been able to make a neural network that you get to play around with. It will use a popular dataset known as the MNIST handwritten digits http://yann.lecun.com/exdb/mnist/ which is essentially a massive database containing 60,000 images of handwritten numeric digits from 0-9. We are going to create and train a classification network that will allow you to input a handwritten digit and the trained model should be able to predict or ‘classify’ what digit it is that you input to the network.</p>
 <p>It should be noted at this point that there are many different kinds of neural networks that have been designed to deal with a whole range of applications amidst different problem spaces from natural language processing to self driving cars etc etc. But we’ll start with what is often considered the most simple of neural networks known as the Multi-layer percepron network - a diagram of which is shown below!</p>
-<p><img alt="Image" src="../_images/mlp.png" /></p>
+<p><img alt="Image" src="../_images/lstm.jpg" /></p>
 <p>These networks are excellent at making a prediction (or number of predictions), based on a number of inputs. Simply put, the MLP is a layered network where each layer consists of a number of nodes. These nodes are often referred to as Perceptrons (hence multi-layer perceptron) and they can be thought of as a place where computation occurs (see left image). These nodes take a series of inputs and convert them into a single output. Each node has two important parameters to consider known as a ‘weight’ and a ‘bias’. A weight is something that is specific to each input that enters the node: a numeric input enters the node and is multiplied by its associated numeric weight. The sum of all of the inputs multiplied by their associated weights is summed at the node. At this point, a ‘bias’ is another quantity that is added to the node to modify its output. That output then passes through an activation function (we’ll get to this later) and then depending on how the network is arranged that output will enter a different node in a different layer as an input! During training, the values of these weights and biases are optimised such that their outputs begin to match more closely with the task you are trying to perform. During training, if the output from your network is drastically different to the value you want it to be (the target value), then you can expect the weights and biases to be optimised more rigorously than they would be if there was no difference between its output and its target value - but again I’ll talk more about this later.</p>
 <p>On the right hand side of the figure, you can see that a MLP network is typically split into three key sections:</p>
 <ul class="simple">
@@ -409,8 +409,8 @@ https://www.machinecurve.com/index.php/2019/07/27/how-to-create-a-basic-mlp-clas
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/1_MNIST_MLP_13_0.png" src="../_images/1_MNIST_MLP_13_0.png" />
-<img alt="../_images/1_MNIST_MLP_13_1.png" src="../_images/1_MNIST_MLP_13_1.png" />
+<img alt="../_images/3_LSTM_13_0.png" src="../_images/3_LSTM_13_0.png" />
+<img alt="../_images/3_LSTM_13_1.png" src="../_images/3_LSTM_13_1.png" />
 </div>
 </div>
 </div>
@@ -641,7 +641,7 @@ Epoch 20/20
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/1_MNIST_MLP_30_0.png" src="../_images/1_MNIST_MLP_30_0.png" />
+<img alt="../_images/3_LSTM_30_0.png" src="../_images/3_LSTM_30_0.png" />
 </div>
 </div>
 <p>As you can see, training loss decreases rapidly (noted by the steep gradient). This is perfectly normal, as the model always learns most during the early stages of optimization. Accuracies converge after only one epoch, and still improve during the 10th, albeit slightly.</p>
@@ -680,7 +680,7 @@ Test results - Loss: 0.08917443580453692 - Accuracy: 97.75000214576721%
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/1_MNIST_MLP_34_0.png" src="../_images/1_MNIST_MLP_34_0.png" />
+<img alt="../_images/3_LSTM_34_0.png" src="../_images/3_LSTM_34_0.png" />
 </div>
 </div>
 <p>Note that we reshaped the data in the training set into pixel format so that we can plot it to have a look. Now we need to flatten it again so that it is in the format that that model expects i.e. a vector of 784 elements. We can do this easily by calling the <code class="docutils literal notranslate"><span class="pre">.reshape()</span></code> attribute once again before finally using <code class="docutils literal notranslate"><span class="pre">model.predict()</span></code>.</p>
@@ -733,7 +733,7 @@ Test results - Loss: 0.08917443580453692 - Accuracy: 97.75000214576721%
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/1_MNIST_MLP_38_0.png" src="../_images/1_MNIST_MLP_38_0.png" />
+<img alt="../_images/3_LSTM_38_0.png" src="../_images/3_LSTM_38_0.png" />
 </div>
 </div>
 <p>~ <code class="docutils literal notranslate"><span class="pre">Finished!</span></code></p>
@@ -769,8 +769,8 @@ Test results - Loss: 0.08917443580453692 - Accuracy: 97.75000214576721%
     
     <div class='prev-next-bottom'>
         
-    <a class='left-prev' id="prev-link" href="../notebooks.html" title="previous page">Content with notebooks</a>
-    <a class='right-next' id="next-link" href="2_MNIST_CNN.html" title="next page">2 - MNIST CNN Network</a>
+    <a class='left-prev' id="prev-link" href="2_MNIST_CNN.html" title="previous page">2 - MNIST CNN Network</a>
+    <a class='right-next' id="next-link" href="../Python%20Help/Introduction%20to%20Python.html" title="next page">Introduction to Python</a>
 
     </div>
     <footer class="footer mt-5 mt-md-0">

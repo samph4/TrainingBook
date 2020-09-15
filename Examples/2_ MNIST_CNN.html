@@ -37,8 +37,6 @@
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="3 - LSTM Network" href="3_LSTM.html" />
-    <link rel="prev" title="1 - MNIST MLP Network" href="1_MNIST_MLP.html" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="docsearch:language" content="en">
@@ -100,20 +98,20 @@
   Machine Learning Examples
  </span>
 </p>
-<ul class="current nav sidenav_l1">
+<ul class="nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="1_MNIST_MLP.html">
    1 - MNIST MLP Network
   </a>
  </li>
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
-   2 - MNIST CNN Network
+ <li class="toctree-l1">
+  <a class="reference internal" href="1_MNIST_MLP.html">
+   1 - MNIST MLP Network
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="3_LSTM.html">
-   3 - LSTM Network
+  <a class="reference internal" href="1_MNIST_MLP.html">
+   1 - MNIST MLP Network
   </a>
  </li>
 </ul>
@@ -131,11 +129,6 @@
  <li class="toctree-l1">
   <a class="reference internal" href="../Python%20Help/Useful%20Python%20Commands.html">
    Useful Packages / Commands
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../Python%20Help/Glossary.html">
-   Glossary
   </a>
  </li>
 </ul>
@@ -180,7 +173,7 @@
         <!-- ipynb file if we had a myst markdown file -->
         
         <!-- Download raw file -->
-        <a class="dropdown-buttons" href="../_sources/Examples/2_MNIST_CNN.ipynb"><button type="button"
+        <a class="dropdown-buttons" href="../_sources/Examples/2_ MNIST_CNN.ipynb"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
                 data-placement="left">.ipynb</button></a>
         <!-- Download PDF via print -->
@@ -190,19 +183,6 @@
     
 </div>
         <!-- Source interaction buttons -->
-
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
-        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
-    <div class="dropdown-buttons sourcebuttons">
-        <a class="repository-button"
-            href="https://github.com/samph4/TrainingBook"><button type="button" class="btn btn-secondary topbarbtn"
-                data-toggle="tooltip" data-placement="left" title="Source repository"><i
-                    class="fab fa-github"></i>repository</button></a>
-        
-        
-    </div>
-</div>
 
 
         <!-- Full screen (wrap in <a> to have style consistency -->
@@ -217,7 +197,7 @@
         aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
     <div class="dropdown-buttons">
         
-        <a class="binder-button" href="https://mybinder.org/v2/gh/samph4/TrainingBook/master?urlpath=tree/Examples/2_MNIST_CNN.ipynb"><button type="button"
+        <a class="binder-button" href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/Examples/2_ MNIST_CNN.ipynb"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
                 data-placement="left"><img class="binder-button-logo"
                     src="../_static/images/logo_binder.svg"
@@ -225,7 +205,7 @@
         
         
         
-        <a class="colab-button" href="https://colab.research.google.com/github/samph4/TrainingBook/blob/master/Examples/2_MNIST_CNN.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
+        <a class="colab-button" href="https://colab.research.google.com/github/executablebooks/jupyter-book/blob/master/Examples/2_ MNIST_CNN.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
                 title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
                     src="../_static/images/logo_colab.png"
                     alt="Interact on Colab">Colab</button></a>
@@ -259,11 +239,6 @@
     </a>
    </li>
   </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#test">
-   Test
-  </a>
  </li>
 </ul>
 
@@ -434,870 +409,939 @@ _________________________________________________________________
 Epoch 1/3
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   32/60000 [..............................] - ETA: 55:45 - loss: 2.2376 - accuracy: 0.3125
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   32/60000 [..............................] - ETA: 54:54 - loss: 2.3718 - accuracy: 0.0312
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-  800/60000 [..............................] - ETA: 2:16 - loss: 2.0486 - accuracy: 0.3775 
+ 1056/60000 [..............................] - ETA: 1:40 - loss: 2.0454 - accuracy: 0.3466 
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
- 1568/60000 [..............................] - ETA: 1:10 - loss: 1.7731 - accuracy: 0.5332
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
- 2176/60000 [&gt;.............................] - ETA: 51s - loss: 1.5617 - accuracy: 0.6052 
+ 2016/60000 [&gt;.............................] - ETA: 53s - loss: 1.7237 - accuracy: 0.5268 
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
- 2816/60000 [&gt;.............................] - ETA: 40s - loss: 1.3768 - accuracy: 0.6566
+ 3040/60000 [&gt;.............................] - ETA: 35s - loss: 1.4495 - accuracy: 0.6118
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
- 3744/60000 [&gt;.............................] - ETA: 30s - loss: 1.1884 - accuracy: 0.7011
+ 4032/60000 [=&gt;............................] - ETA: 27s - loss: 1.2493 - accuracy: 0.6652
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
- 4768/60000 [=&gt;............................] - ETA: 24s - loss: 1.0394 - accuracy: 0.7374
+ 5024/60000 [=&gt;............................] - ETA: 22s - loss: 1.1057 - accuracy: 0.7016
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
- 5472/60000 [=&gt;............................] - ETA: 21s - loss: 0.9676 - accuracy: 0.7542
+ 6016/60000 [==&gt;...........................] - ETA: 18s - loss: 1.0050 - accuracy: 0.7269
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
- 6208/60000 [==&gt;...........................] - ETA: 19s - loss: 0.9075 - accuracy: 0.7674
+ 6880/60000 [==&gt;...........................] - ETA: 16s - loss: 0.9356 - accuracy: 0.7448
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
- 6944/60000 [==&gt;...........................] - ETA: 17s - loss: 0.8590 - accuracy: 0.7794
+ 7776/60000 [==&gt;...........................] - ETA: 14s - loss: 0.8790 - accuracy: 0.7595
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
- 7712/60000 [==&gt;...........................] - ETA: 15s - loss: 0.8158 - accuracy: 0.7872
+ 8608/60000 [===&gt;..........................] - ETA: 13s - loss: 0.8333 - accuracy: 0.7709
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
- 8480/60000 [===&gt;..........................] - ETA: 14s - loss: 0.7773 - accuracy: 0.7972
+ 9632/60000 [===&gt;..........................] - ETA: 11s - loss: 0.7898 - accuracy: 0.7825
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
- 9408/60000 [===&gt;..........................] - ETA: 12s - loss: 0.7394 - accuracy: 0.8060
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>10592/60000 [====&gt;.........................] - ETA: 10s - loss: 0.7564 - accuracy: 0.7908
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-10464/60000 [====&gt;.........................] - ETA: 11s - loss: 0.7009 - accuracy: 0.8148
+11520/60000 [====&gt;.........................] - ETA: 9s - loss: 0.7253 - accuracy: 0.7990 
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-11552/60000 [====&gt;.........................] - ETA: 10s - loss: 0.6674 - accuracy: 0.8222
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+12512/60000 [=====&gt;........................] - ETA: 9s - loss: 0.7001 - accuracy: 0.8045
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-12288/60000 [=====&gt;........................] - ETA: 9s - loss: 0.6485 - accuracy: 0.8263 
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+13472/60000 [=====&gt;........................] - ETA: 8s - loss: 0.6755 - accuracy: 0.8106
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+14400/60000 [======&gt;.......................] - ETA: 8s - loss: 0.6564 - accuracy: 0.8155
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+15296/60000 [======&gt;.......................] - ETA: 7s - loss: 0.6393 - accuracy: 0.8200
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+16000/60000 [=======&gt;......................] - ETA: 7s - loss: 0.6253 - accuracy: 0.8229
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+16768/60000 [=======&gt;......................] - ETA: 6s - loss: 0.6117 - accuracy: 0.8263
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+17664/60000 [=======&gt;......................] - ETA: 6s - loss: 0.5983 - accuracy: 0.8299
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+18528/60000 [========&gt;.....................] - ETA: 6s - loss: 0.5861 - accuracy: 0.8326
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+19232/60000 [========&gt;.....................] - ETA: 6s - loss: 0.5743 - accuracy: 0.8355
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+20000/60000 [=========&gt;....................] - ETA: 5s - loss: 0.5673 - accuracy: 0.8375
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+20896/60000 [=========&gt;....................] - ETA: 5s - loss: 0.5570 - accuracy: 0.8403
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>12992/60000 [=====&gt;........................] - ETA: 9s - loss: 0.6309 - accuracy: 0.8307
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>21664/60000 [=========&gt;....................] - ETA: 5s - loss: 0.5496 - accuracy: 0.8426
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-13856/60000 [=====&gt;........................] - ETA: 8s - loss: 0.6139 - accuracy: 0.8347
+22176/60000 [==========&gt;...................] - ETA: 5s - loss: 0.5434 - accuracy: 0.8442
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-14688/60000 [======&gt;.......................] - ETA: 8s - loss: 0.5993 - accuracy: 0.8377
+22720/60000 [==========&gt;...................] - ETA: 5s - loss: 0.5372 - accuracy: 0.8459
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-15520/60000 [======&gt;.......................] - ETA: 7s - loss: 0.5850 - accuracy: 0.8409
+23328/60000 [==========&gt;...................] - ETA: 4s - loss: 0.5311 - accuracy: 0.8476
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-16288/60000 [=======&gt;......................] - ETA: 7s - loss: 0.5748 - accuracy: 0.8436
+23840/60000 [==========&gt;...................] - ETA: 4s - loss: 0.5261 - accuracy: 0.8493
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-17056/60000 [=======&gt;......................] - ETA: 7s - loss: 0.5648 - accuracy: 0.8453
+24384/60000 [===========&gt;..................] - ETA: 4s - loss: 0.5211 - accuracy: 0.8507
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-17920/60000 [=======&gt;......................] - ETA: 6s - loss: 0.5511 - accuracy: 0.8482
+25088/60000 [===========&gt;..................] - ETA: 4s - loss: 0.5142 - accuracy: 0.8526
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>18944/60000 [========&gt;.....................] - ETA: 6s - loss: 0.5395 - accuracy: 0.8517
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-19616/60000 [========&gt;.....................] - ETA: 6s - loss: 0.5309 - accuracy: 0.8535
+25600/60000 [===========&gt;..................] - ETA: 4s - loss: 0.5107 - accuracy: 0.8536
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-20384/60000 [=========&gt;....................] - ETA: 5s - loss: 0.5213 - accuracy: 0.8562
+26272/60000 [============&gt;.................] - ETA: 4s - loss: 0.5072 - accuracy: 0.8547
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-21216/60000 [=========&gt;....................] - ETA: 5s - loss: 0.5135 - accuracy: 0.8582
+26912/60000 [============&gt;.................] - ETA: 4s - loss: 0.5036 - accuracy: 0.8553
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-22048/60000 [==========&gt;...................] - ETA: 5s - loss: 0.5044 - accuracy: 0.8605
+27648/60000 [============&gt;.................] - ETA: 4s - loss: 0.4994 - accuracy: 0.8566
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-22848/60000 [==========&gt;...................] - ETA: 5s - loss: 0.4964 - accuracy: 0.8625
+28352/60000 [=============&gt;................] - ETA: 3s - loss: 0.4942 - accuracy: 0.8579
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-23680/60000 [==========&gt;...................] - ETA: 5s - loss: 0.4890 - accuracy: 0.8645
+29088/60000 [=============&gt;................] - ETA: 3s - loss: 0.4906 - accuracy: 0.8588
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-24736/60000 [===========&gt;..................] - ETA: 4s - loss: 0.4804 - accuracy: 0.8666
+29856/60000 [=============&gt;................] - ETA: 3s - loss: 0.4839 - accuracy: 0.8606
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-25824/60000 [===========&gt;..................] - ETA: 4s - loss: 0.4712 - accuracy: 0.8688
+30528/60000 [==============&gt;...............] - ETA: 3s - loss: 0.4793 - accuracy: 0.8618
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-26656/60000 [============&gt;.................] - ETA: 4s - loss: 0.4645 - accuracy: 0.8703
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-27424/60000 [============&gt;.................] - ETA: 4s - loss: 0.4585 - accuracy: 0.8716
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-28192/60000 [=============&gt;................] - ETA: 3s - loss: 0.4562 - accuracy: 0.8722
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-28928/60000 [=============&gt;................] - ETA: 3s - loss: 0.4507 - accuracy: 0.8733
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-29664/60000 [=============&gt;................] - ETA: 3s - loss: 0.4461 - accuracy: 0.8745
+31040/60000 [==============&gt;...............] - ETA: 3s - loss: 0.4757 - accuracy: 0.8629
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>30400/60000 [==============&gt;...............] - ETA: 3s - loss: 0.4417 - accuracy: 0.8757
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>31488/60000 [==============&gt;...............] - ETA: 3s - loss: 0.4732 - accuracy: 0.8636
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-31328/60000 [==============&gt;...............] - ETA: 3s - loss: 0.4357 - accuracy: 0.8775
+32320/60000 [===============&gt;..............] - ETA: 3s - loss: 0.4685 - accuracy: 0.8651
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-32320/60000 [===============&gt;..............] - ETA: 3s - loss: 0.4299 - accuracy: 0.8787
+33088/60000 [===============&gt;..............] - ETA: 3s - loss: 0.4647 - accuracy: 0.8661
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-33376/60000 [===============&gt;..............] - ETA: 3s - loss: 0.4239 - accuracy: 0.8804
+33888/60000 [===============&gt;..............] - ETA: 3s - loss: 0.4609 - accuracy: 0.8672
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-34400/60000 [================&gt;.............] - ETA: 2s - loss: 0.4180 - accuracy: 0.8820
+34592/60000 [================&gt;.............] - ETA: 2s - loss: 0.4562 - accuracy: 0.8686
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-35424/60000 [================&gt;.............] - ETA: 2s - loss: 0.4138 - accuracy: 0.8833
+35264/60000 [================&gt;.............] - ETA: 2s - loss: 0.4530 - accuracy: 0.8696
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-36320/60000 [=================&gt;............] - ETA: 2s - loss: 0.4084 - accuracy: 0.8849
+36032/60000 [=================&gt;............] - ETA: 2s - loss: 0.4506 - accuracy: 0.8701
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>37184/60000 [=================&gt;............] - ETA: 2s - loss: 0.4056 - accuracy: 0.8856
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-38048/60000 [==================&gt;...........] - ETA: 2s - loss: 0.4011 - accuracy: 0.8870
+36768/60000 [=================&gt;............] - ETA: 2s - loss: 0.4468 - accuracy: 0.8711
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-38912/60000 [==================&gt;...........] - ETA: 2s - loss: 0.3969 - accuracy: 0.8880
+37728/60000 [=================&gt;............] - ETA: 2s - loss: 0.4428 - accuracy: 0.8723
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-39808/60000 [==================&gt;...........] - ETA: 2s - loss: 0.3932 - accuracy: 0.8888
+38624/60000 [==================&gt;...........] - ETA: 2s - loss: 0.4388 - accuracy: 0.8735
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>40736/60000 [===================&gt;..........] - ETA: 2s - loss: 0.3909 - accuracy: 0.8895
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-41632/60000 [===================&gt;..........] - ETA: 1s - loss: 0.3882 - accuracy: 0.8903
+39456/60000 [==================&gt;...........] - ETA: 2s - loss: 0.4357 - accuracy: 0.8745
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-42496/60000 [====================&gt;.........] - ETA: 1s - loss: 0.3841 - accuracy: 0.8913
+40000/60000 [===================&gt;..........] - ETA: 2s - loss: 0.4338 - accuracy: 0.8750
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-43392/60000 [====================&gt;.........] - ETA: 1s - loss: 0.3809 - accuracy: 0.8922
+40832/60000 [===================&gt;..........] - ETA: 2s - loss: 0.4299 - accuracy: 0.8762
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+41632/60000 [===================&gt;..........] - ETA: 1s - loss: 0.4262 - accuracy: 0.8770
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>44384/60000 [=====================&gt;........] - ETA: 1s - loss: 0.3767 - accuracy: 0.8935
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+42400/60000 [====================&gt;.........] - ETA: 1s - loss: 0.4241 - accuracy: 0.8779
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+43264/60000 [====================&gt;.........] - ETA: 1s - loss: 0.4213 - accuracy: 0.8788
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>45504/60000 [=====================&gt;........] - ETA: 1s - loss: 0.3728 - accuracy: 0.8946
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>43968/60000 [====================&gt;.........] - ETA: 1s - loss: 0.4187 - accuracy: 0.8796
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-46592/60000 [======================&gt;.......] - ETA: 1s - loss: 0.3693 - accuracy: 0.8956
+44736/60000 [=====================&gt;........] - ETA: 1s - loss: 0.4161 - accuracy: 0.8802
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-47680/60000 [======================&gt;.......] - ETA: 1s - loss: 0.3660 - accuracy: 0.8966
+45472/60000 [=====================&gt;........] - ETA: 1s - loss: 0.4134 - accuracy: 0.8811
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-48768/60000 [=======================&gt;......] - ETA: 1s - loss: 0.3633 - accuracy: 0.8974
+46048/60000 [======================&gt;.......] - ETA: 1s - loss: 0.4114 - accuracy: 0.8814
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-49888/60000 [=======================&gt;......] - ETA: 0s - loss: 0.3599 - accuracy: 0.8984
+46816/60000 [======================&gt;.......] - ETA: 1s - loss: 0.4091 - accuracy: 0.8820
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-50976/60000 [========================&gt;.....] - ETA: 0s - loss: 0.3565 - accuracy: 0.8994
+47680/60000 [======================&gt;.......] - ETA: 1s - loss: 0.4060 - accuracy: 0.8827
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-52096/60000 [=========================&gt;....] - ETA: 0s - loss: 0.3537 - accuracy: 0.9003
+48416/60000 [=======================&gt;......] - ETA: 1s - loss: 0.4034 - accuracy: 0.8836
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+49184/60000 [=======================&gt;......] - ETA: 1s - loss: 0.4014 - accuracy: 0.8842
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+49952/60000 [=======================&gt;......] - ETA: 1s - loss: 0.3999 - accuracy: 0.8846
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+50720/60000 [========================&gt;.....] - ETA: 0s - loss: 0.3973 - accuracy: 0.8854
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+51488/60000 [========================&gt;.....] - ETA: 0s - loss: 0.3946 - accuracy: 0.8861
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+52352/60000 [=========================&gt;....] - ETA: 0s - loss: 0.3921 - accuracy: 0.8868
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+53248/60000 [=========================&gt;....] - ETA: 0s - loss: 0.3894 - accuracy: 0.8876
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+54112/60000 [==========================&gt;...] - ETA: 0s - loss: 0.3876 - accuracy: 0.8882
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+55104/60000 [==========================&gt;...] - ETA: 0s - loss: 0.3856 - accuracy: 0.8889
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+56064/60000 [===========================&gt;..] - ETA: 0s - loss: 0.3828 - accuracy: 0.8898
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+56832/60000 [===========================&gt;..] - ETA: 0s - loss: 0.3811 - accuracy: 0.8903
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>53216/60000 [=========================&gt;....] - ETA: 0s - loss: 0.3501 - accuracy: 0.9013
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>57728/60000 [===========================&gt;..] - ETA: 0s - loss: 0.3787 - accuracy: 0.8909
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-54272/60000 [==========================&gt;...] - ETA: 0s - loss: 0.3472 - accuracy: 0.9021
+58528/60000 [============================&gt;.] - ETA: 0s - loss: 0.3767 - accuracy: 0.8914
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-55360/60000 [==========================&gt;...] - ETA: 0s - loss: 0.3445 - accuracy: 0.9028
+59072/60000 [============================&gt;.] - ETA: 0s - loss: 0.3764 - accuracy: 0.8915
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-56352/60000 [===========================&gt;..] - ETA: 0s - loss: 0.3419 - accuracy: 0.9034
+59936/60000 [============================&gt;.] - ETA: 0s - loss: 0.3743 - accuracy: 0.8922
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>57376/60000 [===========================&gt;..] - ETA: 0s - loss: 0.3393 - accuracy: 0.9041
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-58400/60000 [============================&gt;.] - ETA: 0s - loss: 0.3368 - accuracy: 0.9049
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-59520/60000 [============================&gt;.] - ETA: 0s - loss: 0.3343 - accuracy: 0.9056
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-60000/60000 [==============================] - 6s 98us/sample - loss: 0.3333 - accuracy: 0.9058 - val_loss: 0.1874 - val_accuracy: 0.9465
+60000/60000 [==============================] - 6s 107us/sample - loss: 0.3740 - accuracy: 0.8923 - val_loss: 0.2247 - val_accuracy: 0.9352
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 2/3
 
-   32/60000 [..............................] - ETA: 3s - loss: 0.1977 - accuracy: 0.9688
+   32/60000 [..............................] - ETA: 7s - loss: 0.3398 - accuracy: 0.8750
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
- 1088/60000 [..............................] - ETA: 2s - loss: 0.1992 - accuracy: 0.9403
+  960/60000 [..............................] - ETA: 3s - loss: 0.2561 - accuracy: 0.9385
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
- 2176/60000 [&gt;.............................] - ETA: 2s - loss: 0.1876 - accuracy: 0.9453
+ 1824/60000 [..............................] - ETA: 3s - loss: 0.2571 - accuracy: 0.9348
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
- 3008/60000 [&gt;.............................] - ETA: 2s - loss: 0.1879 - accuracy: 0.9471
+ 2752/60000 [&gt;.............................] - ETA: 3s - loss: 0.2490 - accuracy: 0.9306
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
- 3712/60000 [&gt;.............................] - ETA: 3s - loss: 0.1860 - accuracy: 0.9469
+ 3680/60000 [&gt;.............................] - ETA: 3s - loss: 0.2490 - accuracy: 0.9302
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
- 4352/60000 [=&gt;............................] - ETA: 3s - loss: 0.1895 - accuracy: 0.9467
+ 4640/60000 [=&gt;............................] - ETA: 3s - loss: 0.2350 - accuracy: 0.9341
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
- 4992/60000 [=&gt;............................] - ETA: 3s - loss: 0.1875 - accuracy: 0.9465
+ 5600/60000 [=&gt;............................] - ETA: 3s - loss: 0.2417 - accuracy: 0.9320
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
- 5664/60000 [=&gt;............................] - ETA: 3s - loss: 0.1910 - accuracy: 0.9458
+ 6528/60000 [==&gt;...........................] - ETA: 2s - loss: 0.2384 - accuracy: 0.9338
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
- 6432/60000 [==&gt;...........................] - ETA: 3s - loss: 0.1879 - accuracy: 0.9462
+ 7424/60000 [==&gt;...........................] - ETA: 2s - loss: 0.2365 - accuracy: 0.9348
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
- 7168/60000 [==&gt;...........................] - ETA: 3s - loss: 0.1914 - accuracy: 0.9448
+ 7968/60000 [==&gt;...........................] - ETA: 3s - loss: 0.2336 - accuracy: 0.9362
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
- 8224/60000 [===&gt;..........................] - ETA: 3s - loss: 0.1935 - accuracy: 0.9447
+ 8864/60000 [===&gt;..........................] - ETA: 3s - loss: 0.2307 - accuracy: 0.9366
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
- 9312/60000 [===&gt;..........................] - ETA: 3s - loss: 0.1960 - accuracy: 0.9438
+ 9760/60000 [===&gt;..........................] - ETA: 2s - loss: 0.2302 - accuracy: 0.9369
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-10016/60000 [====&gt;.........................] - ETA: 3s - loss: 0.1930 - accuracy: 0.9445
+10656/60000 [====&gt;.........................] - ETA: 2s - loss: 0.2278 - accuracy: 0.9370
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-10720/60000 [====&gt;.........................] - ETA: 3s - loss: 0.1945 - accuracy: 0.9441
+11360/60000 [====&gt;.........................] - ETA: 2s - loss: 0.2294 - accuracy: 0.9366
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-11456/60000 [====&gt;.........................] - ETA: 3s - loss: 0.1933 - accuracy: 0.9444
+11936/60000 [====&gt;.........................] - ETA: 2s - loss: 0.2274 - accuracy: 0.9370
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-12192/60000 [=====&gt;........................] - ETA: 3s - loss: 0.1934 - accuracy: 0.9439
+12352/60000 [=====&gt;........................] - ETA: 2s - loss: 0.2283 - accuracy: 0.9371
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-12928/60000 [=====&gt;........................] - ETA: 3s - loss: 0.1924 - accuracy: 0.9439
+12768/60000 [=====&gt;........................] - ETA: 3s - loss: 0.2276 - accuracy: 0.9371
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-13760/60000 [=====&gt;........................] - ETA: 2s - loss: 0.1930 - accuracy: 0.9435
+13152/60000 [=====&gt;........................] - ETA: 3s - loss: 0.2261 - accuracy: 0.9375
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-14816/60000 [======&gt;.......................] - ETA: 2s - loss: 0.1926 - accuracy: 0.9435
+13664/60000 [=====&gt;........................] - ETA: 3s - loss: 0.2263 - accuracy: 0.9374
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-15936/60000 [======&gt;.......................] - ETA: 2s - loss: 0.1907 - accuracy: 0.9439
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-17056/60000 [=======&gt;......................] - ETA: 2s - loss: 0.1881 - accuracy: 0.9450
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-18112/60000 [========&gt;.....................] - ETA: 2s - loss: 0.1862 - accuracy: 0.9458
+14496/60000 [======&gt;.......................] - ETA: 3s - loss: 0.2252 - accuracy: 0.9376
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>19200/60000 [========&gt;.....................] - ETA: 2s - loss: 0.1836 - accuracy: 0.9466
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>15392/60000 [======&gt;.......................] - ETA: 3s - loss: 0.2234 - accuracy: 0.9380
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-20224/60000 [=========&gt;....................] - ETA: 2s - loss: 0.1845 - accuracy: 0.9462
+16352/60000 [=======&gt;......................] - ETA: 2s - loss: 0.2220 - accuracy: 0.9374
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-21344/60000 [=========&gt;....................] - ETA: 2s - loss: 0.1830 - accuracy: 0.9471
+17344/60000 [=======&gt;......................] - ETA: 2s - loss: 0.2203 - accuracy: 0.9377
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-22464/60000 [==========&gt;...................] - ETA: 2s - loss: 0.1818 - accuracy: 0.9476
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-23584/60000 [==========&gt;...................] - ETA: 2s - loss: 0.1803 - accuracy: 0.9483
+18464/60000 [========&gt;.....................] - ETA: 2s - loss: 0.2207 - accuracy: 0.9379
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>24704/60000 [===========&gt;..................] - ETA: 1s - loss: 0.1787 - accuracy: 0.9487
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>19584/60000 [========&gt;.....................] - ETA: 2s - loss: 0.2204 - accuracy: 0.9379
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-25824/60000 [===========&gt;..................] - ETA: 1s - loss: 0.1775 - accuracy: 0.9492
+20736/60000 [=========&gt;....................] - ETA: 2s - loss: 0.2192 - accuracy: 0.9382
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-26944/60000 [============&gt;.................] - ETA: 1s - loss: 0.1767 - accuracy: 0.9495
+21856/60000 [=========&gt;....................] - ETA: 2s - loss: 0.2183 - accuracy: 0.9387
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-28064/60000 [=============&gt;................] - ETA: 1s - loss: 0.1765 - accuracy: 0.9492
+22784/60000 [==========&gt;...................] - ETA: 2s - loss: 0.2176 - accuracy: 0.9389
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-29184/60000 [=============&gt;................] - ETA: 1s - loss: 0.1752 - accuracy: 0.9498
+23616/60000 [==========&gt;...................] - ETA: 2s - loss: 0.2191 - accuracy: 0.9384
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-30208/60000 [==============&gt;...............] - ETA: 1s - loss: 0.1750 - accuracy: 0.9497
+24544/60000 [===========&gt;..................] - ETA: 2s - loss: 0.2193 - accuracy: 0.9381
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-31200/60000 [==============&gt;...............] - ETA: 1s - loss: 0.1731 - accuracy: 0.9503
+25504/60000 [===========&gt;..................] - ETA: 2s - loss: 0.2166 - accuracy: 0.9387
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-32224/60000 [===============&gt;..............] - ETA: 1s - loss: 0.1723 - accuracy: 0.9502
+26336/60000 [============&gt;.................] - ETA: 2s - loss: 0.2155 - accuracy: 0.9390
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-33152/60000 [===============&gt;..............] - ETA: 1s - loss: 0.1722 - accuracy: 0.9504
+27072/60000 [============&gt;.................] - ETA: 2s - loss: 0.2150 - accuracy: 0.9392
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-34144/60000 [================&gt;.............] - ETA: 1s - loss: 0.1713 - accuracy: 0.9507
+27840/60000 [============&gt;.................] - ETA: 1s - loss: 0.2140 - accuracy: 0.9394
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-34912/60000 [================&gt;.............] - ETA: 1s - loss: 0.1709 - accuracy: 0.9508
+28672/60000 [=============&gt;................] - ETA: 1s - loss: 0.2138 - accuracy: 0.9397
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>35808/60000 [================&gt;.............] - ETA: 1s - loss: 0.1718 - accuracy: 0.9506
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-36800/60000 [=================&gt;............] - ETA: 1s - loss: 0.1715 - accuracy: 0.9508
+29568/60000 [=============&gt;................] - ETA: 1s - loss: 0.2136 - accuracy: 0.9396
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-37760/60000 [=================&gt;............] - ETA: 1s - loss: 0.1708 - accuracy: 0.9511
+30272/60000 [==============&gt;...............] - ETA: 1s - loss: 0.2130 - accuracy: 0.9395
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-38784/60000 [==================&gt;...........] - ETA: 1s - loss: 0.1707 - accuracy: 0.9510
+31136/60000 [==============&gt;...............] - ETA: 1s - loss: 0.2122 - accuracy: 0.9396
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-39776/60000 [==================&gt;...........] - ETA: 1s - loss: 0.1704 - accuracy: 0.9510
+32032/60000 [===============&gt;..............] - ETA: 1s - loss: 0.2104 - accuracy: 0.9399
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-40832/60000 [===================&gt;..........] - ETA: 1s - loss: 0.1695 - accuracy: 0.9512
+32992/60000 [===============&gt;..............] - ETA: 1s - loss: 0.2093 - accuracy: 0.9403
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-41888/60000 [===================&gt;..........] - ETA: 0s - loss: 0.1689 - accuracy: 0.9514
+33856/60000 [===============&gt;..............] - ETA: 1s - loss: 0.2087 - accuracy: 0.9405
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-42912/60000 [====================&gt;.........] - ETA: 0s - loss: 0.1680 - accuracy: 0.9516
+34880/60000 [================&gt;.............] - ETA: 1s - loss: 0.2078 - accuracy: 0.9408
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>44032/60000 [=====================&gt;........] - ETA: 0s - loss: 0.1671 - accuracy: 0.9519
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-45120/60000 [=====================&gt;........] - ETA: 0s - loss: 0.1665 - accuracy: 0.9521
+35872/60000 [================&gt;.............] - ETA: 1s - loss: 0.2079 - accuracy: 0.9408
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-46176/60000 [======================&gt;.......] - ETA: 0s - loss: 0.1663 - accuracy: 0.9522
+36896/60000 [=================&gt;............] - ETA: 1s - loss: 0.2062 - accuracy: 0.9411
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-47296/60000 [======================&gt;.......] - ETA: 0s - loss: 0.1662 - accuracy: 0.9521
+37952/60000 [=================&gt;............] - ETA: 1s - loss: 0.2055 - accuracy: 0.9411
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>48416/60000 [=======================&gt;......] - ETA: 0s - loss: 0.1667 - accuracy: 0.9520
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-49472/60000 [=======================&gt;......] - ETA: 0s - loss: 0.1664 - accuracy: 0.9520
+38304/60000 [==================&gt;...........] - ETA: 1s - loss: 0.2057 - accuracy: 0.9410
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-50592/60000 [========================&gt;.....] - ETA: 0s - loss: 0.1659 - accuracy: 0.9521
+38688/60000 [==================&gt;...........] - ETA: 1s - loss: 0.2052 - accuracy: 0.9411
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-51712/60000 [========================&gt;.....] - ETA: 0s - loss: 0.1655 - accuracy: 0.9524
+39232/60000 [==================&gt;...........] - ETA: 1s - loss: 0.2048 - accuracy: 0.9411
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>52832/60000 [=========================&gt;....] - ETA: 0s - loss: 0.1652 - accuracy: 0.9524
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-53952/60000 [=========================&gt;....] - ETA: 0s - loss: 0.1645 - accuracy: 0.9526
+40160/60000 [===================&gt;..........] - ETA: 1s - loss: 0.2050 - accuracy: 0.9413
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-55040/60000 [==========================&gt;...] - ETA: 0s - loss: 0.1644 - accuracy: 0.9528
+40928/60000 [===================&gt;..........] - ETA: 1s - loss: 0.2052 - accuracy: 0.9411
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-56160/60000 [===========================&gt;..] - ETA: 0s - loss: 0.1637 - accuracy: 0.9530
+41536/60000 [===================&gt;..........] - ETA: 1s - loss: 0.2045 - accuracy: 0.9413
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>57248/60000 [===========================&gt;..] - ETA: 0s - loss: 0.1631 - accuracy: 0.9532
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-58272/60000 [============================&gt;.] - ETA: 0s - loss: 0.1629 - accuracy: 0.9534
+42176/60000 [====================&gt;.........] - ETA: 1s - loss: 0.2046 - accuracy: 0.9413
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-59296/60000 [============================&gt;.] - ETA: 0s - loss: 0.1622 - accuracy: 0.9537
+42944/60000 [====================&gt;.........] - ETA: 1s - loss: 0.2041 - accuracy: 0.9414
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-60000/60000 [==============================] - 4s 60us/sample - loss: 0.1616 - accuracy: 0.9538 - val_loss: 0.1311 - val_accuracy: 0.9591
+43840/60000 [====================&gt;.........] - ETA: 1s - loss: 0.2033 - accuracy: 0.9417
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+44608/60000 [=====================&gt;........] - ETA: 0s - loss: 0.2026 - accuracy: 0.9420
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+45280/60000 [=====================&gt;........] - ETA: 0s - loss: 0.2023 - accuracy: 0.9421
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+45952/60000 [=====================&gt;........] - ETA: 0s - loss: 0.2023 - accuracy: 0.9422
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+46816/60000 [======================&gt;.......] - ETA: 0s - loss: 0.2018 - accuracy: 0.9424
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+47648/60000 [======================&gt;.......] - ETA: 0s - loss: 0.2010 - accuracy: 0.9427
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+48448/60000 [=======================&gt;......] - ETA: 0s - loss: 0.2003 - accuracy: 0.9428
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+49184/60000 [=======================&gt;......] - ETA: 0s - loss: 0.2000 - accuracy: 0.9428
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+50016/60000 [========================&gt;.....] - ETA: 0s - loss: 0.1989 - accuracy: 0.9431
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+50560/60000 [========================&gt;.....] - ETA: 0s - loss: 0.1987 - accuracy: 0.9432
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+51136/60000 [========================&gt;.....] - ETA: 0s - loss: 0.1984 - accuracy: 0.9433
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+51776/60000 [========================&gt;.....] - ETA: 0s - loss: 0.1979 - accuracy: 0.9434
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+52480/60000 [=========================&gt;....] - ETA: 0s - loss: 0.1969 - accuracy: 0.9436
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+52832/60000 [=========================&gt;....] - ETA: 0s - loss: 0.1969 - accuracy: 0.9435
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+53600/60000 [=========================&gt;....] - ETA: 0s - loss: 0.1960 - accuracy: 0.9438
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+54240/60000 [==========================&gt;...] - ETA: 0s - loss: 0.1957 - accuracy: 0.9438
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+55072/60000 [==========================&gt;...] - ETA: 0s - loss: 0.1956 - accuracy: 0.9439
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+56000/60000 [===========================&gt;..] - ETA: 0s - loss: 0.1954 - accuracy: 0.9440
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+56960/60000 [===========================&gt;..] - ETA: 0s - loss: 0.1951 - accuracy: 0.9441
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+58016/60000 [============================&gt;.] - ETA: 0s - loss: 0.1945 - accuracy: 0.9444
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+59168/60000 [============================&gt;.] - ETA: 0s - loss: 0.1939 - accuracy: 0.9447
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+60000/60000 [==============================] - 5s 81us/sample - loss: 0.1931 - accuracy: 0.9448 - val_loss: 0.1503 - val_accuracy: 0.9592
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 3/3
 
-   32/60000 [..............................] - ETA: 3s - loss: 0.0273 - accuracy: 1.0000
+   32/60000 [..............................] - ETA: 3s - loss: 0.0849 - accuracy: 0.9688
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-  992/60000 [..............................] - ETA: 3s - loss: 0.1478 - accuracy: 0.9617
+  800/60000 [..............................] - ETA: 3s - loss: 0.1419 - accuracy: 0.9575
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
- 1952/60000 [..............................] - ETA: 3s - loss: 0.1481 - accuracy: 0.9652
+ 1600/60000 [..............................] - ETA: 3s - loss: 0.1366 - accuracy: 0.9588
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
- 2944/60000 [&gt;.............................] - ETA: 3s - loss: 0.1417 - accuracy: 0.9643
+ 2336/60000 [&gt;.............................] - ETA: 3s - loss: 0.1374 - accuracy: 0.9589
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
- 3936/60000 [&gt;.............................] - ETA: 2s - loss: 0.1363 - accuracy: 0.9644
+ 3136/60000 [&gt;.............................] - ETA: 3s - loss: 0.1335 - accuracy: 0.9595
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
- 4960/60000 [=&gt;............................] - ETA: 2s - loss: 0.1410 - accuracy: 0.9613
+ 3968/60000 [&gt;.............................] - ETA: 3s - loss: 0.1371 - accuracy: 0.9584
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+ 4768/60000 [=&gt;............................] - ETA: 3s - loss: 0.1356 - accuracy: 0.9587
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 5984/60000 [=&gt;............................] - ETA: 2s - loss: 0.1410 - accuracy: 0.9612
-</pre></div>
-</div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
- 6976/60000 [==&gt;...........................] - ETA: 2s - loss: 0.1414 - accuracy: 0.9607
+ 5504/60000 [=&gt;............................] - ETA: 3s - loss: 0.1372 - accuracy: 0.9582
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
- 7968/60000 [==&gt;...........................] - ETA: 2s - loss: 0.1411 - accuracy: 0.9612
+ 6240/60000 [==&gt;...........................] - ETA: 3s - loss: 0.1397 - accuracy: 0.9580
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
- 9024/60000 [===&gt;..........................] - ETA: 2s - loss: 0.1365 - accuracy: 0.9625
+ 6912/60000 [==&gt;...........................] - ETA: 3s - loss: 0.1435 - accuracy: 0.9570
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>10112/60000 [====&gt;.........................] - ETA: 2s - loss: 0.1351 - accuracy: 0.9631
+ 7328/60000 [==&gt;...........................] - ETA: 3s - loss: 0.1437 - accuracy: 0.9566
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-11168/60000 [====&gt;.........................] - ETA: 2s - loss: 0.1337 - accuracy: 0.9625
+ 7776/60000 [==&gt;...........................] - ETA: 3s - loss: 0.1419 - accuracy: 0.9576
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-12192/60000 [=====&gt;........................] - ETA: 2s - loss: 0.1332 - accuracy: 0.9624
+ 8480/60000 [===&gt;..........................] - ETA: 3s - loss: 0.1438 - accuracy: 0.9572
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-12960/60000 [=====&gt;........................] - ETA: 2s - loss: 0.1318 - accuracy: 0.9629
+ 9152/60000 [===&gt;..........................] - ETA: 3s - loss: 0.1458 - accuracy: 0.9571
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-13568/60000 [=====&gt;........................] - ETA: 2s - loss: 0.1318 - accuracy: 0.9630
+ 9984/60000 [===&gt;..........................] - ETA: 3s - loss: 0.1432 - accuracy: 0.9575
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-14208/60000 [======&gt;.......................] - ETA: 2s - loss: 0.1310 - accuracy: 0.9630
+10848/60000 [====&gt;.........................] - ETA: 3s - loss: 0.1416 - accuracy: 0.9578
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-14848/60000 [======&gt;.......................] - ETA: 2s - loss: 0.1310 - accuracy: 0.9628
+11584/60000 [====&gt;.........................] - ETA: 3s - loss: 0.1414 - accuracy: 0.9580
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+12320/60000 [=====&gt;........................] - ETA: 3s - loss: 0.1417 - accuracy: 0.9582
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>15584/60000 [======&gt;.......................] - ETA: 2s - loss: 0.1311 - accuracy: 0.9630
-</pre></div>
-</div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-16288/60000 [=======&gt;......................] - ETA: 2s - loss: 0.1297 - accuracy: 0.9632
+13056/60000 [=====&gt;........................] - ETA: 3s - loss: 0.1410 - accuracy: 0.9583
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-17120/60000 [=======&gt;......................] - ETA: 2s - loss: 0.1301 - accuracy: 0.9634
+13472/60000 [=====&gt;........................] - ETA: 3s - loss: 0.1431 - accuracy: 0.9578
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-17856/60000 [=======&gt;......................] - ETA: 2s - loss: 0.1300 - accuracy: 0.9633
+14080/60000 [======&gt;.......................] - ETA: 3s - loss: 0.1430 - accuracy: 0.9576
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-18560/60000 [========&gt;.....................] - ETA: 2s - loss: 0.1303 - accuracy: 0.9633
+14560/60000 [======&gt;.......................] - ETA: 3s - loss: 0.1431 - accuracy: 0.9576
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-19168/60000 [========&gt;.....................] - ETA: 2s - loss: 0.1316 - accuracy: 0.9629
+15040/60000 [======&gt;.......................] - ETA: 3s - loss: 0.1438 - accuracy: 0.9577
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-19776/60000 [========&gt;.....................] - ETA: 2s - loss: 0.1313 - accuracy: 0.9628
+15488/60000 [======&gt;.......................] - ETA: 3s - loss: 0.1423 - accuracy: 0.9582
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-20480/60000 [=========&gt;....................] - ETA: 2s - loss: 0.1302 - accuracy: 0.9629
+16352/60000 [=======&gt;......................] - ETA: 3s - loss: 0.1425 - accuracy: 0.9584
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-21184/60000 [=========&gt;....................] - ETA: 2s - loss: 0.1291 - accuracy: 0.9631
+17024/60000 [=======&gt;......................] - ETA: 3s - loss: 0.1427 - accuracy: 0.9587
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-21920/60000 [=========&gt;....................] - ETA: 2s - loss: 0.1294 - accuracy: 0.9631
+17920/60000 [=======&gt;......................] - ETA: 3s - loss: 0.1446 - accuracy: 0.9580
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-22912/60000 [==========&gt;...................] - ETA: 2s - loss: 0.1281 - accuracy: 0.9636
+18912/60000 [========&gt;.....................] - ETA: 3s - loss: 0.1431 - accuracy: 0.9583
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-23648/60000 [==========&gt;...................] - ETA: 2s - loss: 0.1286 - accuracy: 0.9637
+19904/60000 [========&gt;.....................] - ETA: 2s - loss: 0.1429 - accuracy: 0.9586
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-24768/60000 [===========&gt;..................] - ETA: 2s - loss: 0.1282 - accuracy: 0.9639
+20896/60000 [=========&gt;....................] - ETA: 2s - loss: 0.1427 - accuracy: 0.9587
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-25920/60000 [===========&gt;..................] - ETA: 2s - loss: 0.1289 - accuracy: 0.9637
+21952/60000 [=========&gt;....................] - ETA: 2s - loss: 0.1426 - accuracy: 0.9587
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-26976/60000 [============&gt;.................] - ETA: 1s - loss: 0.1292 - accuracy: 0.9635
+22944/60000 [==========&gt;...................] - ETA: 2s - loss: 0.1434 - accuracy: 0.9581
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-27968/60000 [============&gt;.................] - ETA: 1s - loss: 0.1298 - accuracy: 0.9634
+23872/60000 [==========&gt;...................] - ETA: 2s - loss: 0.1429 - accuracy: 0.9586
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-29088/60000 [=============&gt;................] - ETA: 1s - loss: 0.1292 - accuracy: 0.9636
+24864/60000 [===========&gt;..................] - ETA: 2s - loss: 0.1427 - accuracy: 0.9586
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-30208/60000 [==============&gt;...............] - ETA: 1s - loss: 0.1292 - accuracy: 0.9636
+25920/60000 [===========&gt;..................] - ETA: 2s - loss: 0.1410 - accuracy: 0.9590
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-30976/60000 [==============&gt;...............] - ETA: 1s - loss: 0.1293 - accuracy: 0.9636
+26816/60000 [============&gt;.................] - ETA: 2s - loss: 0.1409 - accuracy: 0.9593
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>31712/60000 [==============&gt;...............] - ETA: 1s - loss: 0.1288 - accuracy: 0.9638
+27680/60000 [============&gt;.................] - ETA: 2s - loss: 0.1409 - accuracy: 0.9593
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-32384/60000 [===============&gt;..............] - ETA: 1s - loss: 0.1286 - accuracy: 0.9639
+28608/60000 [=============&gt;................] - ETA: 2s - loss: 0.1415 - accuracy: 0.9592
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-33120/60000 [===============&gt;..............] - ETA: 1s - loss: 0.1283 - accuracy: 0.9640
+29440/60000 [=============&gt;................] - ETA: 2s - loss: 0.1409 - accuracy: 0.9594
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-33792/60000 [===============&gt;..............] - ETA: 1s - loss: 0.1286 - accuracy: 0.9638
+30368/60000 [==============&gt;...............] - ETA: 1s - loss: 0.1418 - accuracy: 0.9591
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-34464/60000 [================&gt;.............] - ETA: 1s - loss: 0.1284 - accuracy: 0.9639
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-35104/60000 [================&gt;.............] - ETA: 1s - loss: 0.1277 - accuracy: 0.9640
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>31264/60000 [==============&gt;...............] - ETA: 1s - loss: 0.1415 - accuracy: 0.9595
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-35776/60000 [================&gt;.............] - ETA: 1s - loss: 0.1274 - accuracy: 0.9641
+32192/60000 [===============&gt;..............] - ETA: 1s - loss: 0.1417 - accuracy: 0.9592
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>36448/60000 [=================&gt;............] - ETA: 1s - loss: 0.1277 - accuracy: 0.9640
+33120/60000 [===============&gt;..............] - ETA: 1s - loss: 0.1415 - accuracy: 0.9593
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-37216/60000 [=================&gt;............] - ETA: 1s - loss: 0.1278 - accuracy: 0.9640
+34080/60000 [================&gt;.............] - ETA: 1s - loss: 0.1406 - accuracy: 0.9596
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-37920/60000 [=================&gt;............] - ETA: 1s - loss: 0.1276 - accuracy: 0.9641
+34976/60000 [================&gt;.............] - ETA: 1s - loss: 0.1398 - accuracy: 0.9599
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-38592/60000 [==================&gt;...........] - ETA: 1s - loss: 0.1273 - accuracy: 0.9641
+35840/60000 [================&gt;.............] - ETA: 1s - loss: 0.1388 - accuracy: 0.9602
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-39232/60000 [==================&gt;...........] - ETA: 1s - loss: 0.1267 - accuracy: 0.9642
+36736/60000 [=================&gt;............] - ETA: 1s - loss: 0.1388 - accuracy: 0.9603
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-39936/60000 [==================&gt;...........] - ETA: 1s - loss: 0.1267 - accuracy: 0.9641
+37728/60000 [=================&gt;............] - ETA: 1s - loss: 0.1389 - accuracy: 0.9603
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-40640/60000 [===================&gt;..........] - ETA: 1s - loss: 0.1260 - accuracy: 0.9643
+38560/60000 [==================&gt;...........] - ETA: 1s - loss: 0.1391 - accuracy: 0.9602
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+39488/60000 [==================&gt;...........] - ETA: 1s - loss: 0.1385 - accuracy: 0.9604
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>41312/60000 [===================&gt;..........] - ETA: 1s - loss: 0.1258 - accuracy: 0.9645
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+40384/60000 [===================&gt;..........] - ETA: 1s - loss: 0.1380 - accuracy: 0.9604
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-42048/60000 [====================&gt;.........] - ETA: 1s - loss: 0.1262 - accuracy: 0.9643
+41344/60000 [===================&gt;..........] - ETA: 1s - loss: 0.1381 - accuracy: 0.9605
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-43104/60000 [====================&gt;.........] - ETA: 1s - loss: 0.1260 - accuracy: 0.9645
+42336/60000 [====================&gt;.........] - ETA: 1s - loss: 0.1374 - accuracy: 0.9608
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-44064/60000 [=====================&gt;........] - ETA: 0s - loss: 0.1263 - accuracy: 0.9644
+43328/60000 [====================&gt;.........] - ETA: 1s - loss: 0.1373 - accuracy: 0.9608
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+44160/60000 [=====================&gt;........] - ETA: 0s - loss: 0.1373 - accuracy: 0.9609
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>44800/60000 [=====================&gt;........] - ETA: 0s - loss: 0.1263 - accuracy: 0.9643
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+45024/60000 [=====================&gt;........] - ETA: 0s - loss: 0.1369 - accuracy: 0.9610
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-45920/60000 [=====================&gt;........] - ETA: 0s - loss: 0.1262 - accuracy: 0.9644
+45952/60000 [=====================&gt;........] - ETA: 0s - loss: 0.1364 - accuracy: 0.9612
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-47040/60000 [======================&gt;.......] - ETA: 0s - loss: 0.1258 - accuracy: 0.9646
+46720/60000 [======================&gt;.......] - ETA: 0s - loss: 0.1365 - accuracy: 0.9612
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-48192/60000 [=======================&gt;......] - ETA: 0s - loss: 0.1253 - accuracy: 0.9647
+47456/60000 [======================&gt;.......] - ETA: 0s - loss: 0.1360 - accuracy: 0.9613
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+48320/60000 [=======================&gt;......] - ETA: 0s - loss: 0.1363 - accuracy: 0.9611
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>49344/60000 [=======================&gt;......] - ETA: 0s - loss: 0.1247 - accuracy: 0.9648
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+49248/60000 [=======================&gt;......] - ETA: 0s - loss: 0.1359 - accuracy: 0.9612
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-50464/60000 [========================&gt;.....] - ETA: 0s - loss: 0.1246 - accuracy: 0.9647
+49984/60000 [=======================&gt;......] - ETA: 0s - loss: 0.1357 - accuracy: 0.9611
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-51616/60000 [========================&gt;.....] - ETA: 0s - loss: 0.1244 - accuracy: 0.9647
+50848/60000 [========================&gt;.....] - ETA: 0s - loss: 0.1351 - accuracy: 0.9612
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-52704/60000 [=========================&gt;....] - ETA: 0s - loss: 0.1238 - accuracy: 0.9649
+51904/60000 [========================&gt;.....] - ETA: 0s - loss: 0.1352 - accuracy: 0.9612
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-53824/60000 [=========================&gt;....] - ETA: 0s - loss: 0.1234 - accuracy: 0.9650
+52832/60000 [=========================&gt;....] - ETA: 0s - loss: 0.1350 - accuracy: 0.9611
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-54944/60000 [==========================&gt;...] - ETA: 0s - loss: 0.1226 - accuracy: 0.9652
+53696/60000 [=========================&gt;....] - ETA: 0s - loss: 0.1349 - accuracy: 0.9611
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-56064/60000 [===========================&gt;..] - ETA: 0s - loss: 0.1225 - accuracy: 0.9652
+54656/60000 [==========================&gt;...] - ETA: 0s - loss: 0.1350 - accuracy: 0.9611
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+55456/60000 [==========================&gt;...] - ETA: 0s - loss: 0.1348 - accuracy: 0.9612
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>57184/60000 [===========================&gt;..] - ETA: 0s - loss: 0.1223 - accuracy: 0.9652
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+56448/60000 [===========================&gt;..] - ETA: 0s - loss: 0.1348 - accuracy: 0.9612
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-58144/60000 [============================&gt;.] - ETA: 0s - loss: 0.1230 - accuracy: 0.9651
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-58848/60000 [============================&gt;.] - ETA: 0s - loss: 0.1232 - accuracy: 0.9651
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>57440/60000 [===========================&gt;..] - ETA: 0s - loss: 0.1344 - accuracy: 0.9613
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-59392/60000 [============================&gt;.] - ETA: 0s - loss: 0.1231 - accuracy: 0.9651
+58432/60000 [============================&gt;.] - ETA: 0s - loss: 0.1346 - accuracy: 0.9613
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-59968/60000 [============================&gt;.] - ETA: 0s - loss: 0.1231 - accuracy: 0.9651
+59456/60000 [============================&gt;.] - ETA: 0s - loss: 0.1340 - accuracy: 0.9616
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-60000/60000 [==============================] - 4s 72us/sample - loss: 0.1231 - accuracy: 0.9651 - val_loss: 0.1021 - val_accuracy: 0.9677
+60000/60000 [==============================] - 4s 71us/sample - loss: 0.1339 - accuracy: 0.9617 - val_loss: 0.1114 - val_accuracy: 0.9680
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;tensorflow.python.keras.callbacks.History at 0x1d269e3b688&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;tensorflow.python.keras.callbacks.History at 0x1aea3d32d48&gt;
 </pre></div>
+</div>
 </div>
 </div>
 </div>
 </div>
 </div>
 <div class="section" id="test">
-<h2>Test<a class="headerlink" href="#test" title="Permalink to this headline">¶</a></h2>
+<h1>Test<a class="headerlink" href="#test" title="Permalink to this headline">¶</a></h1>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Test the model after training</span>
@@ -1307,58 +1351,56 @@ Epoch 1/3
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   32/10000 [..............................] - ETA: 0s - loss: 0.1184 - accuracy: 0.9375
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   32/10000 [..............................] - ETA: 2s - loss: 0.1607 - accuracy: 0.9375
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
- 1152/10000 [==&gt;...........................] - ETA: 0s - loss: 0.1148 - accuracy: 0.9618
+ 1024/10000 [==&gt;...........................] - ETA: 0s - loss: 0.1186 - accuracy: 0.9629
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
- 2336/10000 [======&gt;.......................] - ETA: 0s - loss: 0.1373 - accuracy: 0.9529
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 3456/10000 [=========&gt;....................] - ETA: 0s - loss: 0.1271 - accuracy: 0.9578
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
- 4352/10000 [============&gt;.................] - ETA: 0s - loss: 0.1352 - accuracy: 0.9554
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
- 5056/10000 [==============&gt;...............] - ETA: 0s - loss: 0.1329 - accuracy: 0.9555
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
- 5760/10000 [================&gt;.............] - ETA: 0s - loss: 0.1248 - accuracy: 0.9582
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
- 6496/10000 [==================&gt;...........] - ETA: 0s - loss: 0.1222 - accuracy: 0.9600
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
- 7392/10000 [=====================&gt;........] - ETA: 0s - loss: 0.1158 - accuracy: 0.9623
+ 2080/10000 [=====&gt;........................] - ETA: 0s - loss: 0.1430 - accuracy: 0.9577
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 8544/10000 [========================&gt;.....] - ETA: 0s - loss: 0.1083 - accuracy: 0.9649
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 3136/10000 [========&gt;.....................] - ETA: 0s - loss: 0.1428 - accuracy: 0.9589
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
- 9664/10000 [===========================&gt;..] - ETA: 0s - loss: 0.1009 - accuracy: 0.9677
+ 4160/10000 [===========&gt;..................] - ETA: 0s - loss: 0.1448 - accuracy: 0.9570
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-10000/10000 [==============================] - 1s 53us/sample - loss: 0.1021 - accuracy: 0.9677
+ 5152/10000 [==============&gt;...............] - ETA: 0s - loss: 0.1420 - accuracy: 0.9571
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Test results - Loss: 0.10211860797293484 - Accuracy: 96.77000045776367%
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+ 6144/10000 [=================&gt;............] - ETA: 0s - loss: 0.1319 - accuracy: 0.9611
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+ 7200/10000 [====================&gt;.........] - ETA: 0s - loss: 0.1234 - accuracy: 0.9639
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+ 8224/10000 [=======================&gt;......] - ETA: 0s - loss: 0.1184 - accuracy: 0.9652
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 9280/10000 [==========================&gt;...] - ETA: 0s - loss: 0.1113 - accuracy: 0.9679
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>10000/10000 [==============================] - 1s 50us/sample - loss: 0.1114 - accuracy: 0.9680
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Test results - Loss: 0.11143004224672913 - Accuracy: 96.79999947547913%
 </pre></div>
 </div>
 </div>
@@ -1377,21 +1419,21 @@ Epoch 1/3
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[2.88385309e-06, 1.95969079e-07, 5.23912831e-06, 3.33484873e-04,
-        8.65341633e-07, 5.28750263e-07, 1.59221233e-10, 9.99633551e-01,
-        5.41199157e-08, 2.32077200e-05],
-       [5.67820272e-04, 3.58440983e-03, 9.77266252e-01, 4.89940285e-04,
-        7.91265080e-08, 2.87690928e-04, 1.50300525e-02, 7.86491081e-11,
-        2.77368049e-03, 7.05390448e-08],
-       [1.15947050e-05, 9.98153150e-01, 2.37760149e-04, 7.57042017e-06,
-        2.29142432e-04, 9.93438334e-06, 5.30522739e-05, 1.28020265e-03,
-        1.52252778e-05, 2.39826318e-06],
-       [9.87601280e-01, 6.72099850e-06, 1.00592654e-02, 7.11208440e-06,
-        8.23018581e-06, 1.25718454e-03, 7.10454595e-04, 1.99864255e-04,
-        3.48503781e-05, 1.15053808e-04],
-       [1.51429573e-04, 6.58472982e-06, 1.37497162e-04, 9.21420269e-06,
-        9.98410821e-01, 2.23744536e-07, 1.76881163e-04, 1.34552291e-04,
-        7.82733423e-06, 9.64870793e-04]], dtype=float32)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[4.5093307e-06, 3.7049681e-08, 9.3209546e-06, 1.8338022e-03,
+        2.3269852e-06, 5.3734942e-07, 1.2053504e-09, 9.9814367e-01,
+        5.2022227e-07, 5.2704386e-06],
+       [1.3307045e-04, 8.5852735e-06, 9.9793386e-01, 3.7601459e-04,
+        6.3211103e-10, 2.5985442e-04, 1.0677038e-03, 9.3743823e-12,
+        2.2090079e-04, 4.0182297e-08],
+       [6.3252286e-05, 9.9464756e-01, 1.4061902e-03, 1.0766083e-04,
+        5.2136579e-04, 1.0922305e-04, 2.6466421e-04, 2.7453853e-03,
+        1.1728801e-04, 1.7568831e-05],
+       [9.9378312e-01, 1.4973410e-06, 3.8805217e-03, 2.1274314e-05,
+        1.5977839e-05, 1.3236875e-03, 7.4304704e-04, 5.4122429e-05,
+        1.7835942e-05, 1.5896396e-04],
+       [3.8882997e-04, 4.2560118e-06, 3.8960707e-04, 1.4248386e-05,
+        9.9724764e-01, 1.0700307e-05, 9.4676368e-05, 5.9931591e-04,
+        1.5145185e-05, 1.2354824e-03]], dtype=float32)
 </pre></div>
 </div>
 </div>
@@ -1430,8 +1472,7 @@ Epoch 1/3
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/2_MNIST_CNN_22_0.png" src="../_images/2_MNIST_CNN_22_0.png" />
-</div>
+<img alt="../_images/2_ MNIST_CNN_22_0.png" src="../_images/2_ MNIST_CNN_22_0.png" />
 </div>
 </div>
 </div>
@@ -1464,8 +1505,6 @@ Epoch 1/3
     
     <div class='prev-next-bottom'>
         
-    <a class='left-prev' id="prev-link" href="1_MNIST_MLP.html" title="previous page">1 - MNIST MLP Network</a>
-    <a class='right-next' id="next-link" href="3_LSTM.html" title="next page">3 - LSTM Network</a>
 
     </div>
     <footer class="footer mt-5 mt-md-0">
