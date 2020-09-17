@@ -119,6 +119,18 @@
 </ul>
 <p class="caption">
  <span class="caption-text">
+  Extra Stuff
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Extras/Convolutions.html">
+   Convolution Filter Example
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
   Python Support
  </span>
 </p>
@@ -254,16 +266,67 @@
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#necessary-imports">
-     Necessary Imports
+    <a class="reference internal nav-link" href="#feature-learning">
+     Feature Learning
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#classification">
+     Classification
     </a>
    </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#test">
-   Test
+  <a class="reference internal nav-link" href="#creating-the-cnn-algorithm">
+   Creating the CNN Algorithm
   </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#necessary-imports">
+     Necessary Imports
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#loading-preparing-the-training-data">
+     Loading &amp; Preparing the training data
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#creating-the-cnn">
+     Creating the CNN
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#results-and-evaluation">
+   Results and Evaluation
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#test-the-model-using-the-test-data">
+     Test the model using the test data
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#extra-deep-dive-into-the-filters">
+   Extra: Deep dive into the filters
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#visualising-filters">
+     Visualising Filters
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#visualising-feature-maps">
+     Visualising Feature Maps
+    </a>
+   </li>
+  </ul>
  </li>
 </ul>
 
@@ -294,37 +357,74 @@
 <div><p>“Imagine training a network that works well on a certain dog image, but then feeding it a slightly shifted version of the same image. The dog would not activate the same neurons, so the network would react completely differently!”. - https://victorzhou.com/blog/intro-to-cnns-part-1/.</p>
 </div></blockquote>
 <p>We did not run into this problem in the previous example since the MNIST dataset had been structured for us. The dataset contains small images (low # of pixels = low # of features) that, more imporantly, had been centered so we did not encounter the issue of shifting or funky orientations.</p>
-<p>~</p>
 </div>
 <div class="section" id="what-are-cnns">
 <h2>What are CNNs?<a class="headerlink" href="#what-are-cnns" title="Permalink to this headline">¶</a></h2>
+<p>To get a good overview of what happens within a Convolutional Neural Network, I would strongly reccomend to watch this video first (https://www.youtube.com/watch?v=YRhxdVk_sIs). It is a relatively short video but does a good job explaining the concept and highlights some of the key points to be aware of - watching it will make the rest of this example make a lot more sense.</p>
 <p><img alt="Image" src="../_images/cnn.jpeg" /></p>
-<p>~ bunch of text about how they work - refer to video honestly.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>pip install mnist
-</pre></div>
+<div class="section" id="feature-learning">
+<h3>Feature Learning<a class="headerlink" href="#feature-learning" title="Permalink to this headline">¶</a></h3>
+<p>The diagram above shows a typical schematic for a CNN. You can see that the process is split into two main categories; feature learning and classification. Let us first consider feature learning:</p>
+<blockquote>
+<div><p>Feature learning is a set of techniques that learn a feature: a transformation of raw data input to a representation that can be effectively exploited in machine learning tasks. - https://www.quora.com/What-is-feature-learning.</p>
+</div></blockquote>
+<p>In that regard, we will create the CNN architecture such that it can learn the features of the problem. You’ll notice on the diagram above that within the feature engineering categories there are different actions happening that we can take advantage when performing feature engineering. Of course, the input in this case is self explanatory as we know that we are dealing with an input of image format. But the others include convolutions, activation functions and pooling.</p>
+<p><ins>Convolution</ins></p>
+<p>Convolutional layers in a CNN systematically apply learned filters to input images in order to create feature maps that summarize the presence of those features in the input. Convolutional layers prove very effective, and stacking convolutional layers close to the input to learn low-level features (lines) and layers deeper in the model to learn high-order features or more abstract features, like shapes or specific objects.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>It is important to emphasise here that in the video they will have mentioned filters such as the ‘edge detection filters’ that you can convolve across an image to detect the edges. The difference is, during training the CNN network creates their OWN filters and optimises them to learn features specific to the problem and subsequently improve the loss function.</p>
+</div>
+<p><ins>Pooling</ins></p>
+<p>A pooling layer is a new layer added after the convolutional layer. Specifically, after a nonlinearity (e.g. Relu) has been applied to the feature maps output by a convolutional layer; for example the layers in a model may look as follows:</p>
+<ol class="simple">
+<li><p>Input image</p></li>
+<li><p>Convolutional layer</p></li>
+<li><p>Activation Function (non-linearity)</p></li>
+<li><p>Pooling Layer</p></li>
+</ol>
+<p>The pooling layer is important because it helps to make the feature representation become approximately invariant to small translations in the input. We mentioned earlier that one of the issues with a MLP network with a large input vector would be that if there were changes in position (translations/rotations) of the object you are trying to classify, then the model would struggle to recognise/classify the object as you would expect. Here, the pooling layer operates upon each feature map separately to create a new set of the same number of pooled feature maps (feature map = output from Conv layer, often there are a few maps due to 3 RGB channels etc). Pooling involves selecting a pooling operation, much like a filter, to be applied to the feature maps in a similar fashion to convolving. The size of the pooling operation or filter is smaller than the size of the feature map, typically it is almost always 2x2 pixels.</p>
+<p>This means that the pooling layer will always reduce the size of each feature map by a factor of 2, e.g. each dimension is halved, reducing the number of pixels or values in each feature map to 1/4 of the size. For example, a pooling layer applied to a feature map of 6x6 (36 pixels) will result in an output pooled feature map of 3x3 (9 pixels).</p>
+<blockquote>
+<div><p>“In all cases, pooling helps to make the representation become approximately invariant to small translations of the input. Invariance to translation means that if we translate the input by a small amount, the values of most of the pooled outputs do not change.” - Page 342, Deep Learning, Ian Goodfellow 2016</p>
+</div></blockquote>
+<p>The pooling operation is specified and is not a learnable parameter. Two common functions used in the pooling operation are: Average pooling and Maximum pooling. Average pooling calculates the average value for each patch on the feature map, whereas maximum pooling calculates the maxmimum value for each patch on the feature map (patch refers to the 2x2 pooling filter applied to the feature map output by the Conv Layer). The result of using a pooling layer and creating down sampled or pooled feature maps is a summarized version of the features detected in the input.</p>
+</div>
+<div class="section" id="classification">
+<h3>Classification<a class="headerlink" href="#classification" title="Permalink to this headline">¶</a></h3>
+<p>The classification segment is almost identical to the MLP segment in the previous example. We begin by flattening the output of the final pooling layer to form a single vector; so if the final output layer is of size [16x16], we flatten this such that it becomes a vector of 256 elements. Depending on the problem, we may wish to pass this feature vector through an additional dense (fully-connected) layer which is a standard MLP layer with a user-defined number of nodes. Finally, we add a softmax layer to convert the output of the final layer in the network to a probability distribution consisting of a prediction by the model for each of the classes defined in the training dataset.</p>
+<p>~</p>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: mnist in c:\users\samuel\miniconda3\envs\tensorflow\lib\site-packages (0.2.2)
-Requirement already satisfied: numpy in c:\users\samuel\miniconda3\envs\tensorflow\lib\site-packages (from mnist) (1.18.5)
-</pre></div>
-</div>
-</div>
-</div>
+<div class="section" id="creating-the-cnn-algorithm">
+<h2>Creating the CNN Algorithm<a class="headerlink" href="#creating-the-cnn-algorithm" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="necessary-imports">
 <h3>Necessary Imports<a class="headerlink" href="#necessary-imports" title="Permalink to this headline">¶</a></h3>
+<p>Like we did last time, we begin by importing the packages that we will use to develop our algorithm. <code class="docutils literal notranslate"><span class="pre">Numpy</span></code> is a python library used for working with arrays and the syntax is very similar to MATLAB which makes manipulating data easy. Again, we use the <code class="docutils literal notranslate"><span class="pre">keras</span></code> library because it gives us access to machine learning functions without us having to code them all explicitly. Last time, we imported the mnist dataset through the <code class="docutils literal notranslate"><span class="pre">keras.datasets</span></code> attribute, but here we import the data directly from <code class="docutils literal notranslate"><span class="pre">mnist</span></code> by calling <code class="docutils literal notranslate"><span class="pre">import</span> <span class="pre">mnist</span></code>. This can be useful because you can get access to more information about the dataset. Often we must use a particular version of keras for compatibility issues and as such might not have the most up to date information (if anything has been added since that update). Finally, we call <code class="docutils literal notranslate"><span class="pre">matplotlib</span></code> again to make our plots.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span> 
 <span class="kn">from</span> <span class="nn">tensorflow</span> <span class="kn">import</span> <span class="n">keras</span> 
-<span class="c1">#from keras.datasets import mnist</span>
 <span class="kn">import</span> <span class="nn">mnist</span> <span class="c1"># import mnist directly to access more info</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="c1"># layers used in CNN</span>
+<span class="kn">from</span> <span class="nn">tensorflow.keras.models</span> <span class="kn">import</span> <span class="n">Sequential</span>
+<span class="kn">from</span> <span class="nn">tensorflow.keras.layers</span> <span class="kn">import</span> <span class="n">Conv2D</span><span class="p">,</span> <span class="n">MaxPooling2D</span><span class="p">,</span> <span class="n">Dense</span><span class="p">,</span> <span class="n">Flatten</span>
+
+<span class="c1"># convert scalar labels to categorical</span>
+<span class="kn">from</span> <span class="nn">tensorflow.keras.utils</span> <span class="kn">import</span> <span class="n">to_categorical</span>
 </pre></div>
 </div>
 </div>
+</div>
+</div>
+<div class="section" id="loading-preparing-the-training-data">
+<h3>Loading &amp; Preparing the training data<a class="headerlink" href="#loading-preparing-the-training-data" title="Permalink to this headline">¶</a></h3>
+<p>Here we define the variables that contain the training and test data from the mnist dataset. If unsure about the structure of the mnist import, we can call <code class="docutils literal notranslate"><span class="pre">dir(mnist)</span></code> and we will see a whole list of attributes that we can call. Here we see that <code class="docutils literal notranslate"><span class="pre">train_images</span></code> and <code class="docutils literal notranslate"><span class="pre">test_images</span></code> has already been prepared as part of the import, so we can simply make a variable equal to <code class="docutils literal notranslate"><span class="pre">mnist.train_images()</span></code> to store the training images. It is a similar story with the labels; we can call <code class="docutils literal notranslate"><span class="pre">mnist.train_labels()</span></code> to obtain the labels for the training data. The first element here will show the class for the first image in the training set.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Always check the shape of the dataset whenever you import one! Will make it much easier to create your model architecture and avoid any incompatibilities.</p>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -345,14 +445,14 @@ Requirement already satisfied: numpy in c:\users\samuel\miniconda3\envs\tensorfl
 </div>
 </div>
 </div>
-<p>Before we begin, we’ll normalize the image pixel values from [0, 255] to [-0.5, 0.5] to make our network easier to train (using smaller, centered values usually leads to better results). We’ll also reshape each image from (28, 28) to (28, 28, 1) because Keras requires the third dimension.</p>
+<p>Before we begin, we’ll normalize the image pixel values from [0, 255] to [-0.5, 0.5] to make our network easier to train (using smaller, centered values usually leads to better results). We’ll also reshape each image from (28, 28) to (28, 28, 1) because Keras requires the third dimension to also be specified.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Normalize the images.</span>
 <span class="n">train_images</span> <span class="o">=</span> <span class="p">(</span><span class="n">train_images</span> <span class="o">/</span> <span class="mi">255</span><span class="p">)</span> <span class="o">-</span> <span class="mf">0.5</span>
 <span class="n">test_images</span> <span class="o">=</span> <span class="p">(</span><span class="n">test_images</span> <span class="o">/</span> <span class="mi">255</span><span class="p">)</span> <span class="o">-</span> <span class="mf">0.5</span>
 
-<span class="c1"># Reshape the images.</span>
+<span class="c1"># # Reshape the images.</span>
 <span class="n">train_images</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">expand_dims</span><span class="p">(</span><span class="n">train_images</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
 <span class="n">test_images</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">expand_dims</span><span class="p">(</span><span class="n">test_images</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
 
@@ -368,52 +468,67 @@ Requirement already satisfied: numpy in c:\users\samuel\miniconda3\envs\tensorfl
 </div>
 </div>
 </div>
+</div>
+<div class="section" id="creating-the-cnn">
+<h3>Creating the CNN<a class="headerlink" href="#creating-the-cnn" title="Permalink to this headline">¶</a></h3>
+<p>Convolutional Neural Networks do not learn a single filter. Infact, they learn multiple features in parallel for a given input. The amount of filters you would want the CNN to learn depends on the complexity of the problem. For example, if you are trying to develop a CNN classification network that can tell the difference between a dog and a whale; you would not need many filters at all as the features of dogs and whales are so vastly different and it is ‘easier’ to differentiate between the features of the animals. Differentiating between dog breeds however may be more difficult, each dog breed has 4 legs, fur, two eyes and a nose etc - but the differences between breeds may be more subtle and dependent on the proportions of the face and body etc. We would therefore require more filters in the CNN such that the model has more opportunity to create filters that ‘learn’ how to identify key features that differentiate between the different breeds (classes).</p>
+<p>Here we set the number of filters to be 8, filter size as 3 and the pool size as 2. As mentioned earlier, a filter is a [NxN] array that convolves over the image/feature map. So the filter size of 3 refers to a [3x3] filter and thus this refers to 9 additional trainable parameters to optimize during training. The pool size is set at 2 which refers to a [2x2] pooling operation (filter).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">tensorflow.keras.models</span> <span class="kn">import</span> <span class="n">Sequential</span>
-<span class="kn">from</span> <span class="nn">tensorflow.keras.layers</span> <span class="kn">import</span> <span class="n">Conv2D</span><span class="p">,</span> <span class="n">MaxPooling2D</span><span class="p">,</span> <span class="n">Dense</span><span class="p">,</span> <span class="n">Flatten</span>
-
-<span class="n">num_filters</span> <span class="o">=</span> <span class="mi">8</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">num_filters</span> <span class="o">=</span> <span class="mi">8</span>
 <span class="n">filter_size</span> <span class="o">=</span> <span class="mi">3</span>
 <span class="n">pool_size</span> <span class="o">=</span> <span class="mi">2</span>
-
-<span class="n">model</span> <span class="o">=</span> <span class="n">Sequential</span><span class="p">()</span>
-
-<span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Conv2D</span><span class="p">(</span><span class="n">num_filters</span><span class="p">,</span> <span class="n">filter_size</span><span class="p">,</span> <span class="n">input_shape</span><span class="o">=</span><span class="p">(</span><span class="mi">28</span><span class="p">,</span> <span class="mi">28</span><span class="p">,</span> <span class="mi">1</span><span class="p">)))</span>
-<span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">MaxPooling2D</span><span class="p">(</span><span class="n">pool_size</span><span class="o">=</span><span class="n">pool_size</span><span class="p">))</span>
-<span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Flatten</span><span class="p">())</span>
-<span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Dense</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s1">&#39;softmax&#39;</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
 </div>
+<p>We can use the <code class="docutils literal notranslate"><span class="pre">set()</span></code> function which is a default Python function to determine each of the unique classes in this dataset. The <code class="docutils literal notranslate"> <span class="pre">set()</span></code>  function allows us to input a list/vector within its parentheses and returns a set of unique values from the input. Therefore if we write <code class="docutils literal notranslate"> <span class="pre">set(train_labels)</span></code>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">set</span><span class="p">(</span><span class="n">train_labels</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Model: &quot;sequential&quot;
-_________________________________________________________________
-Layer (type)                 Output Shape              Param #   
-=================================================================
-conv2d (Conv2D)              (None, 26, 26, 8)         80        
-_________________________________________________________________
-max_pooling2d (MaxPooling2D) (None, 13, 13, 8)         0         
-_________________________________________________________________
-flatten (Flatten)            (None, 1352)              0         
-_________________________________________________________________
-dense (Dense)                (None, 10)                13530     
-=================================================================
-Total params: 13,610
-Trainable params: 13,610
-Non-trainable params: 0
-_________________________________________________________________
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{0, 1, 2, 3, 4, 5, 6, 7, 8, 9}
 </pre></div>
 </div>
 </div>
 </div>
+<p>We see each of the possible classes for the MNIST dataset. Intuitively this also makes sense because 0-9 are the only numeric digits that exist. We can then call the <code class="docutils literal notranslate"> <span class="pre">len()</span></code>  function to determine the length of this set, i.e. the total number of classes.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">num_classes</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">train_labels</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Total number of classes:&#39;</span><span class="p">,</span><span class="n">num_classes</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Total number of classes: 10
+</pre></div>
+</div>
+</div>
+</div>
+<p>Here we will actually start to define the architecture of the CNN network. Again this part shouldn’t be scary, the most import thing (as always), is making sure that we have a clear idea as to what is going into the network (input) and what is going out of it (the output). We previously formatted the training data such that the input image has a shape (28,28,1) as Keras requires the input to have three dimensions. We want the model to take an image as input and give us the classification vector as output. We know that we cant the output to be a probability distribution associated with a prediction for any given input that corresponds to one of the 10 different classes we are classifying.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model</span> <span class="o">=</span> <span class="n">Sequential</span><span class="p">()</span>
+
+<span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Conv2D</span><span class="p">(</span><span class="n">num_filters</span><span class="p">,</span> <span class="n">filter_size</span><span class="p">,</span> <span class="n">input_shape</span><span class="o">=</span><span class="p">(</span><span class="mi">28</span><span class="p">,</span> <span class="mi">28</span><span class="p">,</span> <span class="mi">1</span><span class="p">)))</span>
+<span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">MaxPooling2D</span><span class="p">(</span><span class="n">pool_size</span><span class="o">=</span><span class="n">pool_size</span><span class="p">))</span>
+<span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Flatten</span><span class="p">())</span>
+<span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Dense</span><span class="p">(</span><span class="n">num_classes</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s1">&#39;softmax&#39;</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The structure here should be familiar and share some similarities with the MLP network that we made in the previous example. Again, we create a <code class="docutils literal notranslate"><span class="pre">Sequential()</span></code> model. This allows us to define a model architecture layer by layer, adding subsequent layers easily by using the <code class="docutils literal notranslate"><span class="pre">model.add()</span></code> attribute in Keras. We then proceed to add four layers; a <code class="docutils literal notranslate"><span class="pre">Conv2D</span></code> layer, a <code class="docutils literal notranslate"><span class="pre">MaxPooling2D</span></code> layer, a <code class="docutils literal notranslate"><span class="pre">Flatten</span></code> layer and finally a <code class="docutils literal notranslate"><span class="pre">Dense</span></code> (fully connected) layer.</p>
+<p>The Conv2D class is structured as follows:</p>
+<p><code class="docutils literal notranslate"><span class="pre">Conv2D(filters,</span> <span class="pre">kernel_size,</span> <span class="pre">strides=(1,</span> <span class="pre">1),</span> <span class="pre">padding='valid',</span> <span class="pre">data_format=None,</span> <span class="pre">dilation_rate=(1,</span> <span class="pre">1),</span> <span class="pre">activation=None,</span> <span class="pre">use_bias=True,</span> <span class="pre">kernel_initializer='glorot_uniform',</span> <span class="pre">bias_initializer='zeros',</span> <span class="pre">kernel_regularizer=None,</span> <span class="pre">bias_regularizer=None,</span> <span class="pre">activity_regularizer=None,</span> <span class="pre">kernel_constraint=None,</span> <span class="pre">bias_constraint=None,</span> <span class="pre">**kwargs)</span></code>.</p>
+<p>Note that any parameter with an equals sign is a default property that can be modified if we require further modification of the convolution layer. The <code class="docutils literal notranslate"><span class="pre">filters</span></code> property refers to the number of filters, in our case equal to variable <code class="docutils literal notranslate"><span class="pre">num_filters</span></code> that we previously defined as 8. The <code class="docutils literal notranslate"><span class="pre">kernel_size</span></code> property refers to the dimension of the filter themselves (also known as kernels) for which we already defined variable <code class="docutils literal notranslate"><span class="pre">filter_size</span></code> as 3. Finally we must define the shape of the input as this is the first layer in the network, here the images are [28x28] pixels in size and we recall that keras required the input to be in a format with the third dimension present.</p>
+<p>We add the pooling layer simply by calling <code class="docutils literal notranslate"><span class="pre">model.add(MaxPooling2D())</span></code> and we must define the size of the ‘pooling’ filter/kernel, which we previously defined as <code class="docutils literal notranslate"><span class="pre">pool_size</span></code> with a value of 2. We then flatten the feature map into a single (1D) vector of nodes (such that a 28x28 would become a vector of 784 elements). Finally, we connect this to a <code class="docutils literal notranslate"><span class="pre">Dense()</span></code> (fully connected) layer with a softmax activation function (to return probability distribution) for the defined number of classes <code class="docutils literal notranslate"><span class="pre">num_classes</span></code>.</p>
+<p>The last step before training is to compile the model. We need to compile the model as this lets us define the loss function, the optimizer and the metrics used to track the results of the training process. The <code class="docutils literal notranslate"><span class="pre">model.compile()</span></code> function is powerful and allows us to change and define lots of things about the training process; here we can select whichever loss function we like, we can use any optimiser and also use any metric we wish to judge the performance of the model (see https://keras.io/api/metrics/).</p>
+<p>Refer to the previous example for more information regarding this, but again we select the <code class="docutils literal notranslate"><span class="pre">adam</span></code> optimizer and the <code class="docutils literal notranslate"><span class="pre">categorical_crossentropy</span></code> function and wish to record the <code class="docutils literal notranslate"><span class="pre">accuracy</span></code> metrics to evaluate the training process.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">optimizer</span><span class="o">=</span><span class="s1">&#39;adam&#39;</span><span class="p">,</span> <span class="n">loss</span> <span class="o">=</span> <span class="s1">&#39;categorical_crossentropy&#39;</span><span class="p">,</span> <span class="n">metrics</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;accuracy&#39;</span><span class="p">])</span>
@@ -423,1075 +538,170 @@ _________________________________________________________________
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">tensorflow.keras.utils</span> <span class="kn">import</span> <span class="n">to_categorical</span>
-
-<span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">train_images</span><span class="p">,</span><span class="n">to_categorical</span><span class="p">(</span><span class="n">train_labels</span><span class="p">),</span> <span class="n">epochs</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span><span class="n">validation_data</span><span class="o">=</span><span class="p">(</span><span class="n">test_images</span><span class="p">,</span> <span class="n">to_categorical</span><span class="p">(</span><span class="n">test_labels</span><span class="p">)))</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">num_epochs</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">train_images</span><span class="p">,</span><span class="n">to_categorical</span><span class="p">(</span><span class="n">train_labels</span><span class="p">,</span> <span class="n">num_classes</span><span class="p">),</span> <span class="n">epochs</span><span class="o">=</span><span class="n">num_epochs</span><span class="p">,</span><span class="n">validation_data</span><span class="o">=</span><span class="p">(</span><span class="n">test_images</span><span class="p">,</span> <span class="n">to_categorical</span><span class="p">(</span><span class="n">test_labels</span><span class="p">,</span> <span class="n">num_classes</span><span class="p">)))</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Train on 60000 samples, validate on 10000 samples
-Epoch 1/3
+Epoch 1/10
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   32/60000 [..............................] - ETA: 1:29:12 - loss: 2.3406 - accuracy: 0.0000e+00
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   32/60000 [..............................] - ETA: 8:53:21
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-  704/60000 [..............................] - ETA: 4:04 - loss: 2.1558 - accuracy: 0.2969       
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
- 1536/60000 [..............................] - ETA: 1:52 - loss: 1.9378 - accuracy: 0.4551
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
- 2368/60000 [&gt;.............................] - ETA: 1:13 - loss: 1.6695 - accuracy: 0.5591
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
- 3168/60000 [&gt;.............................] - ETA: 54s - loss: 1.4492 - accuracy: 0.6209 
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
- 4064/60000 [=&gt;............................] - ETA: 42s - loss: 1.2708 - accuracy: 0.6651
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
- 4864/60000 [=&gt;............................] - ETA: 35s - loss: 1.1478 - accuracy: 0.6961
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
- 5568/60000 [=&gt;............................] - ETA: 31s - loss: 1.0677 - accuracy: 0.7144
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
- 6304/60000 [==&gt;...........................] - ETA: 27s - loss: 0.9977 - accuracy: 0.7327
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
- 7136/60000 [==&gt;...........................] - ETA: 24s - loss: 0.9301 - accuracy: 0.7499
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
- 8000/60000 [===&gt;..........................] - ETA: 21s - loss: 0.8730 - accuracy: 0.7632
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
- 8800/60000 [===&gt;..........................] - ETA: 19s - loss: 0.8291 - accuracy: 0.7751
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
- 9504/60000 [===&gt;..........................] - ETA: 18s - loss: 0.7911 - accuracy: 0.7848
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>10208/60000 [====&gt;.........................] - ETA: 17s - loss: 0.7621 - accuracy: 0.7919
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-10496/60000 [====&gt;.........................] - ETA: 16s - loss: 0.7527 - accuracy: 0.7946
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-11104/60000 [====&gt;.........................] - ETA: 16s - loss: 0.7322 - accuracy: 0.8008
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-11840/60000 [====&gt;.........................] - ETA: 15s - loss: 0.7075 - accuracy: 0.8076
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-12736/60000 [=====&gt;........................] - ETA: 13s - loss: 0.6788 - accuracy: 0.8156
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>13568/60000 [=====&gt;........................] - ETA: 12s - loss: 0.6564 - accuracy: 0.8215
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-14240/60000 [======&gt;.......................] - ETA: 12s - loss: 0.6386 - accuracy: 0.8262
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-14848/60000 [======&gt;.......................] - ETA: 11s - loss: 0.6246 - accuracy: 0.8303
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-15488/60000 [======&gt;.......................] - ETA: 11s - loss: 0.6117 - accuracy: 0.8340
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-16128/60000 [=======&gt;......................] - ETA: 10s - loss: 0.5983 - accuracy: 0.8371
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-16800/60000 [=======&gt;......................] - ETA: 10s - loss: 0.5878 - accuracy: 0.8397
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-17280/60000 [=======&gt;......................] - ETA: 10s - loss: 0.5813 - accuracy: 0.8414
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-17728/60000 [=======&gt;......................] - ETA: 9s - loss: 0.5757 - accuracy: 0.8427 
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-18432/60000 [========&gt;.....................] - ETA: 9s - loss: 0.5662 - accuracy: 0.8449
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-19072/60000 [========&gt;.....................] - ETA: 9s - loss: 0.5579 - accuracy: 0.8469
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-19872/60000 [========&gt;.....................] - ETA: 8s - loss: 0.5465 - accuracy: 0.8503
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-20512/60000 [=========&gt;....................] - ETA: 8s - loss: 0.5394 - accuracy: 0.8519
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>21248/60000 [=========&gt;....................] - ETA: 8s - loss: 0.5321 - accuracy: 0.8539
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-22016/60000 [==========&gt;...................] - ETA: 7s - loss: 0.5245 - accuracy: 0.8556
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-22848/60000 [==========&gt;...................] - ETA: 7s - loss: 0.5156 - accuracy: 0.8578
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-23712/60000 [==========&gt;...................] - ETA: 7s - loss: 0.5071 - accuracy: 0.8599
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-24512/60000 [===========&gt;..................] - ETA: 6s - loss: 0.4988 - accuracy: 0.8621
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-25312/60000 [===========&gt;..................] - ETA: 6s - loss: 0.4939 - accuracy: 0.8636
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-26176/60000 [============&gt;.................] - ETA: 6s - loss: 0.4869 - accuracy: 0.8650
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-27008/60000 [============&gt;.................] - ETA: 5s - loss: 0.4803 - accuracy: 0.8673
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-27840/60000 [============&gt;.................] - ETA: 5s - loss: 0.4736 - accuracy: 0.8689
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-28608/60000 [=============&gt;................] - ETA: 5s - loss: 0.4672 - accuracy: 0.8705
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-29408/60000 [=============&gt;................] - ETA: 5s - loss: 0.4619 - accuracy: 0.8717
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-30176/60000 [==============&gt;...............] - ETA: 4s - loss: 0.4554 - accuracy: 0.8735
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-30816/60000 [==============&gt;...............] - ETA: 4s - loss: 0.4522 - accuracy: 0.8742
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-31552/60000 [==============&gt;...............] - ETA: 4s - loss: 0.4478 - accuracy: 0.8752
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-32384/60000 [===============&gt;..............] - ETA: 4s - loss: 0.4433 - accuracy: 0.8762
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-33152/60000 [===============&gt;..............] - ETA: 4s - loss: 0.4391 - accuracy: 0.8775
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-33920/60000 [===============&gt;..............] - ETA: 4s - loss: 0.4362 - accuracy: 0.8781
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-34656/60000 [================&gt;.............] - ETA: 3s - loss: 0.4327 - accuracy: 0.8788
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-35360/60000 [================&gt;.............] - ETA: 3s - loss: 0.4287 - accuracy: 0.8799
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-36064/60000 [=================&gt;............] - ETA: 3s - loss: 0.4246 - accuracy: 0.8812
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-36832/60000 [=================&gt;............] - ETA: 3s - loss: 0.4209 - accuracy: 0.8821
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-37632/60000 [=================&gt;............] - ETA: 3s - loss: 0.4169 - accuracy: 0.8831
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-38464/60000 [==================&gt;...........] - ETA: 3s - loss: 0.4136 - accuracy: 0.8840
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-39264/60000 [==================&gt;...........] - ETA: 2s - loss: 0.4102 - accuracy: 0.8849
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-40000/60000 [===================&gt;..........] - ETA: 2s - loss: 0.4071 - accuracy: 0.8858
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-40768/60000 [===================&gt;..........] - ETA: 2s - loss: 0.4035 - accuracy: 0.8867
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-41568/60000 [===================&gt;..........] - ETA: 2s - loss: 0.4007 - accuracy: 0.8877
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-42368/60000 [====================&gt;.........] - ETA: 2s - loss: 0.3973 - accuracy: 0.8885
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-43168/60000 [====================&gt;.........] - ETA: 2s - loss: 0.3944 - accuracy: 0.8893
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-43968/60000 [====================&gt;.........] - ETA: 2s - loss: 0.3916 - accuracy: 0.8902
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>44768/60000 [=====================&gt;........] - ETA: 2s - loss: 0.3881 - accuracy: 0.8912
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-45504/60000 [=====================&gt;........] - ETA: 1s - loss: 0.3858 - accuracy: 0.8919
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-46304/60000 [======================&gt;.......] - ETA: 1s - loss: 0.3824 - accuracy: 0.8928
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-47104/60000 [======================&gt;.......] - ETA: 1s - loss: 0.3802 - accuracy: 0.8933
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-47936/60000 [======================&gt;.......] - ETA: 1s - loss: 0.3771 - accuracy: 0.8943
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-48768/60000 [=======================&gt;......] - ETA: 1s - loss: 0.3745 - accuracy: 0.8949
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-49536/60000 [=======================&gt;......] - ETA: 1s - loss: 0.3721 - accuracy: 0.8955
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-50336/60000 [========================&gt;.....] - ETA: 1s - loss: 0.3698 - accuracy: 0.8961
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-51136/60000 [========================&gt;.....] - ETA: 1s - loss: 0.3674 - accuracy: 0.8967
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-51936/60000 [========================&gt;.....] - ETA: 0s - loss: 0.3651 - accuracy: 0.8972
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-52736/60000 [=========================&gt;....] - ETA: 0s - loss: 0.3638 - accuracy: 0.8974
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-53504/60000 [=========================&gt;....] - ETA: 0s - loss: 0.3618 - accuracy: 0.8979
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-54304/60000 [==========================&gt;...] - ETA: 0s - loss: 0.3597 - accuracy: 0.8985
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-55040/60000 [==========================&gt;...] - ETA: 0s - loss: 0.3580 - accuracy: 0.8989
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-55840/60000 [==========================&gt;...] - ETA: 0s - loss: 0.3554 - accuracy: 0.8997
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-56512/60000 [===========================&gt;..] - ETA: 0s - loss: 0.3539 - accuracy: 0.9000
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-57216/60000 [===========================&gt;..] - ETA: 0s - loss: 0.3517 - accuracy: 0.9007
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-58048/60000 [============================&gt;.] - ETA: 0s - loss: 0.3495 - accuracy: 0.9015
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-58880/60000 [============================&gt;.] - ETA: 0s - loss: 0.3474 - accuracy: 0.9020
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-59712/60000 [============================&gt;.] - ETA: 0s - loss: 0.3454 - accuracy: 0.9026
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-60000/60000 [==============================] - 8s 128us/sample - loss: 0.3445 - accuracy: 0.9028 - val_loss: 0.1827 - val_accuracy: 0.9476
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 2/3
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">UnknownError</span><span class="g g-Whitespace">                              </span>Traceback (most recent call last)
+<span class="o">&lt;</span><span class="n">ipython</span><span class="o">-</span><span class="nb">input</span><span class="o">-</span><span class="mi">9</span><span class="o">-</span><span class="mf">302e094</span><span class="n">c995d</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="n">num_epochs</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="ne">----&gt; </span><span class="mi">2</span> <span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">train_images</span><span class="p">,</span><span class="n">to_categorical</span><span class="p">(</span><span class="n">train_labels</span><span class="p">,</span> <span class="n">num_classes</span><span class="p">),</span> <span class="n">epochs</span><span class="o">=</span><span class="n">num_epochs</span><span class="p">,</span><span class="n">validation_data</span><span class="o">=</span><span class="p">(</span><span class="n">test_images</span><span class="p">,</span> <span class="n">to_categorical</span><span class="p">(</span><span class="n">test_labels</span><span class="p">,</span> <span class="n">num_classes</span><span class="p">)))</span>
 
-   32/60000 [..............................] - ETA: 3s - loss: 0.4128 - accuracy: 0.9062
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-  832/60000 [..............................] - ETA: 3s - loss: 0.2032 - accuracy: 0.9423
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
- 1632/60000 [..............................] - ETA: 3s - loss: 0.1894 - accuracy: 0.9436
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
- 2432/60000 [&gt;.............................] - ETA: 3s - loss: 0.1817 - accuracy: 0.9474
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
- 3232/60000 [&gt;.............................] - ETA: 3s - loss: 0.1770 - accuracy: 0.9474
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
- 4032/60000 [=&gt;............................] - ETA: 3s - loss: 0.1849 - accuracy: 0.9467
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
- 4800/60000 [=&gt;............................] - ETA: 3s - loss: 0.1884 - accuracy: 0.9460
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
- 5632/60000 [=&gt;............................] - ETA: 3s - loss: 0.1885 - accuracy: 0.9473
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 6400/60000 [==&gt;...........................] - ETA: 3s - loss: 0.1896 - accuracy: 0.9459
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
- 7168/60000 [==&gt;...........................] - ETA: 3s - loss: 0.1862 - accuracy: 0.9467
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
- 7968/60000 [==&gt;...........................] - ETA: 3s - loss: 0.1840 - accuracy: 0.9474
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
- 8736/60000 [===&gt;..........................] - ETA: 3s - loss: 0.1847 - accuracy: 0.9472
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 9536/60000 [===&gt;..........................] - ETA: 3s - loss: 0.1852 - accuracy: 0.9473
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-10304/60000 [====&gt;.........................] - ETA: 3s - loss: 0.1863 - accuracy: 0.9466
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-11040/60000 [====&gt;.........................] - ETA: 3s - loss: 0.1875 - accuracy: 0.9462
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-11808/60000 [====&gt;.........................] - ETA: 3s - loss: 0.1859 - accuracy: 0.9470
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-12608/60000 [=====&gt;........................] - ETA: 3s - loss: 0.1838 - accuracy: 0.9476
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-13376/60000 [=====&gt;........................] - ETA: 3s - loss: 0.1829 - accuracy: 0.9477
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-14112/60000 [======&gt;.......................] - ETA: 3s - loss: 0.1823 - accuracy: 0.9481
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-14912/60000 [======&gt;.......................] - ETA: 2s - loss: 0.1812 - accuracy: 0.9484
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-15648/60000 [======&gt;.......................] - ETA: 2s - loss: 0.1830 - accuracy: 0.9484
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-16384/60000 [=======&gt;......................] - ETA: 2s - loss: 0.1830 - accuracy: 0.9487
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-17184/60000 [=======&gt;......................] - ETA: 2s - loss: 0.1815 - accuracy: 0.9494
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-17984/60000 [=======&gt;......................] - ETA: 2s - loss: 0.1805 - accuracy: 0.9496
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-18816/60000 [========&gt;.....................] - ETA: 2s - loss: 0.1805 - accuracy: 0.9498
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-19776/60000 [========&gt;.....................] - ETA: 2s - loss: 0.1791 - accuracy: 0.9503
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-20640/60000 [=========&gt;....................] - ETA: 2s - loss: 0.1795 - accuracy: 0.9500
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-21536/60000 [=========&gt;....................] - ETA: 2s - loss: 0.1796 - accuracy: 0.9499
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-22432/60000 [==========&gt;...................] - ETA: 2s - loss: 0.1789 - accuracy: 0.9502
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-23424/60000 [==========&gt;...................] - ETA: 2s - loss: 0.1786 - accuracy: 0.9501
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-24352/60000 [===========&gt;..................] - ETA: 2s - loss: 0.1780 - accuracy: 0.9502
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-25248/60000 [===========&gt;..................] - ETA: 2s - loss: 0.1776 - accuracy: 0.9504
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>26144/60000 [============&gt;.................] - ETA: 2s - loss: 0.1783 - accuracy: 0.9498
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-27040/60000 [============&gt;.................] - ETA: 2s - loss: 0.1769 - accuracy: 0.9501
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-28000/60000 [=============&gt;................] - ETA: 1s - loss: 0.1760 - accuracy: 0.9502
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-28864/60000 [=============&gt;................] - ETA: 1s - loss: 0.1761 - accuracy: 0.9501
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>29824/60000 [=============&gt;................] - ETA: 1s - loss: 0.1752 - accuracy: 0.9504
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-30752/60000 [==============&gt;...............] - ETA: 1s - loss: 0.1760 - accuracy: 0.9502
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-31712/60000 [==============&gt;...............] - ETA: 1s - loss: 0.1754 - accuracy: 0.9505
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-32608/60000 [===============&gt;..............] - ETA: 1s - loss: 0.1746 - accuracy: 0.9507
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-33472/60000 [===============&gt;..............] - ETA: 1s - loss: 0.1745 - accuracy: 0.9506
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-34304/60000 [================&gt;.............] - ETA: 1s - loss: 0.1742 - accuracy: 0.9507
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-34624/60000 [================&gt;.............] - ETA: 1s - loss: 0.1742 - accuracy: 0.9507
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-35136/60000 [================&gt;.............] - ETA: 1s - loss: 0.1734 - accuracy: 0.9509
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-35744/60000 [================&gt;.............] - ETA: 1s - loss: 0.1732 - accuracy: 0.9509
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-36256/60000 [=================&gt;............] - ETA: 1s - loss: 0.1726 - accuracy: 0.9510
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-36800/60000 [=================&gt;............] - ETA: 1s - loss: 0.1731 - accuracy: 0.9509
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-37312/60000 [=================&gt;............] - ETA: 1s - loss: 0.1723 - accuracy: 0.9511
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-37920/60000 [=================&gt;............] - ETA: 1s - loss: 0.1721 - accuracy: 0.9509
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-38528/60000 [==================&gt;...........] - ETA: 1s - loss: 0.1726 - accuracy: 0.9508
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-39104/60000 [==================&gt;...........] - ETA: 1s - loss: 0.1727 - accuracy: 0.9508
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-39616/60000 [==================&gt;...........] - ETA: 1s - loss: 0.1727 - accuracy: 0.9508
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-40160/60000 [===================&gt;..........] - ETA: 1s - loss: 0.1721 - accuracy: 0.9510
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-40736/60000 [===================&gt;..........] - ETA: 1s - loss: 0.1724 - accuracy: 0.9510
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-41376/60000 [===================&gt;..........] - ETA: 1s - loss: 0.1722 - accuracy: 0.9509
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-42016/60000 [====================&gt;.........] - ETA: 1s - loss: 0.1721 - accuracy: 0.9510
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-42656/60000 [====================&gt;.........] - ETA: 1s - loss: 0.1717 - accuracy: 0.9511
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-43232/60000 [====================&gt;.........] - ETA: 1s - loss: 0.1713 - accuracy: 0.9510
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-43904/60000 [====================&gt;.........] - ETA: 1s - loss: 0.1711 - accuracy: 0.9511
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-44544/60000 [=====================&gt;........] - ETA: 1s - loss: 0.1715 - accuracy: 0.9510
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-45184/60000 [=====================&gt;........] - ETA: 1s - loss: 0.1711 - accuracy: 0.9511
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-45792/60000 [=====================&gt;........] - ETA: 0s - loss: 0.1707 - accuracy: 0.9514
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-46560/60000 [======================&gt;.......] - ETA: 0s - loss: 0.1702 - accuracy: 0.9515
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-47360/60000 [======================&gt;.......] - ETA: 0s - loss: 0.1703 - accuracy: 0.9515
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-48192/60000 [=======================&gt;......] - ETA: 0s - loss: 0.1699 - accuracy: 0.9517
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-48960/60000 [=======================&gt;......] - ETA: 0s - loss: 0.1695 - accuracy: 0.9518
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-49824/60000 [=======================&gt;......] - ETA: 0s - loss: 0.1696 - accuracy: 0.9516
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-50688/60000 [========================&gt;.....] - ETA: 0s - loss: 0.1691 - accuracy: 0.9518
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-51584/60000 [========================&gt;.....] - ETA: 0s - loss: 0.1686 - accuracy: 0.9520
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-52448/60000 [=========================&gt;....] - ETA: 0s - loss: 0.1683 - accuracy: 0.9521
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-53312/60000 [=========================&gt;....] - ETA: 0s - loss: 0.1685 - accuracy: 0.9520
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-54240/60000 [==========================&gt;...] - ETA: 0s - loss: 0.1679 - accuracy: 0.9522
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-55104/60000 [==========================&gt;...] - ETA: 0s - loss: 0.1677 - accuracy: 0.9523
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-56064/60000 [===========================&gt;..] - ETA: 0s - loss: 0.1675 - accuracy: 0.9525
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-57024/60000 [===========================&gt;..] - ETA: 0s - loss: 0.1668 - accuracy: 0.9528
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-57920/60000 [===========================&gt;..] - ETA: 0s - loss: 0.1663 - accuracy: 0.9529
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-58848/60000 [============================&gt;.] - ETA: 0s - loss: 0.1654 - accuracy: 0.9532
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-59744/60000 [============================&gt;.] - ETA: 0s - loss: 0.1648 - accuracy: 0.9534
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-60000/60000 [==============================] - 5s 76us/sample - loss: 0.1647 - accuracy: 0.9534 - val_loss: 0.1330 - val_accuracy: 0.9588
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 3/3
+<span class="nn">~\miniconda3\envs\tensorflow\lib\site-packages\tensorflow_core\python\keras\engine\training.py</span> in <span class="ni">fit</span><span class="nt">(self, x, y, batch_size, epochs, verbose, callbacks, validation_split, validation_data, shuffle, class_weight, sample_weight, initial_epoch, steps_per_epoch, validation_steps, validation_freq, max_queue_size, workers, use_multiprocessing, **kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">817</span>         <span class="n">max_queue_size</span><span class="o">=</span><span class="n">max_queue_size</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">818</span>         <span class="n">workers</span><span class="o">=</span><span class="n">workers</span><span class="p">,</span>
+<span class="ne">--&gt; </span><span class="mi">819</span>         <span class="n">use_multiprocessing</span><span class="o">=</span><span class="n">use_multiprocessing</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">820</span> 
+<span class="g g-Whitespace">    </span><span class="mi">821</span>   <span class="k">def</span> <span class="nf">evaluate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
 
-   32/60000 [..............................] - ETA: 3s - loss: 0.1621 - accuracy: 0.9375
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-  864/60000 [..............................] - ETA: 3s - loss: 0.1364 - accuracy: 0.9618
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
- 1792/60000 [..............................] - ETA: 3s - loss: 0.1455 - accuracy: 0.9626
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
- 2720/60000 [&gt;.............................] - ETA: 3s - loss: 0.1352 - accuracy: 0.9643
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
- 3552/60000 [&gt;.............................] - ETA: 3s - loss: 0.1289 - accuracy: 0.9651
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
- 4384/60000 [=&gt;............................] - ETA: 3s - loss: 0.1337 - accuracy: 0.9640
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
- 5280/60000 [=&gt;............................] - ETA: 3s - loss: 0.1299 - accuracy: 0.9644
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
- 6144/60000 [==&gt;...........................] - ETA: 3s - loss: 0.1288 - accuracy: 0.9637
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
- 7040/60000 [==&gt;...........................] - ETA: 3s - loss: 0.1287 - accuracy: 0.9641
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
- 7872/60000 [==&gt;...........................] - ETA: 3s - loss: 0.1305 - accuracy: 0.9635
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
- 8576/60000 [===&gt;..........................] - ETA: 3s - loss: 0.1300 - accuracy: 0.9637
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
- 9440/60000 [===&gt;..........................] - ETA: 3s - loss: 0.1321 - accuracy: 0.9627
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-10304/60000 [====&gt;.........................] - ETA: 2s - loss: 0.1324 - accuracy: 0.9629
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-11200/60000 [====&gt;.........................] - ETA: 2s - loss: 0.1314 - accuracy: 0.9629
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-12032/60000 [=====&gt;........................] - ETA: 2s - loss: 0.1301 - accuracy: 0.9630
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-12928/60000 [=====&gt;........................] - ETA: 2s - loss: 0.1306 - accuracy: 0.9626
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-13792/60000 [=====&gt;........................] - ETA: 2s - loss: 0.1310 - accuracy: 0.9624
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-14688/60000 [======&gt;.......................] - ETA: 2s - loss: 0.1300 - accuracy: 0.9632
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-15552/60000 [======&gt;.......................] - ETA: 2s - loss: 0.1317 - accuracy: 0.9625
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-16480/60000 [=======&gt;......................] - ETA: 2s - loss: 0.1318 - accuracy: 0.9621
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-17344/60000 [=======&gt;......................] - ETA: 2s - loss: 0.1317 - accuracy: 0.9621
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-18240/60000 [========&gt;.....................] - ETA: 2s - loss: 0.1326 - accuracy: 0.9614
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>19168/60000 [========&gt;.....................] - ETA: 2s - loss: 0.1304 - accuracy: 0.9619
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-20032/60000 [=========&gt;....................] - ETA: 2s - loss: 0.1298 - accuracy: 0.9623
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-20960/60000 [=========&gt;....................] - ETA: 2s - loss: 0.1290 - accuracy: 0.9628
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-21888/60000 [=========&gt;....................] - ETA: 2s - loss: 0.1287 - accuracy: 0.9629
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-22752/60000 [==========&gt;...................] - ETA: 2s - loss: 0.1297 - accuracy: 0.9625
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-23648/60000 [==========&gt;...................] - ETA: 2s - loss: 0.1306 - accuracy: 0.9624
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-24576/60000 [===========&gt;..................] - ETA: 2s - loss: 0.1303 - accuracy: 0.9622
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-25440/60000 [===========&gt;..................] - ETA: 2s - loss: 0.1294 - accuracy: 0.9626
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-26368/60000 [============&gt;.................] - ETA: 1s - loss: 0.1298 - accuracy: 0.9627
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-27232/60000 [============&gt;.................] - ETA: 1s - loss: 0.1296 - accuracy: 0.9627
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-28128/60000 [=============&gt;................] - ETA: 1s - loss: 0.1294 - accuracy: 0.9627
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-29024/60000 [=============&gt;................] - ETA: 1s - loss: 0.1284 - accuracy: 0.9630
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-29920/60000 [=============&gt;................] - ETA: 1s - loss: 0.1289 - accuracy: 0.9629
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-30752/60000 [==============&gt;...............] - ETA: 1s - loss: 0.1289 - accuracy: 0.9629
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-31616/60000 [==============&gt;...............] - ETA: 1s - loss: 0.1290 - accuracy: 0.9629
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-32448/60000 [===============&gt;..............] - ETA: 1s - loss: 0.1290 - accuracy: 0.9627
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-33216/60000 [===============&gt;..............] - ETA: 1s - loss: 0.1292 - accuracy: 0.9627
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-34080/60000 [================&gt;.............] - ETA: 1s - loss: 0.1293 - accuracy: 0.9626
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-34944/60000 [================&gt;.............] - ETA: 1s - loss: 0.1288 - accuracy: 0.9628
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-35840/60000 [================&gt;.............] - ETA: 1s - loss: 0.1289 - accuracy: 0.9628
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-36736/60000 [=================&gt;............] - ETA: 1s - loss: 0.1282 - accuracy: 0.9630
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-37600/60000 [=================&gt;............] - ETA: 1s - loss: 0.1278 - accuracy: 0.9633
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-38464/60000 [==================&gt;...........] - ETA: 1s - loss: 0.1281 - accuracy: 0.9632
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-39328/60000 [==================&gt;...........] - ETA: 1s - loss: 0.1276 - accuracy: 0.9633
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-40224/60000 [===================&gt;..........] - ETA: 1s - loss: 0.1275 - accuracy: 0.9633
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-41088/60000 [===================&gt;..........] - ETA: 1s - loss: 0.1271 - accuracy: 0.9635
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-41920/60000 [===================&gt;..........] - ETA: 1s - loss: 0.1269 - accuracy: 0.9636
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-42848/60000 [====================&gt;.........] - ETA: 1s - loss: 0.1273 - accuracy: 0.9635
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-43680/60000 [====================&gt;.........] - ETA: 0s - loss: 0.1277 - accuracy: 0.9633
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>44544/60000 [=====================&gt;........] - ETA: 0s - loss: 0.1276 - accuracy: 0.9633
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-45408/60000 [=====================&gt;........] - ETA: 0s - loss: 0.1274 - accuracy: 0.9633
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-46304/60000 [======================&gt;.......] - ETA: 0s - loss: 0.1273 - accuracy: 0.9634
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-47232/60000 [======================&gt;.......] - ETA: 0s - loss: 0.1273 - accuracy: 0.9635
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-48128/60000 [=======================&gt;......] - ETA: 0s - loss: 0.1277 - accuracy: 0.9634
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-49056/60000 [=======================&gt;......] - ETA: 0s - loss: 0.1283 - accuracy: 0.9634
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-49952/60000 [=======================&gt;......] - ETA: 0s - loss: 0.1284 - accuracy: 0.9635
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-50848/60000 [========================&gt;.....] - ETA: 0s - loss: 0.1282 - accuracy: 0.9634
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-51712/60000 [========================&gt;.....] - ETA: 0s - loss: 0.1281 - accuracy: 0.9634
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-52640/60000 [=========================&gt;....] - ETA: 0s - loss: 0.1276 - accuracy: 0.9635
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-53504/60000 [=========================&gt;....] - ETA: 0s - loss: 0.1270 - accuracy: 0.9636
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>54432/60000 [==========================&gt;...] - ETA: 0s - loss: 0.1268 - accuracy: 0.9637
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-55392/60000 [==========================&gt;...] - ETA: 0s - loss: 0.1263 - accuracy: 0.9638
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-56256/60000 [===========================&gt;..] - ETA: 0s - loss: 0.1258 - accuracy: 0.9638
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-57184/60000 [===========================&gt;..] - ETA: 0s - loss: 0.1256 - accuracy: 0.9639
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-58080/60000 [============================&gt;.] - ETA: 0s - loss: 0.1257 - accuracy: 0.9639
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-59040/60000 [============================&gt;.] - ETA: 0s - loss: 0.1256 - accuracy: 0.9638
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-59872/60000 [============================&gt;.] - ETA: 0s - loss: 0.1256 - accuracy: 0.9638
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-60000/60000 [==============================] - 4s 68us/sample - loss: 0.1256 - accuracy: 0.9638 - val_loss: 0.1128 - val_accuracy: 0.9652
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;tensorflow.python.keras.callbacks.History at 0x283b762e648&gt;
-</pre></div>
+<span class="nn">~\miniconda3\envs\tensorflow\lib\site-packages\tensorflow_core\python\keras\engine\training_v2.py</span> in <span class="ni">fit</span><span class="nt">(self, model, x, y, batch_size, epochs, verbose, callbacks, validation_split, validation_data, shuffle, class_weight, sample_weight, initial_epoch, steps_per_epoch, validation_steps, validation_freq, max_queue_size, workers, use_multiprocessing, **kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">340</span>                 <span class="n">mode</span><span class="o">=</span><span class="n">ModeKeys</span><span class="o">.</span><span class="n">TRAIN</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">341</span>                 <span class="n">training_context</span><span class="o">=</span><span class="n">training_context</span><span class="p">,</span>
+<span class="ne">--&gt; </span><span class="mi">342</span>                 <span class="n">total_epochs</span><span class="o">=</span><span class="n">epochs</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">343</span>             <span class="n">cbks</span><span class="o">.</span><span class="n">make_logs</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">epoch_logs</span><span class="p">,</span> <span class="n">training_result</span><span class="p">,</span> <span class="n">ModeKeys</span><span class="o">.</span><span class="n">TRAIN</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">344</span> 
+
+<span class="nn">~\miniconda3\envs\tensorflow\lib\site-packages\tensorflow_core\python\keras\engine\training_v2.py</span> in <span class="ni">run_one_epoch</span><span class="nt">(model, iterator, execution_function, dataset_size, batch_size, strategy, steps_per_epoch, num_samples, mode, training_context, total_epochs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">126</span>         <span class="n">step</span><span class="o">=</span><span class="n">step</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="n">mode</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">current_batch_size</span><span class="p">)</span> <span class="k">as</span> <span class="n">batch_logs</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">127</span>       <span class="k">try</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">128</span>         <span class="n">batch_outs</span> <span class="o">=</span> <span class="n">execution_function</span><span class="p">(</span><span class="n">iterator</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">129</span>       <span class="k">except</span> <span class="p">(</span><span class="ne">StopIteration</span><span class="p">,</span> <span class="n">errors</span><span class="o">.</span><span class="n">OutOfRangeError</span><span class="p">):</span>
+<span class="g g-Whitespace">    </span><span class="mi">130</span>         <span class="c1"># TODO(kaftan): File bug about tf function and errors.OutOfRangeError?</span>
+
+<span class="nn">~\miniconda3\envs\tensorflow\lib\site-packages\tensorflow_core\python\keras\engine\training_v2_utils.py</span> in <span class="ni">execution_function</span><span class="nt">(input_fn)</span>
+<span class="g g-Whitespace">     </span><span class="mi">96</span>     <span class="c1"># `numpy` translates Tensors to values in Eager mode.</span>
+<span class="g g-Whitespace">     </span><span class="mi">97</span>     <span class="k">return</span> <span class="n">nest</span><span class="o">.</span><span class="n">map_structure</span><span class="p">(</span><span class="n">_non_none_constant_value</span><span class="p">,</span>
+<span class="ne">---&gt; </span><span class="mi">98</span>                               <span class="n">distributed_function</span><span class="p">(</span><span class="n">input_fn</span><span class="p">))</span>
+<span class="g g-Whitespace">     </span><span class="mi">99</span> 
+<span class="g g-Whitespace">    </span><span class="mi">100</span>   <span class="k">return</span> <span class="n">execution_function</span>
+
+<span class="nn">~\miniconda3\envs\tensorflow\lib\site-packages\tensorflow_core\python\eager\def_function.py</span> in <span class="ni">__call__</span><span class="nt">(self, *args, **kwds)</span>
+<span class="g g-Whitespace">    </span><span class="mi">566</span>         <span class="n">xla_context</span><span class="o">.</span><span class="n">Exit</span><span class="p">()</span>
+<span class="g g-Whitespace">    </span><span class="mi">567</span>     <span class="k">else</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">568</span>       <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_call</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwds</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">569</span> 
+<span class="g g-Whitespace">    </span><span class="mi">570</span>     <span class="k">if</span> <span class="n">tracing_count</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_tracing_count</span><span class="p">():</span>
+
+<span class="nn">~\miniconda3\envs\tensorflow\lib\site-packages\tensorflow_core\python\eager\def_function.py</span> in <span class="ni">_call</span><span class="nt">(self, *args, **kwds)</span>
+<span class="g g-Whitespace">    </span><span class="mi">630</span>         <span class="c1"># Lifting succeeded, so variables are initialized and we can run the</span>
+<span class="g g-Whitespace">    </span><span class="mi">631</span>         <span class="c1"># stateless function.</span>
+<span class="ne">--&gt; </span><span class="mi">632</span>         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_stateless_fn</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwds</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">633</span>     <span class="k">else</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">634</span>       <span class="n">canon_args</span><span class="p">,</span> <span class="n">canon_kwds</span> <span class="o">=</span> \
+
+<span class="nn">~\miniconda3\envs\tensorflow\lib\site-packages\tensorflow_core\python\eager\function.py</span> in <span class="ni">__call__</span><span class="nt">(self, *args, **kwargs)</span>
+<span class="g g-Whitespace">   </span><span class="mi">2361</span>     <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">_lock</span><span class="p">:</span>
+<span class="g g-Whitespace">   </span><span class="mi">2362</span>       <span class="n">graph_function</span><span class="p">,</span> <span class="n">args</span><span class="p">,</span> <span class="n">kwargs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_maybe_define_function</span><span class="p">(</span><span class="n">args</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">)</span>
+<span class="ne">-&gt; </span><span class="mi">2363</span>     <span class="k">return</span> <span class="n">graph_function</span><span class="o">.</span><span class="n">_filtered_call</span><span class="p">(</span><span class="n">args</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">)</span>  <span class="c1"># pylint: disable=protected-access</span>
+<span class="g g-Whitespace">   </span><span class="mi">2364</span> 
+<span class="g g-Whitespace">   </span><span class="mi">2365</span>   <span class="nd">@property</span>
+
+<span class="nn">~\miniconda3\envs\tensorflow\lib\site-packages\tensorflow_core\python\eager\function.py</span> in <span class="ni">_filtered_call</span><span class="nt">(self, args, kwargs)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1609</span>          <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="p">(</span><span class="n">ops</span><span class="o">.</span><span class="n">Tensor</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1610</span>                            <span class="n">resource_variable_ops</span><span class="o">.</span><span class="n">BaseResourceVariable</span><span class="p">))),</span>
+<span class="ne">-&gt; </span><span class="mi">1611</span>         <span class="bp">self</span><span class="o">.</span><span class="n">captured_inputs</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1612</span> 
+<span class="g g-Whitespace">   </span><span class="mi">1613</span>   <span class="k">def</span> <span class="nf">_call_flat</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">args</span><span class="p">,</span> <span class="n">captured_inputs</span><span class="p">,</span> <span class="n">cancellation_manager</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+
+<span class="nn">~\miniconda3\envs\tensorflow\lib\site-packages\tensorflow_core\python\eager\function.py</span> in <span class="ni">_call_flat</span><span class="nt">(self, args, captured_inputs, cancellation_manager)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1690</span>       <span class="c1"># No tape is watching; skip to running the function.</span>
+<span class="g g-Whitespace">   </span><span class="mi">1691</span>       <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_build_call_outputs</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_inference_function</span><span class="o">.</span><span class="n">call</span><span class="p">(</span>
+<span class="ne">-&gt; </span><span class="mi">1692</span>           <span class="n">ctx</span><span class="p">,</span> <span class="n">args</span><span class="p">,</span> <span class="n">cancellation_manager</span><span class="o">=</span><span class="n">cancellation_manager</span><span class="p">))</span>
+<span class="g g-Whitespace">   </span><span class="mi">1693</span>     <span class="n">forward_backward</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_select_forward_and_backward_functions</span><span class="p">(</span>
+<span class="g g-Whitespace">   </span><span class="mi">1694</span>         <span class="n">args</span><span class="p">,</span>
+
+<span class="nn">~\miniconda3\envs\tensorflow\lib\site-packages\tensorflow_core\python\eager\function.py</span> in <span class="ni">call</span><span class="nt">(self, ctx, args, cancellation_manager)</span>
+<span class="g g-Whitespace">    </span><span class="mi">543</span>               <span class="n">inputs</span><span class="o">=</span><span class="n">args</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">544</span>               <span class="n">attrs</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;executor_type&quot;</span><span class="p">,</span> <span class="n">executor_type</span><span class="p">,</span> <span class="s2">&quot;config_proto&quot;</span><span class="p">,</span> <span class="n">config</span><span class="p">),</span>
+<span class="ne">--&gt; </span><span class="mi">545</span>               <span class="n">ctx</span><span class="o">=</span><span class="n">ctx</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">546</span>         <span class="k">else</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">547</span>           <span class="n">outputs</span> <span class="o">=</span> <span class="n">execute</span><span class="o">.</span><span class="n">execute_with_cancellation</span><span class="p">(</span>
+
+<span class="nn">~\miniconda3\envs\tensorflow\lib\site-packages\tensorflow_core\python\eager\execute.py</span> in <span class="ni">quick_execute</span><span class="nt">(op_name, num_outputs, inputs, attrs, ctx, name)</span>
+<span class="g g-Whitespace">     </span><span class="mi">65</span>     <span class="k">else</span><span class="p">:</span>
+<span class="g g-Whitespace">     </span><span class="mi">66</span>       <span class="n">message</span> <span class="o">=</span> <span class="n">e</span><span class="o">.</span><span class="n">message</span>
+<span class="ne">---&gt; </span><span class="mi">67</span>     <span class="n">six</span><span class="o">.</span><span class="n">raise_from</span><span class="p">(</span><span class="n">core</span><span class="o">.</span><span class="n">_status_to_exception</span><span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="n">code</span><span class="p">,</span> <span class="n">message</span><span class="p">),</span> <span class="kc">None</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">68</span>   <span class="k">except</span> <span class="ne">TypeError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+<span class="g g-Whitespace">     </span><span class="mi">69</span>     <span class="n">keras_symbolic_tensors</span> <span class="o">=</span> <span class="p">[</span>
+
+<span class="nn">~\miniconda3\envs\tensorflow\lib\site-packages\six.py</span> in <span class="ni">raise_from</span><span class="nt">(value, from_value)</span>
+
+<span class="ne">UnknownError</span>:  Failed to get convolution algorithm. This is probably because cuDNN failed to initialize, so try looking to see if a warning log message was printed above.
+	 <span class="p">[[</span><span class="n">node</span> <span class="n">sequential</span><span class="o">/</span><span class="n">conv2d</span><span class="o">/</span><span class="n">Conv2D</span> <span class="p">(</span><span class="n">defined</span> <span class="n">at</span> <span class="o">&lt;</span><span class="n">ipython</span><span class="o">-</span><span class="nb">input</span><span class="o">-</span><span class="mi">9</span><span class="o">-</span><span class="mf">302e094</span><span class="n">c995d</span><span class="o">&gt;</span><span class="p">:</span><span class="mi">2</span><span class="p">)</span> <span class="p">]]</span> <span class="p">[</span><span class="n">Op</span><span class="p">:</span><span class="n">__inference_distributed_function_695</span><span class="p">]</span>
+
+<span class="n">Function</span> <span class="n">call</span> <span class="n">stack</span><span class="p">:</span>
+<span class="n">distributed_function</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="results-and-evaluation">
+<h2>Results and Evaluation<a class="headerlink" href="#results-and-evaluation" title="Permalink to this headline">¶</a></h2>
+<p>Now the model has been trained and we can evaluate the results and play around with the trained model. I mentioned in the previous example that the metrics during trained are saved within the model variable itself, and we can access the data by calling <code class="docutils literal notranslate"><span class="pre">model.history.history</span></code>. The data is stored here in a dictionary format. Calling <code class="docutils literal notranslate"><span class="pre">model.history.history</span></code> prints out the contents and we can see the metrics that have been stored, we see <code class="docutils literal notranslate"><span class="pre">loss</span></code>, <code class="docutils literal notranslate"><span class="pre">accuracy</span></code>, <code class="docutils literal notranslate"><span class="pre">val_loss</span></code> etc and access that data explicitly by using square brackets and indexing the string containing the data we want. So if we want to create a new variable containing all of the computed <code class="docutils literal notranslate"><span class="pre">loss</span></code> values during training. We can write <code class="docutils literal notranslate"><span class="pre">loss</span> <span class="pre">=</span> <span class="pre">model.history.history['loss']</span></code> and use that data to perform further analysis. In this case, we are just going to plot the data to see what is happening during training.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">num_epochs</span><span class="p">),</span><span class="n">model</span><span class="o">.</span><span class="n">history</span><span class="o">.</span><span class="n">history</span><span class="p">[</span><span class="s1">&#39;val_loss&#39;</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Validation Loss&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">num_epochs</span><span class="p">),</span><span class="n">model</span><span class="o">.</span><span class="n">history</span><span class="o">.</span><span class="n">history</span><span class="p">[</span><span class="s1">&#39;val_accuracy&#39;</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Validation Accuracy&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">num_epochs</span><span class="p">),</span><span class="n">model</span><span class="o">.</span><span class="n">history</span><span class="o">.</span><span class="n">history</span><span class="p">[</span><span class="s1">&#39;loss&#39;</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Traiing Loss&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">num_epochs</span><span class="p">),</span><span class="n">model</span><span class="o">.</span><span class="n">history</span><span class="o">.</span><span class="n">history</span><span class="p">[</span><span class="s1">&#39;accuracy&#39;</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Training Accuracy&#39;</span><span class="p">)</span>
+
+<span class="c1"># some simple formatting</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Epoch Number&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Loss&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="s1">&#39;True&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="../_images/2_MNIST_CNN_21_0.png" src="../_images/2_MNIST_CNN_21_0.png" />
 </div>
 </div>
+<p>As you can see, training loss decreases rapidly (noted by the steep gradient). This is perfectly normal, as the model always learns most during the early stages of optimization. Accuracies converge after only one epoch, and still improve during the 10th, albeit slightly. Validation loss begins to convergeat around the 6th epoch. This means that training the model for longer (increasing the number of epochs) is unlikely to improve the accuracy of the model.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Often when models are unsuccessful, some clues as to what went wrong can appear when plotting this information. We can therefore go back and make changes to the model architecture or training parameters and try again.</p>
 </div>
-<div class="section" id="test">
-<h2>Test<a class="headerlink" href="#test" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="test-the-model-using-the-test-data">
+<h3>Test the model using the test data<a class="headerlink" href="#test-the-model-using-the-test-data" title="Permalink to this headline">¶</a></h3>
+<p>However, this was all observed from validation data. What’s best is to test it with the actual testing data that was generated earlier. Here we call the <code class="docutils literal notranslate"><span class="pre">model.evaluate</span></code> function and input the test data we created earlier, <code class="docutils literal notranslate"><span class="pre">test_images</span></code> and <code class="docutils literal notranslate"><span class="pre">test_labels</span></code> - remembering to convert the test labels into <code class="docutils literal notranslate"><span class="pre">to_categorical</span></code> format as we are using the <code class="docutils literal notranslate"><span class="pre">categorical_crossentropy</span></code> loss function. Once again we can use the verbose feature to display the progress output and print the results.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Test the model after training</span>
-<span class="n">test_results</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">evaluate</span><span class="p">(</span><span class="n">test_images</span><span class="p">,</span> <span class="n">to_categorical</span><span class="p">(</span><span class="n">test_labels</span><span class="p">),</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">test_results</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">evaluate</span><span class="p">(</span><span class="n">test_images</span><span class="p">,</span> <span class="n">to_categorical</span><span class="p">(</span><span class="n">test_labels</span><span class="p">,</span> <span class="n">num_classes</span><span class="p">),</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Test results - Loss: </span><span class="si">{</span><span class="n">test_results</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s1"> - Accuracy: </span><span class="si">{</span><span class="n">test_results</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="mi">100</span><span class="si">}</span><span class="s1">%&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   32/10000 [..............................] - ETA: 0s - loss: 0.1813 - accuracy: 0.9375
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-  960/10000 [=&gt;............................] - ETA: 0s - loss: 0.1190 - accuracy: 0.9635
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
- 1888/10000 [====&gt;.........................] - ETA: 0s - loss: 0.1498 - accuracy: 0.9550
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 2848/10000 [=======&gt;......................] - ETA: 0s - loss: 0.1506 - accuracy: 0.9540
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
- 3808/10000 [==========&gt;...................] - ETA: 0s - loss: 0.1486 - accuracy: 0.9543
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
- 4704/10000 [=============&gt;................] - ETA: 0s - loss: 0.1509 - accuracy: 0.9530
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
- 5632/10000 [===============&gt;..............] - ETA: 0s - loss: 0.1385 - accuracy: 0.9570
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
- 6560/10000 [==================&gt;...........] - ETA: 0s - loss: 0.1333 - accuracy: 0.9575
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 7488/10000 [=====================&gt;........] - ETA: 0s - loss: 0.1256 - accuracy: 0.9603
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
- 8416/10000 [========================&gt;.....] - ETA: 0s - loss: 0.1198 - accuracy: 0.9623
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
- 9344/10000 [===========================&gt;..] - ETA: 0s - loss: 0.1130 - accuracy: 0.9651
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>10000/10000 [==============================] - 1s 55us/sample - loss: 0.1128 - accuracy: 0.9652
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Test results - Loss: 0.11280090025439858 - Accuracy: 96.52000069618225%
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>10000/10000 [==============================] - 1s 85us/sample - loss: 0.0750 - accuracy: 0.9780
+Test results - Loss: 0.0749931918419432 - Accuracy: 97.79999852180481%
 </pre></div>
 </div>
 </div>
 </div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">predictions</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">test_images</span><span class="p">[:</span><span class="mi">5</span><span class="p">])</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">predictions</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[3.17064587e-06, 1.89754957e-07, 1.11517893e-05, 1.19209311e-04,
-        1.63429081e-06, 7.81240658e-07, 2.57791094e-10, 9.99854207e-01,
-        1.35837098e-07, 9.51365746e-06],
-       [1.48026564e-04, 3.08694689e-05, 9.98795509e-01, 1.73769251e-04,
-        2.60642646e-10, 1.12965485e-04, 3.29487637e-04, 4.94145523e-12,
-        4.09500586e-04, 1.44384404e-09],
-       [6.17393453e-05, 9.96644616e-01, 1.84586586e-03, 1.65146103e-05,
-        5.91348915e-04, 5.57014482e-06, 5.99679079e-05, 7.53064000e-04,
-        1.90076189e-05, 2.33977607e-06],
-       [9.97269213e-01, 1.16097146e-06, 1.66019518e-03, 2.74033318e-05,
-        1.15383064e-05, 2.11628649e-04, 4.85056342e-04, 2.64065224e-04,
-        4.44858924e-05, 2.53228955e-05],
-       [4.31983826e-05, 1.04784422e-05, 1.62195734e-04, 3.03431307e-06,
-        9.98324692e-01, 2.79182063e-06, 5.65910632e-05, 5.49614255e-04,
-        2.43818545e-06, 8.45037866e-04]], dtype=float32)
-</pre></div>
-</div>
-</div>
-</div>
+<p>The results show that the accuracy of the model was 97.79 % when evaluated on the test data that it had not been trained on! This is obviously a good result especially given the simplicity of the network and the short amount of time spent training. We could modify size of the network by increasing the number of filters, modify the size of the filters, play around with pooling, use different optimisers, activation functions and loss functions in attempt to improve the accuracy of the network. We already established that training the model for longer is unlikely to yield better results as the network has began to converge.</p>
+<p>Once again, let’s play around with the model that we just trained and take a look at how we can use it to make new predictions. First of all, we call the <code class="docutils literal notranslate"><span class="pre">model.predict()</span></code> function to use the model (as you might expect) to make a new prediction. The code below selects an image from the test set by defining an index and plots a bar chart that corresponds to the probability distribution produced by the softmax output. The predictions in this layer correspond to the confidence that the trained CNN believes that the input belongs to a particular class.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># create subplot to show input and its prediction</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span><span class="mi">7</span><span class="p">))</span>
 
-<span class="n">index</span> <span class="o">=</span> <span class="mi">7</span>
+<span class="n">index</span> <span class="o">=</span> <span class="mi">4</span>
 <span class="n">test_input</span> <span class="o">=</span> <span class="n">test_images</span><span class="p">[</span><span class="n">index</span><span class="p">,:,:]</span>
 
 
@@ -1520,8 +730,167 @@ Epoch 1/3
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/2_MNIST_CNN_22_0.png" src="../_images/2_MNIST_CNN_22_0.png" />
+<img alt="../_images/2_MNIST_CNN_25_0.png" src="../_images/2_MNIST_CNN_25_0.png" />
 </div>
+</div>
+<p>There we have it, a trained CNN that can classify handwritten digits! If you want to take it a little further, there is more information below that looks into what is happening with the filters in more detail.</p>
+<p>~ Sam</p>
+</div>
+</div>
+<div class="section" id="extra-deep-dive-into-the-filters">
+<h2>Extra: Deep dive into the filters<a class="headerlink" href="#extra-deep-dive-into-the-filters" title="Permalink to this headline">¶</a></h2>
+<p>When I first started developing networks, I wish that more of the tutorials that I learnt from showed you how to access the data that the model has learned so that you can see and interact with the learned parameters. So I’m going to show you a few additional things that you can do to understand your model better. First of all, we can call the <code class="docutils literal notranslate"><span class="pre">model.summary()</span></code> function to print out the architecture of the network.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Model: &quot;sequential_1&quot;
+_________________________________________________________________
+Layer (type)                 Output Shape              Param #   
+=================================================================
+conv2d_1 (Conv2D)            (None, 26, 26, 8)         80        
+_________________________________________________________________
+max_pooling2d_1 (MaxPooling2 (None, 13, 13, 8)         0         
+_________________________________________________________________
+flatten_1 (Flatten)          (None, 1352)              0         
+_________________________________________________________________
+dense_1 (Dense)              (None, 10)                13530     
+=================================================================
+Total params: 13,610
+Trainable params: 13,610
+Non-trainable params: 0
+_________________________________________________________________
+</pre></div>
+</div>
+</div>
+</div>
+<p>Here you can see each of the layers clearly and the total number of trainable parameters. In the first <code class="docutils literal notranslate"><span class="pre">Conv2D</span></code> layer, we can see that the shape is [26x26] with 8 total filters that we defined earlier. The total number of parameters is 80 which is determined by the 9 trainable parameters within each [3x3] filter multiplied by the total number of filters (8) equalling 72 (8x9). There is also an additional trainable parameter associated with each filter known as the bias, therefore total parameters = 72 + 8 = 80. During training, these values are optimised to reduce the loss function and subsequently imporve the accuracy of the network.</p>
+<p>We can call the <code class="docutils literal notranslate"><span class="pre">model.layers</span></code> function to access the data stored within each layer within the model. This prints out four layers corresponding to the <code class="docutils literal notranslate"><span class="pre">Conv2D</span></code> layer (index 0) and the <code class="docutils literal notranslate"><span class="pre">MaxPooling2D</span></code> layer (index 1) etc. From here, we can call <code class="docutils literal notranslate"><span class="pre">dir(models.layers[0])</span></code> to see all of the attributes that we can call from the <code class="docutils literal notranslate"><span class="pre">Conv2D</span></code> layer. The <code class="docutils literal notranslate"><span class="pre">get_weights()</span></code> attribute allows us to access all of the optimised values i.e. the filters and the biases. We can call <code class="docutils literal notranslate"><span class="pre">filters,</span> <span class="pre">biases</span> <span class="pre">=</span> <span class="pre">model.layers[0].get_weights()</span></code> to create two new variables <code class="docutils literal notranslate"><span class="pre">filters</span></code> and <code class="docutils literal notranslate"><span class="pre">weights</span></code> which contain the relevant data.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># retrieve weights from the second hidden layer</span>
+<span class="n">filters</span><span class="p">,</span> <span class="n">biases</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">layers</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">get_weights</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>As always, we should double check the structure of the new <code class="docutils literal notranslate"><span class="pre">filters</span></code> variable by calling <code class="docutils literal notranslate"><span class="pre">filters.shape</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">filters</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(3, 3, 1, 8)
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can see the shape of the <code class="docutils literal notranslate"><span class="pre">fitlers</span></code> variable is (3,3,1,8). This refers to the size of the filter (which is [3x3x1]) and the total number of filters (8), hence (3,3,1,8). We can print the filter values for the first array (index 0) by calling <code class="docutils literal notranslate"><span class="pre">filters[:,:,:,0]</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">filters</span><span class="p">[:,:,:,</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[[0.8895948 ],
+        [0.23978315],
+        [0.75460285]],
+
+       [[0.17771143],
+        [0.6460808 ],
+        [0.        ]],
+
+       [[0.6462157 ],
+        [0.32126075],
+        [0.8766276 ]]], dtype=float32)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Remember that the : sign is used to index all elements within that particular dimension of a variable. So here we wish to access all of the filter information for the first layer of eight (index 0).</p>
+</div>
+<div class="section" id="visualising-filters">
+<h3>Visualising Filters<a class="headerlink" href="#visualising-filters" title="Permalink to this headline">¶</a></h3>
+<p>Right now each of our 8 filters exists as a [3x3] array which doesn’t mean all that much. Here we use different methods to visualise the filters a better/more intuitive way. First we can create a grayscale colour map for each filter that is scaled such that the position of the largest value in the [3x3] array is black and the lowest value is white. The code below plots a subplot performing this operation for each of the eight filters.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># create subplot to show input and its prediction</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span><span class="mi">20</span><span class="p">))</span>
+<span class="c1"># plot first few filters</span>
+<span class="n">n_filters</span><span class="p">,</span> <span class="n">ix</span> <span class="o">=</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">1</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_filters</span><span class="p">):</span>
+    <span class="c1"># get the filter</span>
+    <span class="n">f</span> <span class="o">=</span> <span class="n">filters</span><span class="p">[:,</span> <span class="p">:,</span> <span class="p">:,</span> <span class="n">i</span><span class="p">]</span>
+    <span class="c1"># plot each channel separately</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">):</span>
+        <span class="c1"># specify subplot and turn of axis</span>
+        <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="n">n_filters</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="n">ix</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">([])</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_yticks</span><span class="p">([])</span>
+        <span class="c1"># plot filter channel in grayscale</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">f</span><span class="p">[:,</span> <span class="p">:,</span> <span class="n">j</span><span class="p">],</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">)</span>
+        <span class="n">ix</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Filter: &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span>
+<span class="c1"># show the figure</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/2_MNIST_CNN_36_0.png" src="../_images/2_MNIST_CNN_36_0.png" />
+</div>
+</div>
+<p>The dark squares indicate small or inhibitory weights and the light squares represent large or excitatory weights. Using this intuition, we can see that Filter #5 on the first row has strong horizontal presence - this suggests that the filter might be suitable to detecting horizontal edges.</p>
+</div>
+<div class="section" id="visualising-feature-maps">
+<h3>Visualising Feature Maps<a class="headerlink" href="#visualising-feature-maps" title="Permalink to this headline">¶</a></h3>
+<p>Lets apply each of these filters directly to some of the MNIST digits and see what effect they have and visualise what the feature maps (output from CNN layer) within the network might look like. We import the <code class="docutils literal notranslate"><span class="pre">cv2</span></code> library here to allow us to perform 2D convolutions by calling the attribute <code class="docutils literal notranslate"><span class="pre">cv2.filter2D()</span></code> - inside the parentheses we can define the image we wish to convolve over and the filter that we wish to use. Aside from that, we are once again utilising <code class="docutils literal notranslate"><span class="pre">matplotlib</span></code> to allow us to make a subplot with multiple graphs. In this example we take the first 8 images from the test dataset (to create the rows) and apply each of the 8 filters that we trained from the 2D network to them.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">cv2</span> 
+
+<span class="n">nf</span> <span class="o">=</span> <span class="mi">8</span> <span class="c1"># number of filters</span>
+<span class="n">nr</span> <span class="o">=</span> <span class="mi">8</span> <span class="c1"># number of test images</span>
+
+<span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nr</span><span class="p">):</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span><span class="mi">10</span><span class="p">))</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nf</span><span class="p">):</span>
+        
+        <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">nf</span><span class="p">,</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">image</span> <span class="o">=</span> <span class="n">test_images</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">filter2D</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">filters</span><span class="p">[:,:,:,</span><span class="n">i</span><span class="p">])</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">28</span><span class="p">,</span><span class="mi">28</span><span class="p">))</span>
+        
+        <span class="k">if</span> <span class="n">j</span><span class="o">==</span><span class="mi">0</span><span class="p">:</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Filter: &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">continue</span>
+
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/2_MNIST_CNN_38_0.png" src="../_images/2_MNIST_CNN_38_0.png" />
+<img alt="../_images/2_MNIST_CNN_38_1.png" src="../_images/2_MNIST_CNN_38_1.png" />
+<img alt="../_images/2_MNIST_CNN_38_2.png" src="../_images/2_MNIST_CNN_38_2.png" />
+<img alt="../_images/2_MNIST_CNN_38_3.png" src="../_images/2_MNIST_CNN_38_3.png" />
+<img alt="../_images/2_MNIST_CNN_38_4.png" src="../_images/2_MNIST_CNN_38_4.png" />
+<img alt="../_images/2_MNIST_CNN_38_5.png" src="../_images/2_MNIST_CNN_38_5.png" />
+<img alt="../_images/2_MNIST_CNN_38_6.png" src="../_images/2_MNIST_CNN_38_6.png" />
+<img alt="../_images/2_MNIST_CNN_38_7.png" src="../_images/2_MNIST_CNN_38_7.png" />
+</div>
+</div>
+<p>This is a useful task to do as it gives us a much clearer indication as to what the filters are actually doing. We mentioned before that Filter #5 could be a horizontal edge detection filter, and we can see that this is actually the case as the horizontal lines that exist in the MNIST digit image are emphasised and dark.</p>
+<p>Another useful task might be to take a single input image and sequentially apply each of the 8 filters to give a true representation as to what is happening inside the CNN network. In this example, we just applied each filter to the original MNIST image. It should be emphasised at this point that the initial filters of a CNN network tend to detect larger/more distinct features from the input image, and as you progress deeper into the CNN network the filters tend to detect more subtle differences. This is more obvious for more sophisticated CNNs that have more sophisticated filters that are able to identify a more complex variety of features.</p>
 </div>
 </div>
 </div>

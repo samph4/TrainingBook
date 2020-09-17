@@ -10,6 +10,10 @@
   - file: Examples/1_MNIST_MLP   
   - file: Examples/2_MNIST_CNN
   - file: Examples/3_LSTM
+  
+- part: Extra Stuff
+  chapters:
+  - file: Extras/Convolutions
 
 - part: Python Support
   chapters:
