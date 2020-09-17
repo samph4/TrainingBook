@@ -238,6 +238,8 @@ model.summary()
 
 Here you can see each of the layers clearly and the total number of trainable parameters. In the first `Conv2D` layer, we can see that the shape is [26x26] with 8 total filters that we defined earlier. The total number of parameters is 80 which is determined by the 9 trainable parameters within each [3x3] filter multiplied by the total number of filters (8) equalling 72 (8x9). There is also an additional trainable parameter associated with each filter known as the bias, therefore total parameters = 72 + 8 = 80. During training, these values are optimised to reduce the loss function and subsequently imporve the accuracy of the network. 
 
+model.layers
+
 We can call the `model.layers` function to access the data stored within each layer within the model. This prints out four layers corresponding to the `Conv2D` layer (index 0) and the `MaxPooling2D` layer (index 1) etc. From here, we can call `dir(models.layers[0])` to see all of the attributes that we can call from the `Conv2D` layer. The `get_weights()` attribute allows us to access all of the optimised values i.e. the filters and the biases. We can call `filters, biases = model.layers[0].get_weights()` to create two new variables `filters` and `weights` which contain the relevant data.
 
 # retrieve weights from the second hidden layer
