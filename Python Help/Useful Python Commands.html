@@ -26,8 +26,6 @@
     <script src="../_static/copybutton.js"></script>
     <script src="../_static/sphinx-book-theme.js"></script>
     <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
     <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
     <script >
         const thebe_selector = ".thebe"
@@ -80,18 +78,13 @@
 </ul>
 <p class="caption">
  <span class="caption-text">
-  JupyterBook
+  Getting Started
  </span>
 </p>
 <ul class="nav sidenav_l1">
  <li class="toctree-l1">
-  <a class="reference internal" href="../markdown.html">
-   Markdown Files
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../notebooks.html">
-   Content with notebooks
+  <a class="reference internal" href="../Getting%20Started/jupyter%20notebooks.html">
+   Jupyter Notebooks
   </a>
  </li>
 </ul>
@@ -254,7 +247,68 @@
             <i class="fas fa-list"></i> Contents
         </div>
         <nav id="bd-toc-nav">
-            
+            <ul class="nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#preface-importing-functions">
+   Preface: Importing Functions
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#data-manipulation">
+   Data Manipulation
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#numpy">
+     Numpy
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#creating-arrays">
+       Creating arrays
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#understanding-arrays">
+       Understanding arrays
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#create-more-useful-arrays">
+       Create more useful arrays
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#basic-operations-of-ndarray">
+       Basic Operations of ndarray
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#indexing-and-slicing">
+       Indexing and Slicing
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#pandas">
+     Pandas
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#machine-learning">
+   Machine Learning
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#operating-system">
+   Operating System
+  </a>
+ </li>
+</ul>
+
         </nav>
     </div>
 </div>
@@ -265,17 +319,207 @@
                 
   <div class="section" id="useful-packages-commands">
 <h1>Useful Packages / Commands<a class="headerlink" href="#useful-packages-commands" title="Permalink to this headline">¶</a></h1>
+<p>I’ll structure this section so that it exists as a resource more than anything; find the section that corresponds to the work (or task) that you are trying to do and find the packages that might be able to help. Please note that when we import modules into Python, all that we are really doing is importing new functions that we can use directly in our algorithms. There is nothing stopping us creating these functions ourselves and coding everything explicitly from the ground up in Python, just understand that that is an endeavour that will take a lot of time and these functions are available primarily at your convenience. The open-source support network in Python is one of the coding languages strongest attributes as users can share useful bits of code amongst each other with the goal of making everybody more productive. If you are coming from a MATLAB background, it may seem that MATLAB has all of the functionality built in. But that isn’t completely the case, you may remember whenever you first install MATLAB that you have the option to select ‘add-on’toolboxes that provide additional functionality such as the ‘Control System Toolbox’, Signal Processing Toolbox’ etc, this is pretty much the same principle as what we are doing here.</p>
+<div class="section" id="preface-importing-functions">
+<h2>Preface: Importing Functions<a class="headerlink" href="#preface-importing-functions" title="Permalink to this headline">¶</a></h2>
+<p>Lets look at a simple example to see some of the options available to us when importing modules. We will use <code class="docutils literal notranslate"><span class="pre">numpy</span></code> which is the core library for scientific computing in Python.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
-<span class="n">path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">()</span>
-<span class="n">path</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Simply typing <code class="docutils literal notranslate"><span class="pre">import</span> <span class="pre">numpy</span></code> imports the entire <code class="docutils literal notranslate"><span class="pre">numpy</span></code> module into our Python environment. One of the useful functions associated with the <code class="docutils literal notranslate"><span class="pre">numpy</span></code> module is <code class="docutils literal notranslate"><span class="pre">linspace</span></code>. To access this function we type:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">numpy</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">10</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;C:\\Users\\Samuel\\Documents\\samph4\\TrainingBook\\Python Help&#39;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([0.        , 0.11111111, 0.22222222, 0.33333333, 0.44444444,
+       0.55555556, 0.66666667, 0.77777778, 0.88888889, 1.        ])
 </pre></div>
+</div>
+</div>
+</div>
+<p>Sometimes we might have the desire to change the package name that we import, perhaps instead of writing out <code class="docutils literal notranslate"><span class="pre">numpy</span></code> everytime we want to call a function from the <code class="docutils literal notranslate"><span class="pre">numpy</span></code> module; we might prefer to write <code class="docutils literal notranslate"><span class="pre">np</span></code> instead. This can be done easily by changing how we import the module using the <code class="docutils literal notranslate"><span class="pre">as</span></code> command:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can repeat the statement we performed previously in the same way but with the abbreviated name:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([0.        , 0.11111111, 0.22222222, 0.33333333, 0.44444444,
+       0.55555556, 0.66666667, 0.77777778, 0.88888889, 1.        ])
+</pre></div>
+</div>
+</div>
+</div>
+<p>You’ll notice that it does the exact same thing but now we have a little more flexibility. When we import the numpy module we have access to all of the functions within it. You can imagine how this might introduce wastage into larger programs and could slow down runtimes, importing many functions that are unnecessary is not considered good practice when coding so here I show you an option to <code class="docutils literal notranslate"><span class="pre">import</span></code> specific functions directly. This is quite intuitive, we can say:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="n">linspace</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>So from the <code class="docutils literal notranslate"><span class="pre">numpy</span></code> module we want to import the <code class="docutils literal notranslate"><span class="pre">linspace</span></code> function. Importing the function in this direct way means that we do not have to call the function from the package. Instead, we have imported the <code class="docutils literal notranslate"><span class="pre">linspace</span></code> function directly and can then use it as such:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([0.        , 0.11111111, 0.22222222, 0.33333333, 0.44444444,
+       0.55555556, 0.66666667, 0.77777778, 0.88888889, 1.        ])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>You will see %%capture written in some of the code cells in this notebook. All this does is suppress the output of the code cell so that it does not print in the space below. It will just help to keep the notebook more condensed and easier to read.</p>
+</div>
+<p>~</p>
+</div>
+<div class="section" id="data-manipulation">
+<h2>Data Manipulation<a class="headerlink" href="#data-manipulation" title="Permalink to this headline">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">numpy</span></code> <code class="docutils literal notranslate"><span class="pre">pandas</span></code></p>
+<p>~</p>
+<p><code class="docutils literal notranslate"><span class="pre">Numpy</span></code> is the core library for scientific computing in Python. It provides a high-performance multidimensional array object and tools for working with these arrays. Numpy is a powerful N-dimensional array object which is Linear algebra for Python. They allow us to work with vectors, matrices and arrays and manipulate them with ease. Full documentation at https://numpy.org/.</p>
+<p><code class="docutils literal notranslate"><span class="pre">Pandas</span></code> is an open-source library built on top of <code class="docutils literal notranslate"><span class="pre">numpy</span></code> providing high performance, easy-to-use data structures for data analysis. It allows for fast analysis, data cleaning and data preparation. It can work with data from a wide variety of sources and is suited for many kinds of data from a wide variety of sources; tabular data, time-series data and supports all data types.</p>
+<p>~</p>
+<div class="section" id="numpy">
+<h3>Numpy<a class="headerlink" href="#numpy" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="creating-arrays">
+<h4>Creating arrays<a class="headerlink" href="#creating-arrays" title="Permalink to this headline">¶</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span> 
+<span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">])</span>             <span class="c1"># creates a 1D array</span>
+<span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">],[</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">]])</span>   <span class="c1"># creates a 2D array</span>
+<span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">15</span><span class="p">)</span>                 <span class="c1"># generate 1D array with 15 elements from 0 to 14</span>
+<span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">15</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">5</span><span class="p">)</span>    <span class="c1"># reshapes 1D array into 2D array with 3 rows and 5 columns</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="understanding-arrays">
+<h4>Understanding arrays<a class="headerlink" href="#understanding-arrays" title="Permalink to this headline">¶</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%capture</span>
+<span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">])</span>             <span class="c1"># creates a 1D array</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>                          <span class="c1"># prints variable a</span>
+<span class="nb">type</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>                           <span class="c1"># returns the type of variable a</span>
+<span class="nb">len</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>                            <span class="c1"># returns the length of variable a</span>
+<span class="n">a</span><span class="o">.</span><span class="n">ndim</span>                            <span class="c1"># returns the number of dimensions of variable a</span>
+<span class="n">a</span><span class="o">.</span><span class="n">shape</span>                           <span class="c1"># returns the shape of variable a</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="create-more-useful-arrays">
+<h4>Create more useful arrays<a class="headerlink" href="#create-more-useful-arrays" title="Permalink to this headline">¶</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%capture</span>
+<span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">)</span>                <span class="c1"># creates 4 equally spaced points between 0 and 3</span>
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">100</span><span class="p">,</span><span class="mi">6</span><span class="p">)</span>        <span class="c1"># create array of 6 random values between 0-100</span>
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>                 <span class="c1"># create an array of uniform distribution (0,1)</span>
+<span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>                         <span class="c1"># create a 3*3 identity matrix</span>
+<span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>                       <span class="c1"># create array [0,0,0]</span>
+<span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">5</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>                   <span class="c1"># create 2D array with 5 rows and 5 columns of zeros</span>
+<span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int16</span><span class="p">)</span>  <span class="c1"># creates 3D array of size (2,3,4) with int16 datatype.</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="basic-operations-of-ndarray">
+<h4>Basic Operations of ndarray<a class="headerlink" href="#basic-operations-of-ndarray" title="Permalink to this headline">¶</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%capture</span>
+<span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">],[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">]])</span>
+<span class="n">B</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">2</span><span class="p">,</span><span class="mi">0</span><span class="p">],[</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">]])</span>
+<span class="n">A</span> <span class="o">+</span> <span class="n">B</span>                             <span class="c1"># addition of two arrays</span>
+<span class="n">A</span> <span class="o">*</span> <span class="n">B</span>                             <span class="c1"># element-wise product</span>
+<span class="n">A</span> <span class="o">@</span> <span class="n">B</span>                             <span class="c1"># matrix product</span>
+<span class="n">A</span><span class="o">.</span><span class="n">T</span>                               <span class="c1"># transpose of matrix A</span>
+<span class="n">A</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>                       <span class="c1"># form 1-D array</span>
+<span class="n">B</span> <span class="o">&lt;</span> <span class="mi">3</span>                             <span class="c1"># creates Boolean matrix of B. True for elements &lt; 3  </span>
+<span class="n">A</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>                           <span class="c1"># sum of all elements in A</span>
+<span class="n">A</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>                     <span class="c1"># sum of each column</span>
+<span class="n">A</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>                     <span class="c1"># sum of each row</span>
+<span class="n">A</span><span class="o">.</span><span class="n">min</span><span class="p">()</span>                           <span class="c1"># returns minimum value of A</span>
+<span class="n">A</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>                           <span class="c1"># returns maximum value of A</span>
+<span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">B</span><span class="p">)</span>                         <span class="c1"># returns exponential</span>
+<span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">B</span><span class="p">)</span>                        <span class="c1"># returns square root of B</span>
+<span class="n">A</span><span class="o">.</span><span class="n">argmin</span><span class="p">()</span>                        <span class="c1"># position of minimum element in A</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="indexing-and-slicing">
+<h4>Indexing and Slicing<a class="headerlink" href="#indexing-and-slicing" title="Permalink to this headline">¶</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%capture</span>
+<span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span><span class="o">**</span><span class="mi">3</span>               <span class="c1"># creates 4 element vector a with values 0-3 cubed</span>
+<span class="n">a</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>                              <span class="c1"># returns member of a in position 2</span>
+<span class="n">a</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>                           <span class="c1"># reverses vector a</span>
+<span class="n">a</span><span class="p">[</span><span class="n">a</span><span class="o">&gt;</span><span class="mi">5</span><span class="p">]</span>                            <span class="c1"># returns a with values &gt; 5</span>
+
+<span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">2</span><span class="p">,</span><span class="mi">0</span><span class="p">],[</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span><span class="mi">1</span><span class="p">]])</span>
+<span class="n">b</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span>                          <span class="c1"># returns first two elements in column 1 (2nd colum)</span>
+<span class="n">b</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span>                            <span class="c1"># returns all elements in column 0 (1st column)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="pandas">
+<h3>Pandas<a class="headerlink" href="#pandas" title="Permalink to this headline">¶</a></h3>
+</div>
+</div>
+<div class="section" id="machine-learning">
+<h2>Machine Learning<a class="headerlink" href="#machine-learning" title="Permalink to this headline">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">keras</span></code> <code class="docutils literal notranslate"><span class="pre">tensorflow</span></code> <code class="docutils literal notranslate"><span class="pre">fastai</span></code> <code class="docutils literal notranslate"><span class="pre">pytorch</span></code></p>
+</div>
+<div class="section" id="operating-system">
+<h2>Operating System<a class="headerlink" href="#operating-system" title="Permalink to this headline">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">os</span></code></p>
+<p>~</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">os</span></code> module provides a portable way of using operating system dependent functionality. The documentation can be found here https://docs.python.org/3/library/os.html. The main function I use from this module is <code class="docutils literal notranslate"><span class="pre">os.getcwd()</span></code> which is useful for determining the current path you are working on in your current directory. This helps avoid any issues when you want to save logs, images or files into the correct places during your algorithm.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="n">path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\Samuel\Documents\samph4\TrainingBook\Python Help
+</pre></div>
+</div>
 </div>
 </div>
 </div>
