@@ -1,0 +1,375 @@
+
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Jupyter Notebooks &#8212; Ai Training Manual for Maisie &amp; Filipe</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" integrity="sha384-KA6wR/X5RY4zFAHpv/CnoG2UW1uogYfdnP67Uv7eULvTveboZJg0qUpmJZb5VqzN" crossorigin="anonymous">
+    <link href="../_static/css/index.css" rel="stylesheet">
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-dropdown.css" />
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/sphinx-book-theme.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="1 - MNIST MLP Network" href="../Examples/1_MNIST_MLP.html" />
+    <link rel="prev" title="Introduction" href="../intro.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="docsearch:language" content="en">
+
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="../index.html">
+  
+  <img src="../_static/EdLogo.png" class="logo" alt="logo">
+  
+  
+  <h1 class="site-logo" id="site-title">Ai Training Manual for Maisie & Filipe</h1>
+  
+</a>
+</div>
+
+<form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form>
+
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+  <ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../intro.html">
+   Introduction
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Getting Started
+ </span>
+</p>
+<ul class="current nav sidenav_l1">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Jupyter Notebooks
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Machine Learning Examples
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Examples/1_MNIST_MLP.html">
+   1 - MNIST MLP Network
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Examples/2_MNIST_CNN.html">
+   2 - MNIST CNN Network
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Examples/3_LSTM.html">
+   3 - LSTM Network
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Extra Stuff
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Extras/Convolutions.html">
+   Convolution Filter Example
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Python Support
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Python%20Help/Introduction%20to%20Python.html">
+   Introduction to Python
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Python%20Help/Useful%20Python%20Commands.html">
+   Useful Packages / Commands
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Python%20Help/Glossary.html">
+   Glossary
+  </a>
+ </li>
+</ul>
+
+</nav>
+
+ <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="row topbar fixed-top container-xl">
+    <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show">
+    </div>
+    <div class="col pl-2 topbar-main">
+        
+        <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+            data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+            aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+            title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+            <i class="fas fa-bars"></i>
+            <i class="fas fa-arrow-left"></i>
+            <i class="fas fa-arrow-up"></i>
+        </button>
+        
+        <div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/Getting Started/jupyter notebooks.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+    
+</div>
+        <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/samph4/TrainingBook"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        
+        
+    </div>
+</div>
+
+
+        <!-- Full screen (wrap in <a> to have style consistency -->
+        <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                data-placement="bottom" onclick="toggleFullScreen()" title="Fullscreen mode"><i
+                    class="fas fa-expand"></i></button></a>
+
+        <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/samph4/TrainingBook/master?urlpath=tree/Getting Started/jupyter notebooks.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        <a class="colab-button" href="https://colab.research.google.com/github/samph4/TrainingBook/blob/master/Getting Started/jupyter notebooks.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
+                title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
+                    src="../_static/images/logo_colab.png"
+                    alt="Interact on Colab">Colab</button></a>
+        
+        
+    </div>
+</div>
+
+    </div>
+
+    <!-- Table of contents -->
+    <div class="d-none d-md-block col-md-2 bd-toc show">
+        <div class="tocsection onthispage pt-5 pb-3">
+            <i class="fas fa-list"></i> Contents
+        </div>
+        <nav id="bd-toc-nav">
+            <ul class="nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#installation-windows">
+   Installation (Windows)
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#installing-python">
+     Installing Python
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#using-python">
+       Using Python
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#using-pip-to-install-jupyter-notebooks-and-modules">
+     Using Pip to install Jupyter notebooks and modules
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+        </nav>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="jupyter-notebooks">
+<h1>Jupyter Notebooks<a class="headerlink" href="#jupyter-notebooks" title="Permalink to this headline">¶</a></h1>
+<p>The Jupyter Notebook is an open-source web application that allows you to create and share documents that contain live code, equations, visualizations and narrative text. Uses include: data cleaning and transformation, numerical simulation, statistical modeling, data visualization, machine learning, and much more. That is what makes it so useful, a notebook becomes an experimental environment where users can share a ‘document’ that consists of well explained blocks of code that users can modify and interact with. Each page in this booklet is a Jupyter Notebook that has been compiled to form a booklet.</p>
+<p>If you are familiar with MATLAB LiveScripts then that is good news as Jupyter Notebooks are essentially the same thing (I think LiveSripts were built because of the success of Jupyter Notebooks but I could be wrong). Essentially each notebook is formulated by a combination of cells, and each cell can either be a markdown cell or a code cell. A markdown cell displays text which can be formatted using markdown language - in a markdown cell we can write equations, standard text, use headings and insert images to convey intent - the text you are reading now was written in a markdown cell! A code cell is an environment where code can be written directly, the contents of this cell can be executed in the programming language of the current kernel (which for all intensive purposes will be Python).</p>
+<p>~</p>
+<div class="section" id="installation-windows">
+<h2>Installation (Windows)<a class="headerlink" href="#installation-windows" title="Permalink to this headline">¶</a></h2>
+<p>I’ll start this by saying that my first experience installing Jupyter Notebooks was a little tricky - there are a lot of steps in the installation that (maybe you have) I hadn’t had experience with so was a steep learning curve but I’ve learnt such a great deal because of it.</p>
+<div class="section" id="installing-python">
+<h3>Installing Python<a class="headerlink" href="#installing-python" title="Permalink to this headline">¶</a></h3>
+<p>First things first though, lets install Python. This step is straight forward and you can download it directly here (https://www.python.org/downloads/). Follow your way through the install wizard and before you know it Python will be installed on your machine. But at that point nothing really happens. It’s not as if an application appears on your desktop that says Python and we can open it and start coding in Python, it works a little differently. Python will install to this location  <code class="docutils literal notranslate"><span class="pre">C:\Users\Sam\AppData\Local\Programs\Python\</span></code> by default (on Windows), where the AppData folder is a hidden folder which again might make it even less intuitive. But once Python is installed, we can open the Command Prompt (or Powershell) and type <code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">--version</span></code> into the command line, we will see the current version of Python that you have installed printed into the command window.</p>
+<p><img alt="Image" src="../_images/pythonvers2.png" /></p>
+<div class="section" id="using-python">
+<h4>Using Python<a class="headerlink" href="#using-python" title="Permalink to this headline">¶</a></h4>
+<p>If you do not see this it is likely that Python has been installed incorrectly and you might wish to try again (you may have to add the Python installation location to your system PATH variables but will be worth googling if you have this issue. We can type <code class="docutils literal notranslate"><span class="pre">Python</span></code> to intialise Python and allow us to start coding. Here we can type code directly into the terminal window such as <code class="docutils literal notranslate"><span class="pre">print('Hello</span> <span class="pre">World')</span></code> and you’ll see the output appear in the window. What is actually happening here is that through the command prompt, we have initiated a Python ‘kernel’ (which is a program that runs and introspects the user’s code) and within that kernel we can execute the code. Think of it as its own environment that we have created for the purpose of coding.</p>
+<p><img alt="Image" src="../_images/p_print.png" /></p>
+<p>In this window we have access to all the Python functionality and we can define variables, set functions and execute scripts. Python code is typically saved within files with the extension <code class="docutils literal notranslate"><span class="pre">.py</span></code>. We can create <code class="docutils literal notranslate"><span class="pre">.py</span></code> files in any text editor, including Notepad. Here we use notepad to write a simple line of code and save the file as <code class="docutils literal notranslate"><span class="pre">hello.py</span></code> on the Desktop.</p>
+<p><img alt="Image" src="../_images/file2.png" /></p>
+<p>We can use the terminal window to make python execute this file, upon execution (if it worked successfully) we would expect the sentence <code class="docutils literal notranslate"><span class="pre">hello,</span> <span class="pre">this</span> <span class="pre">was</span> <span class="pre">printed</span> <span class="pre">from</span> <span class="pre">when</span> <span class="pre">we</span> <span class="pre">executed</span> <span class="pre">the</span> <span class="pre">code</span> <span class="pre">from</span> <span class="pre">a</span> <span class="pre">saved</span> <span class="pre">file</span></code> to be printed. In order to do this though we must first ‘change directory’ such that we are in the same location as the <code class="docutils literal notranslate"><span class="pre">.py</span></code> file. By default, you can see that when I open Powershell I start at the “C:\Users\Samuel” location. From here, I can change directory into my Desktop folder by typing <code class="docutils literal notranslate"><span class="pre">cd</span> <span class="pre">Desktop</span></code>. Once you do this, you will see that the path (on the left hand side) will have updated to make you aware of your current position. If ever you are unsure as to what directories you can change into, type <code class="docutils literal notranslate"><span class="pre">ls</span></code> and they will be printed below. <code class="docutils literal notranslate"><span class="pre">ls</span></code> simply lists all files in the directory that you are currently in.</p>
+<p><img alt="Image" src="../_images/cdls.png" /></p>
+<p>Here you can see that I am now in my Desktop folder and when I listed my directories I can see the file <code class="docutils literal notranslate"><span class="pre">hello.py</span></code>. This means that I can now execute the file by typing <code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">hello.py</span></code>.</p>
+<p><img alt="Image" src="../_images/runcode.png" /></p>
+<p>It worked! But as you can imagine this is not the most pleasant environment to code. Surely there is a better way to do it. The answer is yes, instead of using Notebook there are many more sophisticated text editors that you can use which are known as an Integrated Development Environment (IDE) that have additional functionality to suit your needs, some of the more popular ones include Visual Studio Code (VS Code) and Atom. But as mentioned earlier, we are going to focus on Jupyter Notebooks instead.</p>
+</div>
+</div>
+<div class="section" id="using-pip-to-install-jupyter-notebooks-and-modules">
+<h3>Using Pip to install Jupyter notebooks and modules<a class="headerlink" href="#using-pip-to-install-jupyter-notebooks-and-modules" title="Permalink to this headline">¶</a></h3>
+<p>In order to install Jupyter notebooks the simplest way to do this is through a package manager - these package managers will become a common theme of working with Python as they make it very easy to install, update and manage different modules that we will end up using later. It is important to know that there are different types of package managers available, but the one I will talk about here is pip (simply because it’s the one that I use - other options include conda which may or may not be more straight forward but I’ll just share my experience and what I tend to use). To install pip use this link (https://pip.pypa.io/en/stable/installing/) and follow the guidance, it will ask you to download a file called <code class="docutils literal notranslate"><span class="pre">get-pip.py</span></code>. You should save this in a place that you can access, and then use Python to run it in the same way I described earlier. Upon doing this Python will then install pip on your computer and you will have access to all of the pip functionality. Once this is done, you can type <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">'XXXXXXX'</span></code> in the terminal to install, well, anything really. We will use this method to install modules in the future, but we will start by typing <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">notebook</span></code> to install Jupyter notebooks to your system. Go to this link (https://jupyter.org/install) if this causes any issues and it will offer a more thorough troubleshooting process, note that here we are using the ‘classic Jupyter Notebook’ but the option to use JupyterLab is also there - just I don’t elect to use it myself. Once this is done, we can activate Jupyter notebooks by typing <code class="docutils literal notranslate"><span class="pre">jupyter</span> <span class="pre">notebook</span></code> in your terminal. If successful, this will open up a browser window where the Jupyter notebook is being hosted locally. You will be greeted by a window that looks similar to that shown below:</p>
+<p><img alt="Image" src="../_images/jupy.png" /></p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The files that you will see here will depend on which directory you were in when you typed the command ‘jupyter notebook’. I changed directory (cd) to my Desktop folder which only contained the hello.py file I mentioned earlier.</p>
+</div>
+<p>This page is essentially the Jupyter hub and gives you access to all the functionality you need. You can upload files directly. If you change files in your File Explorer (or Finder) and refresh the page, any changes you make will automatically be populated here. It is nothing more than a ‘online’ (hosted) version of your local repository. Here you can click new to create a new file. You have the options of creating new folders, notebooks(!) and even terminal windows.</p>
+<p><img alt="Image" src="../_images/new.png" /></p>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./Getting Started"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        </div>
+    </div>
+    
+    
+    <div class='prev-next-bottom'>
+        
+    <a class='left-prev' id="prev-link" href="../intro.html" title="previous page">Introduction</a>
+    <a class='right-next' id="next-link" href="../Examples/1_MNIST_MLP.html" title="next page">1 - MNIST MLP Network</a>
+
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Samuel Thompson<br/>
+        
+            &copy; Copyright 2020.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    <script src="../_static/js/index.js"></script>
+    
+  </body>
+</html>

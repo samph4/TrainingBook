@@ -1,9 +1,8 @@
 - file: intro
 
-- part: JupyterBook
+- part: Getting Started
   chapters:
-  - file: markdown
-  - file: notebooks
+  - file: Getting Started/jupyter notebooks
   
 - part: Machine Learning Examples
   chapters:

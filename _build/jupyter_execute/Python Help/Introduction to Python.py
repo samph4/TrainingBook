@@ -10,11 +10,7 @@ There are a bunch of different libraries people use to develop machine learning 
 
 import numpy
 
-Here we have imported numpy, and therefore have access to all of the functions that exist within the numpy module - see the documentation for all the info https://numpy.org/doc/stable/reference/routines.math.html. But a useful function that is built into Python is one called 'dir'. This function can be used to show the entire directory of a module and list all of the functions that exist within it. So if we call dir(numpy):
-
-dir(numpy)
-
-Then a large list appears with all of the functions that exist within that module, and you can then select the function that suits your needs. If you are unsure as to what any of the functions do, then often you can call the 'help' function. Which again is built into Python. So if we consider the linspace example again, we can call help(numpy.linspace)
+Here we have imported numpy, and therefore have access to all of the functions that exist within the numpy module - see the documentation for all the info https://numpy.org/doc/stable/reference/routines.math.html. But a useful function that is built into Python is one called `dir`. This function can be used to show the entire directory of a module and list all of the functions that exist within it. So if we call `dir(numpy)`, all attributes associated with the `numpy` module will be printed and you can then select the function that suits your needs. If you are unsure as to what any of the functions do, then often you can call the `help` function. Which again is built into Python. So if we consider the linspace example again, we can call `help(numpy.linspace)`:
 
 help(numpy.linspace)
 
@@ -22,14 +18,15 @@ This is obviously useful as it explains what the function itself does, and how i
 
 a = numpy.linspace(0,10,10)
 
-We can then 'print' the value of a into the command line by simply typing 'print(a)'. Note that when you define a variable python will not immediately print it into the command window and as such there is no need for the ';' to terminate the output like you do in MATLAB. Here, we can use the semi-colon to write multiple lines of code on the same line as:
+We can then 'print' the value of a into the command line by simply typing `print(a)`. Note that when you define a variable python will not immediately print it into the command window and as such there is no need for the ';' to terminate the output like you do in MATLAB. Here, we can use the semi-colon to write multiple lines of code on the same line as:
 
 a = numpy.linspace(0,10,10); b = numpy.linspace(0,20,10) 
 print(f'a = ', a)
 print(f'b = ', b)
 
-# Note: That random f at the start of the print function, is known as a formatted string.
-# It is useful because it allows you to print a string and a variable easily.
+```{Note}
+That random f at the start of the print function, is known as a formatted string. It is useful because it allows you to combine a string and a variable easily without having to convert the variable into string format.
+```
 
 #### Types of Variables you will find in Python
 
@@ -41,15 +38,15 @@ You probably noticed that I did something weird in the print function when print
 * Set
 * Sequence Type (strings, list, tuple).
 
-You may or may not end up using a lot of these. But it is good to have some understanding of what kind of variable you are interacting with, especially if ever you run into problems with your code and need to figure out why. Often a good place to start is just to double check what 'type' your variable actually is. With that in mind, lets look at a couple examples:
+You may or may not end up using a lot of these. But it is good to have some understanding of what kind of variable you are interacting with, especially if ever you run into problems with your code and need to start troubleshooting. Often a good place to start is just to double check what `type` your variable actually is. With that in mind, lets look at a couple examples:
 
 c = 4
 c1 = 4.3 
-d = 'This is an example of a string! '
+d = 'This is an example of a string!'
 e = True
 f = '4'
 
-Here we have defined a bunch of different variables, by using the 'type' function we can confirm what variable c is by simply writing type(c). We see that it is an integer as you'd expect. This is important because you can therefore interact with this variable as you would expect with any number i.e. add, multiply, subtract and divide etc etc.
+Here we have defined a bunch of different variables, by using the `type` function we can confirm what variable `c` is by simply writing `type(c)`. We see that it is an integer as you'd expect. This is important because you can therefore interact with this variable as you would expect with any number i.e. add, multiply, subtract and divide etc etc.
 
 type(c)
 
@@ -69,7 +66,13 @@ f2 = f + f
 print(f'c + c = ',c2)
 print(f'f + f = ',f2)
 
-You'll notice that for the string case it has literally added the variable next to itself. This would obviously be problematic if you were writing some code that was expecting the value to be 8. Python is very flexible and is extremely good at working with different types of data allowing you to code up all sorts of funky things without the same limitations that MATLAB gives you. But it's important to be aware of this kind of stuff. Similarly, this example indicates the same thing - however this time it is more obvious that it is a string and (depending on the program) this operation might be something that we would actually want to do:
+You'll notice that for the string case it has literally added the variable next to itself. This would obviously be problematic if you were writing some code that was expecting the value to be 8. Python is very flexible and is extremely good at working with different types of data allowing you to code up all sorts of funky things without the same limitations that MATLAB gives you. But it's important to be aware of this kind of stuff. 
+
+```{Tip}
+We could convert the string object to an integer by calling int(variable) and Python will attempt to convert the variable to integer format. Note that this will only work if the string contains only numbers, as you might expect it would be impossible to convert a string containing letters to numeric format.
+```
+
+Similarly, this example indicates the same thing - however this time it is more obvious that it is a string and (depending on the program) this operation might be something that we would actually want to do:
 
 print(d+d)
 
@@ -77,11 +80,15 @@ print(d+d)
 
 If you're using MATLAB chances are you're very familiar with creating loops to do a bunch of different things. I'll do my best to explain how loops and things work in Python because it is very similar but with a few differences. I'll start with a couple of simple example and maybe spend a moment looking at it to see what is going on - then ill explain them in a bit more detail. 
 
-for i in numpy.linspace(0,5,6):
+for i in numpy.linspace(0,4,5):
     print(i)
 
-for i in range(6): # note range function uses integer values, linspace creates floats (float includes decimal).
+for i in range(5):
     print(i)
+
+```{Note}
+Range function uses integer values, linspace creates floats (float includes decimal).
+```
 
 fruits = ['apple','banana','cherry','grapefruit']
 for x in fruits:
@@ -96,21 +103,13 @@ for x in fruits:
   if x == "banana":
     break
 
-Note that the print function is present before the break, if this was the other way around the loop would not print 'banana'! You'll probably have noticed that the conditional equal statement in Python is written as '==' with two equal signs. Here is a list of other operations you might find yourself wanting to use:
+```{tip}
+Note that the print function is present before the break, if this was the other way around the loop would not print 'banana'!
+```
 
-* == 
+#### Python Assignment Operators
+ You'll probably have noticed in the example above that the conditional equal statement in Python is written as '==' with two equal signs. Here is a list of other operations you might find yourself wanting to use:
 
-operators = {'Operator': '==', 'Expression': 'Equal to'}
-operators
+![Image](./Figures/Operators.png)
 
-import pandas as pd 
-
-df = pd.DataFrame(np.array([['Operator','Expression'],['==','Equal to']]))
-
-df
-
-help(pd.DataFrame)
-
-
-relatively easy to learn the language and if you have basic programming knowledge in any language than studying python in deep for deep learning is not required and it is better if you learn syntax and concepts while implementing deep learning rather than studying python explicitly. This tutorial is enough to start and understand the codes that will be implemented in later tutorials. We will discuss the libraries and framework which we use to make the code in those tutorials only. This will be just basic python covering loops, arrays, lists, conditional statements, etc. So in case you know it you can skip.
-
+These expressions are flexible and you can use them in whichever way you desire to form your algorithms.
