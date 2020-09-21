@@ -48,3 +48,23 @@ This page is essentially the Jupyter hub and gives you access to all the functio
 
 ![Image](./Figures/new.png)
 
+When you open your first notebook, you will be greeted by an empty code cell. At the top of the page, you can name the notebook by double clicking where it says 'Untitled'. Inside this code cell, you can type any code you like and it will execute by using the shortcut `shift-Enter`.
+
+![Image](./Figures/note2.png)
+
+You'll see that on the left hand side it says `In [1]`, `Out [1]` and `In [2]`, `Out [2]`. This indicates that a code cell has been activated and the number refers to the order in which the cells were activated. In these cells you can import the necessary libraries you may wish to use in your algorithm. It is important to note that you will not be able to import libaries that are not on your system, if you try to do so you will be greeted by an error that looks similar to this:
+
+![Image](./Figures/note6.png)
+
+Here I try to import the `fibo` module to demonstrate the problem. The module here is not important, but `fibo` is a simple module that provides access to some fibonacci-related functions. You can see that we are greeted with a `ModuleNotFoundError:`. This simply means that when the notebook tried to locate the `fibo` module on your machine, it was unsuccessful. We therefore need to install the module so that we can import it successfully, and we do so using `pip` (package manager that we installed earlier!). 
+
+![Image](./Figures/note4.png)
+
+Typically when installing things using the `pip` package manager, we do so in the Command Prompt/Terminal. We can write `pip install fibo` in your terminal window and pip will begin the installation. Jupyter Notebooks also give you the functionality to do this within a code cell directly. We can use the exclamation mark, !, as a preface to write code as if we were in the terminal window. So by typing `!pip install fibo`, the installation process begins and information regarding the installation will be printed. At this point, the `fibo` installation was succesful so once again we can `import fibo` and start making the algorithms! 
+
+### Final Words
+
+Importing modules will be a common theme when working with Python but you'll get used to it and start to appreciate that it actually is quite a nice way to do things. When working through the examples in this booklet, if at any point you don't have a particular module installed simple install it in the way I just described and you'll be okay. If ever there is an issue with installation, Python will give you an error message that is usually very helpful and provides guidance as to how to fix it. Otherwise there are a lot of community support websites such as www.stackoverflow.com that offer additional guidance, I can guarantee if you run into a problem you won't be the first that it has happened to so there's a lot of help available. In the future though, you may start hearing about things known as virtual environments. This sounds funky but its not that bad. When you create a new 'virtual environment', you are essentially creating a clean state where no modules are installed. You can then install modules into that environment specifically. This is particularly useful to avoid compatibility issues. Sometimes on github for example, a user may have shared some code that was written in outdated versions of modules that are no longer compatibile with ones that you have - you can therefore make a new virtual environment and import all of the versions of the modules that they used without affecting any of your other work!
+
+
+
