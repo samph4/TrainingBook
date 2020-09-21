@@ -35,7 +35,7 @@
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="1 - MNIST MLP Network" href="../Examples/1_MNIST_MLP.html" />
+    <link rel="next" title="Introduction to Python" href="../Python%20Help/Introduction%20to%20Python.html" />
     <link rel="prev" title="Introduction" href="../intro.html" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -90,6 +90,28 @@
 </ul>
 <p class="caption">
  <span class="caption-text">
+  Python Support
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Python%20Help/Introduction%20to%20Python.html">
+   Introduction to Python
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Python%20Help/Useful%20Python%20Commands.html">
+   Useful Packages / Commands
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Python%20Help/Glossary.html">
+   Glossary
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
   Machine Learning Examples
  </span>
 </p>
@@ -119,28 +141,6 @@
  <li class="toctree-l1">
   <a class="reference internal" href="../Extras/Convolutions.html">
    Convolution Filter Example
-  </a>
- </li>
-</ul>
-<p class="caption">
- <span class="caption-text">
-  Python Support
- </span>
-</p>
-<ul class="nav sidenav_l1">
- <li class="toctree-l1">
-  <a class="reference internal" href="../Python%20Help/Introduction%20to%20Python.html">
-   Introduction to Python
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../Python%20Help/Useful%20Python%20Commands.html">
-   Useful Packages / Commands
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../Python%20Help/Glossary.html">
-   Glossary
   </a>
  </li>
 </ul>
@@ -270,6 +270,11 @@
      Using Pip to install Jupyter notebooks and modules
     </a>
    </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#final-words">
+     Final Words
+    </a>
+   </li>
   </ul>
  </li>
 </ul>
@@ -317,6 +322,17 @@
 </div>
 <p>This page is essentially the Jupyter hub and gives you access to all the functionality you need. You can upload files directly. If you change files in your File Explorer (or Finder) and refresh the page, any changes you make will automatically be populated here. It is nothing more than a ‘online’ (hosted) version of your local repository. Here you can click new to create a new file. You have the options of creating new folders, notebooks(!) and even terminal windows.</p>
 <p><img alt="Image" src="../_images/new.png" /></p>
+<p>When you open your first notebook, you will be greeted by an empty code cell. At the top of the page, you can name the notebook by double clicking where it says ‘Untitled’. Inside this code cell, you can type any code you like and it will execute by using the shortcut <code class="docutils literal notranslate"><span class="pre">shift-Enter</span></code>.</p>
+<p><img alt="Image" src="../_images/note2.png" /></p>
+<p>You’ll see that on the left hand side it says <code class="docutils literal notranslate"><span class="pre">In</span> <span class="pre">[1]</span></code>, <code class="docutils literal notranslate"><span class="pre">Out</span> <span class="pre">[1]</span></code> and <code class="docutils literal notranslate"><span class="pre">In</span> <span class="pre">[2]</span></code>, <code class="docutils literal notranslate"><span class="pre">Out</span> <span class="pre">[2]</span></code>. This indicates that a code cell has been activated and the number refers to the order in which the cells were activated. In these cells you can import the necessary libraries you may wish to use in your algorithm. It is important to note that you will not be able to import libaries that are not on your system, if you try to do so you will be greeted by an error that looks similar to this:</p>
+<p><img alt="Image" src="../_images/note6.png" /></p>
+<p>Here I try to import the <code class="docutils literal notranslate"><span class="pre">fibo</span></code> module to demonstrate the problem. The module here is not important, but <code class="docutils literal notranslate"><span class="pre">fibo</span></code> is a simple module that provides access to some fibonacci-related functions. You can see that we are greeted with a <code class="docutils literal notranslate"><span class="pre">ModuleNotFoundError:</span></code>. This simply means that when the notebook tried to locate the <code class="docutils literal notranslate"><span class="pre">fibo</span></code> module on your machine, it was unsuccessful. We therefore need to install the module so that we can import it successfully, and we do so using <code class="docutils literal notranslate"><span class="pre">pip</span></code> (package manager that we installed earlier!).</p>
+<p><img alt="Image" src="../_images/note4.png" /></p>
+<p>Typically when installing things using the <code class="docutils literal notranslate"><span class="pre">pip</span></code> package manager, we do so in the Command Prompt/Terminal. We can write <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">fibo</span></code> in your terminal window and pip will begin the installation. Jupyter Notebooks also give you the functionality to do this within a code cell directly. We can use the exclamation mark, !, as a preface to write code as if we were in the terminal window. So by typing <code class="docutils literal notranslate"><span class="pre">!pip</span> <span class="pre">install</span> <span class="pre">fibo</span></code>, the installation process begins and information regarding the installation will be printed. At this point, the <code class="docutils literal notranslate"><span class="pre">fibo</span></code> installation was succesful so once again we can <code class="docutils literal notranslate"><span class="pre">import</span> <span class="pre">fibo</span></code> and start making the algorithms!</p>
+</div>
+<div class="section" id="final-words">
+<h3>Final Words<a class="headerlink" href="#final-words" title="Permalink to this headline">¶</a></h3>
+<p>Importing modules will be a common theme when working with Python but you’ll get used to it and start to appreciate that it actually is quite a nice way to do things. When working through the examples in this booklet, if at any point you don’t have a particular module installed simple install it in the way I just described and you’ll be okay. If ever there is an issue with installation, Python will give you an error message that is usually very helpful and provides guidance as to how to fix it. Otherwise there are a lot of community support websites such as www.stackoverflow.com that offer additional guidance, I can guarantee if you run into a problem you won’t be the first that it has happened to so there’s a lot of help available. In the future though, you may start hearing about things known as virtual environments. This sounds funky but its not that bad. When you create a new ‘virtual environment’, you are essentially creating a clean state where no modules are installed. You can then install modules into that environment specifically. This is particularly useful to avoid compatibility issues. Sometimes on github for example, a user may have shared some code that was written in outdated versions of modules that are no longer compatibile with ones that you have - you can therefore make a new virtual environment and import all of the versions of the modules that they used without affecting any of your other work!</p>
 </div>
 </div>
 </div>
@@ -350,7 +366,7 @@
     <div class='prev-next-bottom'>
         
     <a class='left-prev' id="prev-link" href="../intro.html" title="previous page">Introduction</a>
-    <a class='right-next' id="next-link" href="../Examples/1_MNIST_MLP.html" title="next page">1 - MNIST MLP Network</a>
+    <a class='right-next' id="next-link" href="../Python%20Help/Introduction%20to%20Python.html" title="next page">Introduction to Python</a>
 
     </div>
     <footer class="footer mt-5 mt-md-0">

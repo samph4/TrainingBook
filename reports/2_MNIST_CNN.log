@@ -1,4 +1,15 @@
 Traceback (most recent call last):
+  File "c:\users\samuel\miniconda3\envs\tensorflow\lib\site-packages\nbclient\client.py", line 604, in _async_poll_for_reply
+    msg = await ensure_async(self.kc.shell_channel.get_msg(timeout=new_timeout))
+  File "c:\users\samuel\miniconda3\envs\tensorflow\lib\site-packages\nbclient\util.py", line 85, in ensure_async
+    result = await obj
+  File "c:\users\samuel\miniconda3\envs\tensorflow\lib\site-packages\jupyter_client\asynchronous\channels.py", line 48, in get_msg
+    raise Empty
+_queue.Empty
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
   File "c:\users\samuel\miniconda3\envs\tensorflow\lib\site-packages\jupyter_cache\executors\utils.py", line 56, in single_nb_execution
     record_timing=False,
   File "c:\users\samuel\miniconda3\envs\tensorflow\lib\site-packages\nbclient\client.py", line 1082, in execute
@@ -11,111 +22,17 @@ Traceback (most recent call last):
     return future.result()
   File "c:\users\samuel\miniconda3\envs\tensorflow\lib\site-packages\nbclient\client.py", line 536, in async_execute
     cell, index, execution_count=self.code_cells_executed + 1
-  File "c:\users\samuel\miniconda3\envs\tensorflow\lib\site-packages\nbclient\client.py", line 827, in async_execute_cell
-    self._check_raise_for_error(cell, exec_reply)
-  File "c:\users\samuel\miniconda3\envs\tensorflow\lib\site-packages\nbclient\client.py", line 735, in _check_raise_for_error
-    raise CellExecutionError.from_cell_and_msg(cell, exec_reply['content'])
-nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
-------------------
+  File "c:\users\samuel\miniconda3\envs\tensorflow\lib\site-packages\nbclient\client.py", line 811, in async_execute_cell
+    exec_reply = await self.task_poll_for_reply
+  File "c:\users\samuel\miniconda3\envs\tensorflow\lib\site-packages\nbclient\client.py", line 628, in _async_poll_for_reply
+    await self._async_handle_timeout(timeout, cell)
+  File "c:\users\samuel\miniconda3\envs\tensorflow\lib\site-packages\nbclient\client.py", line 679, in _async_handle_timeout
+    "Cell execution timed out", timeout, cell
+nbclient.exceptions.CellTimeoutError: A cell timed out while it was being executed, after 30 seconds.
+The message was: Cell execution timed out.
+Here is a preview of the cell contents:
+-------------------
 num_epochs = 10
 model.fit(train_images,to_categorical(train_labels, num_classes), epochs=num_epochs,validation_data=(test_images, to_categorical(test_labels, num_classes)))
-------------------
-
-[1;31m---------------------------------------------------------------------------[0m
-[1;31mUnknownError[0m                              Traceback (most recent call last)
-[1;32m<ipython-input-9-302e094c995d>[0m in [0;36m<module>[1;34m[0m
-[0;32m      1[0m [0mnum_epochs[0m [1;33m=[0m [1;36m10[0m[1;33m[0m[1;33m[0m[0m
-[1;32m----> 2[1;33m [0mmodel[0m[1;33m.[0m[0mfit[0m[1;33m([0m[0mtrain_images[0m[1;33m,[0m[0mto_categorical[0m[1;33m([0m[0mtrain_labels[0m[1;33m,[0m [0mnum_classes[0m[1;33m)[0m[1;33m,[0m [0mepochs[0m[1;33m=[0m[0mnum_epochs[0m[1;33m,[0m[0mvalidation_data[0m[1;33m=[0m[1;33m([0m[0mtest_images[0m[1;33m,[0m [0mto_categorical[0m[1;33m([0m[0mtest_labels[0m[1;33m,[0m [0mnum_classes[0m[1;33m)[0m[1;33m)[0m[1;33m)[0m[1;33m[0m[1;33m[0m[0m
-[0m
-[1;32m~\miniconda3\envs\tensorflow\lib\site-packages\tensorflow_core\python\keras\engine\training.py[0m in [0;36mfit[1;34m(self, x, y, batch_size, epochs, verbose, callbacks, validation_split, validation_data, shuffle, class_weight, sample_weight, initial_epoch, steps_per_epoch, validation_steps, validation_freq, max_queue_size, workers, use_multiprocessing, **kwargs)[0m
-[0;32m    817[0m         [0mmax_queue_size[0m[1;33m=[0m[0mmax_queue_size[0m[1;33m,[0m[1;33m[0m[1;33m[0m[0m
-[0;32m    818[0m         [0mworkers[0m[1;33m=[0m[0mworkers[0m[1;33m,[0m[1;33m[0m[1;33m[0m[0m
-[1;32m--> 819[1;33m         use_multiprocessing=use_multiprocessing)
-[0m[0;32m    820[0m [1;33m[0m[0m
-[0;32m    821[0m   def evaluate(self,
-
-[1;32m~\miniconda3\envs\tensorflow\lib\site-packages\tensorflow_core\python\keras\engine\training_v2.py[0m in [0;36mfit[1;34m(self, model, x, y, batch_size, epochs, verbose, callbacks, validation_split, validation_data, shuffle, class_weight, sample_weight, initial_epoch, steps_per_epoch, validation_steps, validation_freq, max_queue_size, workers, use_multiprocessing, **kwargs)[0m
-[0;32m    340[0m                 [0mmode[0m[1;33m=[0m[0mModeKeys[0m[1;33m.[0m[0mTRAIN[0m[1;33m,[0m[1;33m[0m[1;33m[0m[0m
-[0;32m    341[0m                 [0mtraining_context[0m[1;33m=[0m[0mtraining_context[0m[1;33m,[0m[1;33m[0m[1;33m[0m[0m
-[1;32m--> 342[1;33m                 total_epochs=epochs)
-[0m[0;32m    343[0m             [0mcbks[0m[1;33m.[0m[0mmake_logs[0m[1;33m([0m[0mmodel[0m[1;33m,[0m [0mepoch_logs[0m[1;33m,[0m [0mtraining_result[0m[1;33m,[0m [0mModeKeys[0m[1;33m.[0m[0mTRAIN[0m[1;33m)[0m[1;33m[0m[1;33m[0m[0m
-[0;32m    344[0m [1;33m[0m[0m
-
-[1;32m~\miniconda3\envs\tensorflow\lib\site-packages\tensorflow_core\python\keras\engine\training_v2.py[0m in [0;36mrun_one_epoch[1;34m(model, iterator, execution_function, dataset_size, batch_size, strategy, steps_per_epoch, num_samples, mode, training_context, total_epochs)[0m
-[0;32m    126[0m         step=step, mode=mode, size=current_batch_size) as batch_logs:
-[0;32m    127[0m       [1;32mtry[0m[1;33m:[0m[1;33m[0m[1;33m[0m[0m
-[1;32m--> 128[1;33m         [0mbatch_outs[0m [1;33m=[0m [0mexecution_function[0m[1;33m([0m[0miterator[0m[1;33m)[0m[1;33m[0m[1;33m[0m[0m
-[0m[0;32m    129[0m       [1;32mexcept[0m [1;33m([0m[0mStopIteration[0m[1;33m,[0m [0merrors[0m[1;33m.[0m[0mOutOfRangeError[0m[1;33m)[0m[1;33m:[0m[1;33m[0m[1;33m[0m[0m
-[0;32m    130[0m         [1;31m# TODO(kaftan): File bug about tf function and errors.OutOfRangeError?[0m[1;33m[0m[1;33m[0m[1;33m[0m[0m
-
-[1;32m~\miniconda3\envs\tensorflow\lib\site-packages\tensorflow_core\python\keras\engine\training_v2_utils.py[0m in [0;36mexecution_function[1;34m(input_fn)[0m
-[0;32m     96[0m     [1;31m# `numpy` translates Tensors to values in Eager mode.[0m[1;33m[0m[1;33m[0m[1;33m[0m[0m
-[0;32m     97[0m     return nest.map_structure(_non_none_constant_value,
-[1;32m---> 98[1;33m                               distributed_function(input_fn))
-[0m[0;32m     99[0m [1;33m[0m[0m
-[0;32m    100[0m   [1;32mreturn[0m [0mexecution_function[0m[1;33m[0m[1;33m[0m[0m
-
-[1;32m~\miniconda3\envs\tensorflow\lib\site-packages\tensorflow_core\python\eager\def_function.py[0m in [0;36m__call__[1;34m(self, *args, **kwds)[0m
-[0;32m    566[0m         [0mxla_context[0m[1;33m.[0m[0mExit[0m[1;33m([0m[1;33m)[0m[1;33m[0m[1;33m[0m[0m
-[0;32m    567[0m     [1;32melse[0m[1;33m:[0m[1;33m[0m[1;33m[0m[0m
-[1;32m--> 568[1;33m       [0mresult[0m [1;33m=[0m [0mself[0m[1;33m.[0m[0m_call[0m[1;33m([0m[1;33m*[0m[0margs[0m[1;33m,[0m [1;33m**[0m[0mkwds[0m[1;33m)[0m[1;33m[0m[1;33m[0m[0m
-[0m[0;32m    569[0m [1;33m[0m[0m
-[0;32m    570[0m     [1;32mif[0m [0mtracing_count[0m [1;33m==[0m [0mself[0m[1;33m.[0m[0m_get_tracing_count[0m[1;33m([0m[1;33m)[0m[1;33m:[0m[1;33m[0m[1;33m[0m[0m
-
-[1;32m~\miniconda3\envs\tensorflow\lib\site-packages\tensorflow_core\python\eager\def_function.py[0m in [0;36m_call[1;34m(self, *args, **kwds)[0m
-[0;32m    630[0m         [1;31m# Lifting succeeded, so variables are initialized and we can run the[0m[1;33m[0m[1;33m[0m[1;33m[0m[0m
-[0;32m    631[0m         [1;31m# stateless function.[0m[1;33m[0m[1;33m[0m[1;33m[0m[0m
-[1;32m--> 632[1;33m         [1;32mreturn[0m [0mself[0m[1;33m.[0m[0m_stateless_fn[0m[1;33m([0m[1;33m*[0m[0margs[0m[1;33m,[0m [1;33m**[0m[0mkwds[0m[1;33m)[0m[1;33m[0m[1;33m[0m[0m
-[0m[0;32m    633[0m     [1;32melse[0m[1;33m:[0m[1;33m[0m[1;33m[0m[0m
-[0;32m    634[0m       [0mcanon_args[0m[1;33m,[0m [0mcanon_kwds[0m [1;33m=[0m[0;31m [0m[0;31m\[0m[1;33m[0m[1;33m[0m[0m
-
-[1;32m~\miniconda3\envs\tensorflow\lib\site-packages\tensorflow_core\python\eager\function.py[0m in [0;36m__call__[1;34m(self, *args, **kwargs)[0m
-[0;32m   2361[0m     [1;32mwith[0m [0mself[0m[1;33m.[0m[0m_lock[0m[1;33m:[0m[1;33m[0m[1;33m[0m[0m
-[0;32m   2362[0m       [0mgraph_function[0m[1;33m,[0m [0margs[0m[1;33m,[0m [0mkwargs[0m [1;33m=[0m [0mself[0m[1;33m.[0m[0m_maybe_define_function[0m[1;33m([0m[0margs[0m[1;33m,[0m [0mkwargs[0m[1;33m)[0m[1;33m[0m[1;33m[0m[0m
-[1;32m-> 2363[1;33m     [1;32mreturn[0m [0mgraph_function[0m[1;33m.[0m[0m_filtered_call[0m[1;33m([0m[0margs[0m[1;33m,[0m [0mkwargs[0m[1;33m)[0m  [1;31m# pylint: disable=protected-access[0m[1;33m[0m[1;33m[0m[0m
-[0m[0;32m   2364[0m [1;33m[0m[0m
-[0;32m   2365[0m   [1;33m@[0m[0mproperty[0m[1;33m[0m[1;33m[0m[0m
-
-[1;32m~\miniconda3\envs\tensorflow\lib\site-packages\tensorflow_core\python\eager\function.py[0m in [0;36m_filtered_call[1;34m(self, args, kwargs)[0m
-[0;32m   1609[0m          if isinstance(t, (ops.Tensor,
-[0;32m   1610[0m                            resource_variable_ops.BaseResourceVariable))),
-[1;32m-> 1611[1;33m         self.captured_inputs)
-[0m[0;32m   1612[0m [1;33m[0m[0m
-[0;32m   1613[0m   [1;32mdef[0m [0m_call_flat[0m[1;33m([0m[0mself[0m[1;33m,[0m [0margs[0m[1;33m,[0m [0mcaptured_inputs[0m[1;33m,[0m [0mcancellation_manager[0m[1;33m=[0m[1;32mNone[0m[1;33m)[0m[1;33m:[0m[1;33m[0m[1;33m[0m[0m
-
-[1;32m~\miniconda3\envs\tensorflow\lib\site-packages\tensorflow_core\python\eager\function.py[0m in [0;36m_call_flat[1;34m(self, args, captured_inputs, cancellation_manager)[0m
-[0;32m   1690[0m       [1;31m# No tape is watching; skip to running the function.[0m[1;33m[0m[1;33m[0m[1;33m[0m[0m
-[0;32m   1691[0m       return self._build_call_outputs(self._inference_function.call(
-[1;32m-> 1692[1;33m           ctx, args, cancellation_manager=cancellation_manager))
-[0m[0;32m   1693[0m     forward_backward = self._select_forward_and_backward_functions(
-[0;32m   1694[0m         [0margs[0m[1;33m,[0m[1;33m[0m[1;33m[0m[0m
-
-[1;32m~\miniconda3\envs\tensorflow\lib\site-packages\tensorflow_core\python\eager\function.py[0m in [0;36mcall[1;34m(self, ctx, args, cancellation_manager)[0m
-[0;32m    543[0m               [0minputs[0m[1;33m=[0m[0margs[0m[1;33m,[0m[1;33m[0m[1;33m[0m[0m
-[0;32m    544[0m               [0mattrs[0m[1;33m=[0m[1;33m([0m[1;34m"executor_type"[0m[1;33m,[0m [0mexecutor_type[0m[1;33m,[0m [1;34m"config_proto"[0m[1;33m,[0m [0mconfig[0m[1;33m)[0m[1;33m,[0m[1;33m[0m[1;33m[0m[0m
-[1;32m--> 545[1;33m               ctx=ctx)
-[0m[0;32m    546[0m         [1;32melse[0m[1;33m:[0m[1;33m[0m[1;33m[0m[0m
-[0;32m    547[0m           outputs = execute.execute_with_cancellation(
-
-[1;32m~\miniconda3\envs\tensorflow\lib\site-packages\tensorflow_core\python\eager\execute.py[0m in [0;36mquick_execute[1;34m(op_name, num_outputs, inputs, attrs, ctx, name)[0m
-[0;32m     65[0m     [1;32melse[0m[1;33m:[0m[1;33m[0m[1;33m[0m[0m
-[0;32m     66[0m       [0mmessage[0m [1;33m=[0m [0me[0m[1;33m.[0m[0mmessage[0m[1;33m[0m[1;33m[0m[0m
-[1;32m---> 67[1;33m     [0msix[0m[1;33m.[0m[0mraise_from[0m[1;33m([0m[0mcore[0m[1;33m.[0m[0m_status_to_exception[0m[1;33m([0m[0me[0m[1;33m.[0m[0mcode[0m[1;33m,[0m [0mmessage[0m[1;33m)[0m[1;33m,[0m [1;32mNone[0m[1;33m)[0m[1;33m[0m[1;33m[0m[0m
-[0m[0;32m     68[0m   [1;32mexcept[0m [0mTypeError[0m [1;32mas[0m [0me[0m[1;33m:[0m[1;33m[0m[1;33m[0m[0m
-[0;32m     69[0m     keras_symbolic_tensors = [
-
-[1;32m~\miniconda3\envs\tensorflow\lib\site-packages\six.py[0m in [0;36mraise_from[1;34m(value, from_value)[0m
-
-[1;31mUnknownError[0m:  Failed to get convolution algorithm. This is probably because cuDNN failed to initialize, so try looking to see if a warning log message was printed above.
-	 [[node sequential/conv2d/Conv2D (defined at <ipython-input-9-302e094c995d>:2) ]] [Op:__inference_distributed_function_695]
-
-Function call stack:
-distributed_function
-
-UnknownError:  Failed to get convolution algorithm. This is probably because cuDNN failed to initialize, so try looking to see if a warning log message was printed above.
-	 [[node sequential/conv2d/Conv2D (defined at <ipython-input-9-302e094c995d>:2) ]] [Op:__inference_distributed_function_695]
-
-Function call stack:
-distributed_function
-
+-------------------
 
