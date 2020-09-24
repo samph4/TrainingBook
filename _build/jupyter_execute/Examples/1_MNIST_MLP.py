@@ -35,7 +35,7 @@ In simple English, it’s just a database of handwritten numbers that are 28 by 
 
 And this is what these numbers look like:
 
-![Image](Figures\\mnist1.png)
+![Image](./Figures/mnist1.png)
 
 #### Import Necessary Libraries
 

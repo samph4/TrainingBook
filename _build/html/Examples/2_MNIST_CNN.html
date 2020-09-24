@@ -267,62 +267,74 @@
     <a class="reference internal nav-link" href="#feature-learning">
      Feature Learning
     </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#convolutions">
+       Convolutions
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#pooling">
+       Pooling
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#classification">
+       Classification
+      </a>
+     </li>
+    </ul>
    </li>
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#classification">
-     Classification
+    <a class="reference internal nav-link" href="#creating-the-cnn-algorithm">
+     Creating the CNN Algorithm
     </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#creating-the-cnn-algorithm">
-   Creating the CNN Algorithm
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#necessary-imports">
-     Necessary Imports
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#loading-preparing-the-training-data">
-     Loading &amp; Preparing the training data
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#creating-the-cnn">
-     Creating the CNN
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#results-and-evaluation">
-   Results and Evaluation
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#test-the-model-using-the-test-data">
-     Test the model using the test data
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#extra-deep-dive-into-the-filters">
-   Extra: Deep dive into the filters
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#visualising-filters">
-     Visualising Filters
-    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#necessary-imports">
+       Necessary Imports
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#loading-preparing-the-training-data">
+       Loading &amp; Preparing the training data
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#creating-the-cnn">
+       Creating the CNN
+      </a>
+     </li>
+    </ul>
    </li>
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#visualising-feature-maps">
-     Visualising Feature Maps
+    <a class="reference internal nav-link" href="#results-and-evaluation">
+     Results and Evaluation
     </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#test-the-model-using-the-test-data">
+       Test the model using the test data
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#extra-deep-dive-into-the-filters">
+     Extra: Deep dive into the filters
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#visualising-filters">
+       Visualising Filters
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#visualising-feature-maps">
+       Visualising Feature Maps
+      </a>
+     </li>
+    </ul>
    </li>
   </ul>
  </li>
@@ -367,13 +379,16 @@
 <div><p>Feature learning is a set of techniques that learn a feature: a transformation of raw data input to a representation that can be effectively exploited in machine learning tasks. - https://www.quora.com/What-is-feature-learning.</p>
 </div></blockquote>
 <p>In that regard, we will create the CNN architecture such that it can learn the features of the problem. You’ll notice on the diagram above that within the feature engineering categories there are different actions happening that we can take advantage when performing feature engineering. Of course, the input in this case is self explanatory as we know that we are dealing with an input of image format. But the others include convolutions, activation functions and pooling.</p>
-<p><ins>Convolution</ins></p>
+<div class="section" id="convolutions">
+<h4>Convolutions<a class="headerlink" href="#convolutions" title="Permalink to this headline">¶</a></h4>
 <p>Convolutional layers in a CNN systematically apply learned filters to input images in order to create feature maps that summarize the presence of those features in the input. Convolutional layers prove very effective, and stacking convolutional layers close to the input to learn low-level features (lines) and layers deeper in the model to learn high-order features or more abstract features, like shapes or specific objects.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>It is important to emphasise here that in the video they will have mentioned filters such as the ‘edge detection filters’ that you can convolve across an image to detect the edges. The difference is, during training the CNN network creates their OWN filters and optimises them to learn features specific to the problem and subsequently improve the loss function.</p>
 </div>
-<p><ins>Pooling</ins></p>
+</div>
+<div class="section" id="pooling">
+<h4>Pooling<a class="headerlink" href="#pooling" title="Permalink to this headline">¶</a></h4>
 <p>A pooling layer is a new layer added after the convolutional layer. Specifically, after a nonlinearity (e.g. Relu) has been applied to the feature maps output by a convolutional layer; for example the layers in a model may look as follows:</p>
 <ol class="simple">
 <li><p>Input image</p></li>
@@ -389,15 +404,15 @@
 <p>The pooling operation is specified and is not a learnable parameter. Two common functions used in the pooling operation are: Average pooling and Maximum pooling. Average pooling calculates the average value for each patch on the feature map, whereas maximum pooling calculates the maxmimum value for each patch on the feature map (patch refers to the 2x2 pooling filter applied to the feature map output by the Conv Layer). The result of using a pooling layer and creating down sampled or pooled feature maps is a summarized version of the features detected in the input.</p>
 </div>
 <div class="section" id="classification">
-<h3>Classification<a class="headerlink" href="#classification" title="Permalink to this headline">¶</a></h3>
+<h4>Classification<a class="headerlink" href="#classification" title="Permalink to this headline">¶</a></h4>
 <p>The classification segment is almost identical to the MLP segment in the previous example. We begin by flattening the output of the final pooling layer to form a single vector; so if the final output layer is of size [16x16], we flatten this such that it becomes a vector of 256 elements. Depending on the problem, we may wish to pass this feature vector through an additional dense (fully-connected) layer which is a standard MLP layer with a user-defined number of nodes. Finally, we add a softmax layer to convert the output of the final layer in the network to a probability distribution consisting of a prediction by the model for each of the classes defined in the training dataset.</p>
 <p>~</p>
 </div>
 </div>
 <div class="section" id="creating-the-cnn-algorithm">
-<h2>Creating the CNN Algorithm<a class="headerlink" href="#creating-the-cnn-algorithm" title="Permalink to this headline">¶</a></h2>
+<h3>Creating the CNN Algorithm<a class="headerlink" href="#creating-the-cnn-algorithm" title="Permalink to this headline">¶</a></h3>
 <div class="section" id="necessary-imports">
-<h3>Necessary Imports<a class="headerlink" href="#necessary-imports" title="Permalink to this headline">¶</a></h3>
+<h4>Necessary Imports<a class="headerlink" href="#necessary-imports" title="Permalink to this headline">¶</a></h4>
 <p>Like we did last time, we begin by importing the packages that we will use to develop our algorithm. <code class="docutils literal notranslate"><span class="pre">Numpy</span></code> is a python library used for working with arrays and the syntax is very similar to MATLAB which makes manipulating data easy. Again, we use the <code class="docutils literal notranslate"><span class="pre">keras</span></code> library because it gives us access to machine learning functions without us having to code them all explicitly. Last time, we imported the mnist dataset through the <code class="docutils literal notranslate"><span class="pre">keras.datasets</span></code> attribute, but here we import the data directly from <code class="docutils literal notranslate"><span class="pre">mnist</span></code> by calling <code class="docutils literal notranslate"><span class="pre">import</span> <span class="pre">mnist</span></code>. This can be useful because you can get access to more information about the dataset. Often we must use a particular version of keras for compatibility issues and as such might not have the most up to date information (if anything has been added since that update). Finally, we call <code class="docutils literal notranslate"><span class="pre">matplotlib</span></code> again to make our plots.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -418,7 +433,7 @@
 </div>
 </div>
 <div class="section" id="loading-preparing-the-training-data">
-<h3>Loading &amp; Preparing the training data<a class="headerlink" href="#loading-preparing-the-training-data" title="Permalink to this headline">¶</a></h3>
+<h4>Loading &amp; Preparing the training data<a class="headerlink" href="#loading-preparing-the-training-data" title="Permalink to this headline">¶</a></h4>
 <p>Here we define the variables that contain the training and test data from the mnist dataset. If unsure about the structure of the mnist import, we can call <code class="docutils literal notranslate"><span class="pre">dir(mnist)</span></code> and we will see a whole list of attributes that we can call. Here we see that <code class="docutils literal notranslate"><span class="pre">train_images</span></code> and <code class="docutils literal notranslate"><span class="pre">test_images</span></code> has already been prepared as part of the import, so we can simply make a variable equal to <code class="docutils literal notranslate"><span class="pre">mnist.train_images()</span></code> to store the training images. It is a similar story with the labels; we can call <code class="docutils literal notranslate"><span class="pre">mnist.train_labels()</span></code> to obtain the labels for the training data. The first element here will show the class for the first image in the training set.</p>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
@@ -468,7 +483,7 @@
 </div>
 </div>
 <div class="section" id="creating-the-cnn">
-<h3>Creating the CNN<a class="headerlink" href="#creating-the-cnn" title="Permalink to this headline">¶</a></h3>
+<h4>Creating the CNN<a class="headerlink" href="#creating-the-cnn" title="Permalink to this headline">¶</a></h4>
 <p>Convolutional Neural Networks do not learn a single filter. Infact, they learn multiple features in parallel for a given input. The amount of filters you would want the CNN to learn depends on the complexity of the problem. For example, if you are trying to develop a CNN classification network that can tell the difference between a dog and a whale; you would not need many filters at all as the features of dogs and whales are so vastly different and it is ‘easier’ to differentiate between the features of the animals. Differentiating between dog breeds however may be more difficult, each dog breed has 4 legs, fur, two eyes and a nose etc - but the differences between breeds may be more subtle and dependent on the proportions of the face and body etc. We would therefore require more filters in the CNN such that the model has more opportunity to create filters that ‘learn’ how to identify key features that differentiate between the different breeds (classes).</p>
 <p>Here we set the number of filters to be 8, filter size as 3 and the pool size as 2. As mentioned earlier, a filter is a [NxN] array that convolves over the image/feature map. So the filter size of 3 refers to a [3x3] filter and thus this refers to 9 additional trainable parameters to optimize during training. The pool size is set at 2 which refers to a [2x2] pooling operation (filter).</p>
 <div class="cell docutils container">
@@ -546,7 +561,7 @@
 Epoch 1/10
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   32/60000 [..............................] - ETA: 13:37:31
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   32/60000 [..............................] - ETA: 5:43:57
 </pre></div>
 </div>
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
@@ -646,7 +661,7 @@ Epoch 1/10
 </div>
 </div>
 <div class="section" id="results-and-evaluation">
-<h2>Results and Evaluation<a class="headerlink" href="#results-and-evaluation" title="Permalink to this headline">¶</a></h2>
+<h3>Results and Evaluation<a class="headerlink" href="#results-and-evaluation" title="Permalink to this headline">¶</a></h3>
 <p>Now the model has been trained and we can evaluate the results and play around with the trained model. I mentioned in the previous example that the metrics during trained are saved within the model variable itself, and we can access the data by calling <code class="docutils literal notranslate"><span class="pre">model.history.history</span></code>. The data is stored here in a dictionary format. Calling <code class="docutils literal notranslate"><span class="pre">model.history.history</span></code> prints out the contents and we can see the metrics that have been stored, we see <code class="docutils literal notranslate"><span class="pre">loss</span></code>, <code class="docutils literal notranslate"><span class="pre">accuracy</span></code>, <code class="docutils literal notranslate"><span class="pre">val_loss</span></code> etc and access that data explicitly by using square brackets and indexing the string containing the data we want. So if we want to create a new variable containing all of the computed <code class="docutils literal notranslate"><span class="pre">loss</span></code> values during training. We can write <code class="docutils literal notranslate"><span class="pre">loss</span> <span class="pre">=</span> <span class="pre">model.history.history['loss']</span></code> and use that data to perform further analysis. In this case, we are just going to plot the data to see what is happening during training.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -675,7 +690,7 @@ Epoch 1/10
 <p>Often when models are unsuccessful, some clues as to what went wrong can appear when plotting this information. We can therefore go back and make changes to the model architecture or training parameters and try again.</p>
 </div>
 <div class="section" id="test-the-model-using-the-test-data">
-<h3>Test the model using the test data<a class="headerlink" href="#test-the-model-using-the-test-data" title="Permalink to this headline">¶</a></h3>
+<h4>Test the model using the test data<a class="headerlink" href="#test-the-model-using-the-test-data" title="Permalink to this headline">¶</a></h4>
 <p>However, this was all observed from validation data. What’s best is to test it with the actual testing data that was generated earlier. Here we call the <code class="docutils literal notranslate"><span class="pre">model.evaluate</span></code> function and input the test data we created earlier, <code class="docutils literal notranslate"><span class="pre">test_images</span></code> and <code class="docutils literal notranslate"><span class="pre">test_labels</span></code> - remembering to convert the test labels into <code class="docutils literal notranslate"><span class="pre">to_categorical</span></code> format as we are using the <code class="docutils literal notranslate"><span class="pre">categorical_crossentropy</span></code> loss function. Once again we can use the verbose feature to display the progress output and print the results.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -736,7 +751,7 @@ Test results - Loss: 0.0829402305746451 - Accuracy: 97.3800003528595%
 </div>
 </div>
 <div class="section" id="extra-deep-dive-into-the-filters">
-<h2>Extra: Deep dive into the filters<a class="headerlink" href="#extra-deep-dive-into-the-filters" title="Permalink to this headline">¶</a></h2>
+<h3>Extra: Deep dive into the filters<a class="headerlink" href="#extra-deep-dive-into-the-filters" title="Permalink to this headline">¶</a></h3>
 <p>When I first started developing networks, I wish that more of the tutorials that I learnt from showed you how to access the data that the model has learned so that you can see and interact with the learned parameters. So I’m going to show you a few additional things that you can do to understand your model better. First of all, we can call the <code class="docutils literal notranslate"><span class="pre">model.summary()</span></code> function to print out the architecture of the network.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -831,7 +846,7 @@ _________________________________________________________________
 <p>Remember that the : sign is used to index all elements within that particular dimension of a variable. So here we wish to access all of the filter information for the first layer of eight (index 0).</p>
 </div>
 <div class="section" id="visualising-filters">
-<h3>Visualising Filters<a class="headerlink" href="#visualising-filters" title="Permalink to this headline">¶</a></h3>
+<h4>Visualising Filters<a class="headerlink" href="#visualising-filters" title="Permalink to this headline">¶</a></h4>
 <p>Right now each of our 8 filters exists as a [3x3] array which doesn’t mean all that much. Here we use different methods to visualise the filters a better/more intuitive way. First we can create a grayscale colour map for each filter that is scaled such that the position of the largest value in the [3x3] array is black and the lowest value is white. The code below plots a subplot performing this operation for each of the eight filters.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -864,7 +879,7 @@ _________________________________________________________________
 <p>The dark squares indicate small or inhibitory weights and the light squares represent large or excitatory weights. Using this intuition, we can see that Filter #5 on the first row has strong horizontal presence - this suggests that the filter might be suitable to detecting horizontal edges.</p>
 </div>
 <div class="section" id="visualising-feature-maps">
-<h3>Visualising Feature Maps<a class="headerlink" href="#visualising-feature-maps" title="Permalink to this headline">¶</a></h3>
+<h4>Visualising Feature Maps<a class="headerlink" href="#visualising-feature-maps" title="Permalink to this headline">¶</a></h4>
 <p>Lets apply each of these filters directly to some of the MNIST digits and see what effect they have and visualise what the feature maps (output from CNN layer) within the network might look like. We import the <code class="docutils literal notranslate"><span class="pre">cv2</span></code> library here to allow us to perform 2D convolutions by calling the attribute <code class="docutils literal notranslate"><span class="pre">cv2.filter2D()</span></code> - inside the parentheses we can define the image we wish to convolve over and the filter that we wish to use. Aside from that, we are once again utilising <code class="docutils literal notranslate"><span class="pre">matplotlib</span></code> to allow us to make a subplot with multiple graphs. In this example we take the first 8 images from the test dataset (to create the rows) and apply each of the 8 filters that we trained from the 2D network to them.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -904,6 +919,7 @@ _________________________________________________________________
 </div>
 <p>This is a useful task to do as it gives us a much clearer indication as to what the filters are actually doing. We mentioned before that Filter #5 could be a horizontal edge detection filter, and we can see that this is actually the case as the horizontal lines that exist in the MNIST digit image are emphasised and dark.</p>
 <p>Another useful task might be to take a single input image and sequentially apply each of the 8 filters to give a true representation as to what is happening inside the CNN network. In this example, we just applied each filter to the original MNIST image. It should be emphasised at this point that the initial filters of a CNN network tend to detect larger/more distinct features from the input image, and as you progress deeper into the CNN network the filters tend to detect more subtle differences. This is more obvious for more sophisticated CNNs that have more sophisticated filters that are able to identify a more complex variety of features.</p>
+</div>
 </div>
 </div>
 </div>

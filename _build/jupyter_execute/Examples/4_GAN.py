@@ -14,30 +14,102 @@ The image above looks rather unassuming, it is simply a row of portraits of four
 
 ![Image](./Figures/gan1.png)
 
+~
 
+## Training Set
 
+First of all, we need to decide what we want our generative network to generate. Of course, NVIDIA's sophisticated StyleGAN is capable of generating human faces, but GANs are capable of generating new data regardless of the form that it comes in. GANs can be used to generate new audio signals, new images, new time-series data etc. GANs are capable of generating new data that is representative of the data that it was trained on (the training set). Therefore, in large, a key factor in the success of the GAN model lies in the quality of the training set. 
 
+In this example we will 
+
+`dataset = name of variable containing training set`
+
+```{note}
+Throughout this example I may use terms such as 'real' and 'fake' when referring to data. Real refers to data samples that come from the training set and 'fake' samples refer to any data that is produced by the Generator.
+```
+
+### Import Libraries
+
+import numpy as np
+from matplotlib import pyplot
+from numpy.random import rand
+from numpy.random import randn
+from keras.models import Sequential
+from keras.layers import Dense
+from keras.layers import LeakyReLU
+
+from keras import optimizers
+from keras import initializers
+from matplotlib import pyplot
+
+### Create Training (Target) Dataset
+
+Here we create a simple dataset that will be used to form the training set of real data. For simplicity, we will consider a simple y=sin(x) function.
+
+np.sqrt(5)
+
+n1 = 20
+dataset = np.zeros((n1,2))
+dataset[:,0] = np.linspace(0,2*np.pi,n1)
+dataset[:,1] = np.sin(dataset[:,0])
+
+pyplot.scatter(dataset[:,0],dataset[:,1], marker='x',color='r')
+pyplot.show()
+
+#### Take Real Samples
+To evaluate the performance of the GAN we will use the real data from the training set to train the Discriminator so that it can learn the characteristics of data that comes from the training set. This will make it easier for the Discriminator to label samples that come from the Generator as fake. 
+
+def take_real_samples(n):
+    np.random.seed(30)
+    idx = np.random.randint(len(dataset), size=int(n))
+    X = dataset[idx,:]
+    y = np.ones((n,1)) 
+    
+    return X, y
+
+#### Generate points in latent space as input for the generator
+
+Next, we can use the generator model to generate fake samples. Although first we need to generate points in latent space via the `generate_latent_points()` function below. These can then be passed to the generator model and used to generate new samples.
+
+# generate points in latent space as input for the generator
+def create_latent_points(latent_dim, n):
+    # generate points in the latent space
+    x_input = randn(latent_dim * n)
+    # reshape into a batch of inputs for the network
+    x_input = x_input.reshape(n, latent_dim)
+    return x_input
+
+#### Use the Generator to generate n fake examples, with class labels
+
+The `generate_fake_samples()` function below inputs the latent variables created by the `generate_latent_points()` function into the generator network to generate n fake samples `X`. Class labels of 0's are assigned to variable `y` to label the fake samples.
+
+# use the generator to generate n fake examples, with class labels
+def generate_fake_samples(generator, latent_dim, n):
+    # generate points in latent space
+    x_input = create_latent_points(latent_dim, n)
+    # predict outputs
+    X = generator.predict(x_input)
+    # create class labels
+    y = np.zeros((n, 1))
+    return X, y
 
 ### Define GAN Model
 
 #### Discrimnator
 
-# define the standalone discriminator model
-def define_discriminator(lr = 1, n_inputs=2):
+def define_discriminator(n_inputs=2):
     model = Sequential()
-    model.add(Dense(25, kernel_initializer='he_uniform', input_dim=n_inputs))
+    model.add(Dense(25,  kernel_initializer='he_uniform', input_dim=n_inputs))
     model.add(LeakyReLU(alpha=0.01))
-    model.add(Dense(15, kernel_initializer='he_uniform'))
-    model.add(LeakyReLU(alpha=0.01))    
-    model.add(Dense(15, kernel_initializer='he_uniform'))
-    model.add(LeakyReLU(alpha=0.01)) 
-    model.add(Dense(5, kernel_initializer='he_uniform'))
+    model.add(Dense(15,  kernel_initializer='he_uniform'))
+    model.add(LeakyReLU(alpha=0.01))
+    model.add(Dense(10,  kernel_initializer='he_uniform'))
+    model.add(LeakyReLU(alpha=0.01))
+    model.add(Dense(5,  kernel_initializer='he_uniform'))
     model.add(LeakyReLU(alpha=0.01))
     model.add(Dense(1, activation='sigmoid'))
-    
     # compile model
-    adam = optimizers.Adam(lr, beta_1 = 0.9, beta_2 = 0.99, amsgrad = False)
-    model.compile(loss='binary_crossentropy', optimizer=adam, metrics=['accuracy'])
+    model.compile(loss='binary_crossentropy', optimizer='adam', metrics=['accuracy'])
     return model
 
 #### Generator
@@ -45,10 +117,78 @@ def define_discriminator(lr = 1, n_inputs=2):
 # define the standalone generator model
 def define_generator(latent_dim, n_outputs=2):
     model = Sequential()
-    initial = initializers.RandomUniform(minval = 0.05, maxval = 1.5, seed = 30)
-    model.add(Dense(11, activation='relu', kernel_initializer=initial, input_dim=latent_dim))
-    model.add(LeakyReLU(alpha=0.01))
-    model.add(Dense(11, activation='relu', kernel_initializer=initial, input_dim=latent_dim))
-    model.add(LeakyReLU(alpha=0.01))
+    model.add(Dense(15, activation='relu', kernel_initializer='he_uniform', input_dim=latent_dim))
     model.add(Dense(n_outputs, activation='linear'))
     return model
+
+#### Combined GAN Model
+
+# define the combined generator and discriminator model, for updating the generator
+def define_gan(generator, discriminator):
+    # make weights in the discriminator not trainable
+    discriminator.trainable = False
+    # connect them
+    model = Sequential()
+    # add generator
+    model.add(generator)
+    # add the discriminator
+    model.add(discriminator)
+    # compile model
+    model.compile(loss='binary_crossentropy', optimizer='adam',metrics=['accuracy'])
+    return model
+
+## Evaluate Performance
+
+# evaluate the discriminator and plot real and fake points
+def summarize_performance(epoch, generator, discriminator, latent_dim, n=100):
+    # prepare real samples
+    x_real, y_real = take_real_samples(n)
+    # evaluate discriminator on real examples
+    _, acc_real = discriminator.evaluate(x_real, y_real, verbose=0)
+    # prepare fake examples
+    x_fake, y_fake = generate_fake_samples(generator, latent_dim, n)
+    # evaluate discriminator on fake examples
+    _, acc_fake = discriminator.evaluate(x_fake, y_fake, verbose=0)
+    # summarize discriminator performance
+    print(epoch+1, acc_real, acc_fake)
+    # scatter plot real and fake data points
+    
+    
+    pyplot.scatter(x_real[:, 0], x_real[:, 1], marker='x', color='red')
+    pyplot.scatter(x_fake[:, 0], x_fake[:, 1], marker='$\u25EF$', color='grey')
+    pyplot.show()
+
+# train the generator and discriminator
+def train(g_model, d_model, gan_model, latent_dim, n_epochs=20000, n_batch=1024, n_eval=1000):
+    # determine half the size of one batch, for updating the discriminator
+    half_batch = int(n_batch / 2)
+    # manually enumerate epochs
+    for i in range(n_epochs):
+        # prepare real samples
+        x_real, y_real = take_real_samples(half_batch)
+        # prepare fake examples
+        x_fake, y_fake = generate_fake_samples(g_model, latent_dim, half_batch)
+        # update discriminator
+        d_model.train_on_batch(x_real, y_real)
+        d_model.train_on_batch(x_fake, y_fake)
+        # prepare points in latent space as input for the generator
+        x_gan = create_latent_points(latent_dim, n_batch)
+        # create inverted labels for the fake samples
+        y_gan = np.ones((n_batch, 1))
+        # update the generator via the discriminator's error
+        gan_model.train_on_batch(x_gan, y_gan)
+        # evaluate the model every n_eval epochs
+        if (i+1) % n_eval == 0:
+            summarize_performance(i, g_model, d_model, latent_dim)
+
+# size of the latent space
+latent_dim = 5
+# create the discriminator
+discriminator = define_discriminator()
+# create the generator
+generator = define_generator(latent_dim)
+# create the gan
+gan_model = define_gan(generator, discriminator)
+# train model
+train(generator, discriminator, gan_model, latent_dim)
+

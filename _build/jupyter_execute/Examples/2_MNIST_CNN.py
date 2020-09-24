@@ -6,7 +6,7 @@ Adapted from this tutorial -> https://victorzhou.com/blog/keras-cnn-tutorial/#th
 
 ~
 
-### Preface
+## Preface
 
 This example will use the same MNIST dataset as we used in the last example. However, this time we are going to train a different class of neural network. This time, we'll be using a Convolutional Neural Network (CNN). CNN's are extremely popular recently as they have revolutionised the field of computer vision as they are well equipped to deal with and process data in image format. There is an article by Victor Zhou (https://victorzhou.com/blog/intro-to-cnns-part-1/) that does an excellent job introducing what a CNN is, but I'll try and summarise his key points here.
 
@@ -24,27 +24,27 @@ This is exactly what we did in the previous example, where we took the 28x28 inp
 
 We did not run into this problem in the previous example since the MNIST dataset had been structured for us. The dataset contains small images (low # of pixels = low # of features) that, more imporantly, had been centered so we did not encounter the issue of shifting or funky orientations.
 
-### What are CNNs?
+## What are CNNs?
 
 To get a good overview of what happens within a Convolutional Neural Network, I would strongly reccomend to watch this video first (https://www.youtube.com/watch?v=YRhxdVk_sIs). It is a relatively short video but does a good job explaining the concept and highlights some of the key points to be aware of - watching it will make the rest of this example make a lot more sense.
 
 ![Image](./Figures/cnn.jpeg)
 
-#### Feature Learning
+### Feature Learning
 The diagram above shows a typical schematic for a CNN. You can see that the process is split into two main categories; feature learning and classification. Let us first consider feature learning:
 
 > Feature learning is a set of techniques that learn a feature: a transformation of raw data input to a representation that can be effectively exploited in machine learning tasks. - https://www.quora.com/What-is-feature-learning.
 
 In that regard, we will create the CNN architecture such that it can learn the features of the problem. You'll notice on the diagram above that within the feature engineering categories there are different actions happening that we can take advantage when performing feature engineering. Of course, the input in this case is self explanatory as we know that we are dealing with an input of image format. But the others include convolutions, activation functions and pooling. 
 
-<ins>Convolution</ins>
+#### Convolutions
 
 Convolutional layers in a CNN systematically apply learned filters to input images in order to create feature maps that summarize the presence of those features in the input. Convolutional layers prove very effective, and stacking convolutional layers close to the input to learn low-level features (lines) and layers deeper in the model to learn high-order features or more abstract features, like shapes or specific objects.
 ```{note}
 It is important to emphasise here that in the video they will have mentioned filters such as the 'edge detection filters' that you can convolve across an image to detect the edges. The difference is, during training the CNN network creates their OWN filters and optimises them to learn features specific to the problem and subsequently improve the loss function.
 ```
 
-<ins>Pooling</ins>
+#### Pooling
 
 A pooling layer is a new layer added after the convolutional layer. Specifically, after a nonlinearity (e.g. Relu) has been applied to the feature maps output by a convolutional layer; for example the layers in a model may look as follows:
 
