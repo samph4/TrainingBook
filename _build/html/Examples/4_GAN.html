@@ -594,92 +594,14 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">InternalError</span><span class="g g-Whitespace">                             </span>Traceback (most recent call last)
-<span class="o">&lt;</span><span class="n">ipython</span><span class="o">-</span><span class="nb">input</span><span class="o">-</span><span class="mi">12</span><span class="o">-</span><span class="mi">3</span><span class="n">db7c9b9c7df</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
-<span class="g g-Whitespace">      </span><span class="mi">8</span> <span class="n">gan_model</span> <span class="o">=</span> <span class="n">define_gan</span><span class="p">(</span><span class="n">generator</span><span class="p">,</span> <span class="n">discriminator</span><span class="p">)</span>
-<span class="g g-Whitespace">      </span><span class="mi">9</span> <span class="c1"># train model</span>
-<span class="ne">---&gt; </span><span class="mi">10</span> <span class="n">train</span><span class="p">(</span><span class="n">generator</span><span class="p">,</span> <span class="n">discriminator</span><span class="p">,</span> <span class="n">gan_model</span><span class="p">,</span> <span class="n">latent_dim</span><span class="p">)</span>
-
-<span class="nn">&lt;ipython-input-11-21e0732ec1cf&gt;</span> in <span class="ni">train</span><span class="nt">(g_model, d_model, gan_model, latent_dim, n_epochs, n_batch, n_eval)</span>
-<span class="g g-Whitespace">      </span><span class="mi">8</span>         <span class="n">x_real</span><span class="p">,</span> <span class="n">y_real</span> <span class="o">=</span> <span class="n">take_real_samples</span><span class="p">(</span><span class="n">half_batch</span><span class="p">)</span>
-<span class="g g-Whitespace">      </span><span class="mi">9</span>         <span class="c1"># prepare fake examples</span>
-<span class="ne">---&gt; </span><span class="mi">10</span>         <span class="n">x_fake</span><span class="p">,</span> <span class="n">y_fake</span> <span class="o">=</span> <span class="n">generate_fake_samples</span><span class="p">(</span><span class="n">g_model</span><span class="p">,</span> <span class="n">latent_dim</span><span class="p">,</span> <span class="n">half_batch</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">11</span>         <span class="c1"># update discriminator</span>
-<span class="g g-Whitespace">     </span><span class="mi">12</span>         <span class="n">d_model</span><span class="o">.</span><span class="n">train_on_batch</span><span class="p">(</span><span class="n">x_real</span><span class="p">,</span> <span class="n">y_real</span><span class="p">)</span>
-
-<span class="nn">&lt;ipython-input-6-09e284b18cef&gt;</span> in <span class="ni">generate_fake_samples</span><span class="nt">(generator, latent_dim, n)</span>
-<span class="g g-Whitespace">      </span><span class="mi">4</span>     <span class="n">x_input</span> <span class="o">=</span> <span class="n">create_latent_points</span><span class="p">(</span><span class="n">latent_dim</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
-<span class="g g-Whitespace">      </span><span class="mi">5</span>     <span class="c1"># predict outputs</span>
-<span class="ne">----&gt; </span><span class="mi">6</span>     <span class="n">X</span> <span class="o">=</span> <span class="n">generator</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">x_input</span><span class="p">)</span>
-<span class="g g-Whitespace">      </span><span class="mi">7</span>     <span class="c1"># create class labels</span>
-<span class="g g-Whitespace">      </span><span class="mi">8</span>     <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">n</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
-
-<span class="nn">~\miniconda3\envs\tensorflow\lib\site-packages\keras\engine\training.py</span> in <span class="ni">predict</span><span class="nt">(self, x, batch_size, verbose, steps, callbacks, max_queue_size, workers, use_multiprocessing)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1460</span>                                             <span class="n">verbose</span><span class="o">=</span><span class="n">verbose</span><span class="p">,</span>
-<span class="g g-Whitespace">   </span><span class="mi">1461</span>                                             <span class="n">steps</span><span class="o">=</span><span class="n">steps</span><span class="p">,</span>
-<span class="ne">-&gt; </span><span class="mi">1462</span>                                             <span class="n">callbacks</span><span class="o">=</span><span class="n">callbacks</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1463</span> 
-<span class="g g-Whitespace">   </span><span class="mi">1464</span>     <span class="k">def</span> <span class="nf">train_on_batch</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span>
-
-<span class="nn">~\miniconda3\envs\tensorflow\lib\site-packages\keras\engine\training_arrays.py</span> in <span class="ni">predict_loop</span><span class="nt">(model, f, ins, batch_size, verbose, steps, callbacks)</span>
-<span class="g g-Whitespace">    </span><span class="mi">322</span>             <span class="n">batch_logs</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;batch&#39;</span><span class="p">:</span> <span class="n">batch_index</span><span class="p">,</span> <span class="s1">&#39;size&#39;</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">batch_ids</span><span class="p">)}</span>
-<span class="g g-Whitespace">    </span><span class="mi">323</span>             <span class="n">callbacks</span><span class="o">.</span><span class="n">_call_batch_hook</span><span class="p">(</span><span class="s1">&#39;predict&#39;</span><span class="p">,</span> <span class="s1">&#39;begin&#39;</span><span class="p">,</span> <span class="n">batch_index</span><span class="p">,</span> <span class="n">batch_logs</span><span class="p">)</span>
-<span class="ne">--&gt; </span><span class="mi">324</span>             <span class="n">batch_outs</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">ins_batch</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">325</span>             <span class="n">batch_outs</span> <span class="o">=</span> <span class="n">to_list</span><span class="p">(</span><span class="n">batch_outs</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">326</span>             <span class="k">if</span> <span class="n">batch_index</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-
-<span class="nn">~\miniconda3\envs\tensorflow\lib\site-packages\tensorflow_core\python\keras\backend.py</span> in <span class="ni">__call__</span><span class="nt">(self, inputs)</span>
-<span class="g g-Whitespace">   </span><span class="mi">3725</span>         <span class="n">value</span> <span class="o">=</span> <span class="n">math_ops</span><span class="o">.</span><span class="n">cast</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">tensor</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">3726</span>       <span class="n">converted_inputs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
-<span class="ne">-&gt; </span><span class="mi">3727</span>     <span class="n">outputs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_graph_fn</span><span class="p">(</span><span class="o">*</span><span class="n">converted_inputs</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">3728</span> 
-<span class="g g-Whitespace">   </span><span class="mi">3729</span>     <span class="c1"># EagerTensor.numpy() will often make a copy to ensure memory safety.</span>
-
-<span class="nn">~\miniconda3\envs\tensorflow\lib\site-packages\tensorflow_core\python\eager\function.py</span> in <span class="ni">__call__</span><span class="nt">(self, *args, **kwargs)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1549</span>       <span class="ne">TypeError</span><span class="p">:</span> <span class="n">For</span> <span class="n">invalid</span> <span class="n">positional</span><span class="o">/</span><span class="n">keyword</span> <span class="n">argument</span> <span class="n">combinations</span><span class="o">.</span>
-<span class="g g-Whitespace">   </span><span class="mi">1550</span>     <span class="s2">&quot;&quot;&quot;</span>
-<span class="ne">-&gt; </span><span class="mi">1551</span><span class="s2">     return self._call_impl(args, kwargs)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1552</span><span class="s2"> </span>
-<span class="g g-Whitespace">   </span><span class="mi">1553</span><span class="s2">   def _call_impl(self, args, kwargs, cancellation_manager=None):</span>
-
-<span class="nn">~\miniconda3\envs\tensorflow\lib\site-packages\tensorflow_core\python\eager\function.py</span> in <span class="ni">_call_impl</span><span class="nt">(self, args, kwargs, cancellation_manager)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1589</span><span class="s2">       raise TypeError(&quot;Keyword arguments </span><span class="si">{}</span><span class="s2"> unknown. Expected </span><span class="si">{}</span><span class="s2">.&quot;.format(</span>
-<span class="g g-Whitespace">   </span><span class="mi">1590</span><span class="s2">           list(kwargs.keys()), list(self._arg_keywords)))</span>
-<span class="ne">-&gt; </span><span class="mi">1591</span><span class="s2">     return self._call_flat(args, self.captured_inputs, cancellation_manager)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1592</span><span class="s2"> </span>
-<span class="g g-Whitespace">   </span><span class="mi">1593</span><span class="s2">   def _filtered_call(self, args, kwargs):</span>
-
-<span class="nn">~\miniconda3\envs\tensorflow\lib\site-packages\tensorflow_core\python\eager\function.py</span> in <span class="ni">_call_flat</span><span class="nt">(self, args, captured_inputs, cancellation_manager)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1690</span><span class="s2">       # No tape is watching; skip to running the function.</span>
-<span class="g g-Whitespace">   </span><span class="mi">1691</span><span class="s2">       return self._build_call_outputs(self._inference_function.call(</span>
-<span class="ne">-&gt; </span><span class="mi">1692</span><span class="s2">           ctx, args, cancellation_manager=cancellation_manager))</span>
-<span class="g g-Whitespace">   </span><span class="mi">1693</span><span class="s2">     forward_backward = self._select_forward_and_backward_functions(</span>
-<span class="g g-Whitespace">   </span><span class="mi">1694</span><span class="s2">         args,</span>
-
-<span class="nn">~\miniconda3\envs\tensorflow\lib\site-packages\tensorflow_core\python\eager\function.py</span> in <span class="ni">call</span><span class="nt">(self, ctx, args, cancellation_manager)</span>
-<span class="g g-Whitespace">    </span><span class="mi">543</span><span class="s2">               inputs=args,</span>
-<span class="g g-Whitespace">    </span><span class="mi">544</span><span class="s2">               attrs=(&quot;executor_type&quot;, executor_type, &quot;config_proto&quot;, config),</span>
-<span class="ne">--&gt; </span><span class="mi">545</span><span class="s2">               ctx=ctx)</span>
-<span class="g g-Whitespace">    </span><span class="mi">546</span><span class="s2">         else:</span>
-<span class="g g-Whitespace">    </span><span class="mi">547</span><span class="s2">           outputs = execute.execute_with_cancellation(</span>
-
-<span class="nn">~\miniconda3\envs\tensorflow\lib\site-packages\tensorflow_core\python\eager\execute.py</span> in <span class="ni">quick_execute</span><span class="nt">(op_name, num_outputs, inputs, attrs, ctx, name)</span>
-<span class="g g-Whitespace">     </span><span class="mi">65</span><span class="s2">     else:</span>
-<span class="g g-Whitespace">     </span><span class="mi">66</span><span class="s2">       message = e.message</span>
-<span class="ne">---&gt; </span><span class="mi">67</span><span class="s2">     six.raise_from(core._status_to_exception(e.code, message), None)</span>
-<span class="g g-Whitespace">     </span><span class="mi">68</span><span class="s2">   except TypeError as e:</span>
-<span class="g g-Whitespace">     </span><span class="mi">69</span><span class="s2">     keras_symbolic_tensors = [</span>
-
-<span class="nn">~\miniconda3\envs\tensorflow\lib\site-packages\six.py</span> in <span class="ni">raise_from</span><span class="nt">(value, from_value)</span>
-
-<span class="ne">InternalError</span>:  Blas GEMM launch failed : a.shape=(32, 5), b.shape=(5, 15), m=32, n=15, k=5
-<span class="s2">	 [[node dense_6/MatMul (defined at C:\Users\Samuel\miniconda3\envs</span><span class="se">\t</span><span class="s2">ensorflow\lib\site-packages\keras</span><span class="se">\b</span><span class="s2">ackend</span><span class="se">\t</span><span class="s2">ensorflow_backend.py:3009) ]] [Op:__inference_keras_scratch_graph_377]</span>
-
-<span class="s2">Function call stack:</span>
-<span class="s2">keras_scratch_graph</span>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\Samuel\miniconda3\envs\tensorflow\lib\site-packages\keras\engine\training.py:297: UserWarning: Discrepancy between trainable weights and collected trainable weights, did you set `model.trainable` without calling `model.compile` after ?
+  &#39;Discrepancy between trainable weights and collected trainable&#39;
 </pre></div>
 </div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1000 0.5799999833106995 0.7300000190734863
+</pre></div>
+</div>
+<img alt="../_images/4_GAN_23_2.png" src="../_images/4_GAN_23_2.png" />
 </div>
 </div>
 </div>

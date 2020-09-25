@@ -39,6 +39,8 @@ And this is what these numbers look like:
 
 #### Import Necessary Libraries
 
+When we import libraries in Python, they are essentially the 'toolbox' equivalent from MATLAB and give us access to lots more functions so that we don't have to code them explicitly. More information about this can be found in the Introduction to Python page.
+
 import keras                            #keras library that gives us access to a bunch of machine learning functions
 from keras.datasets import mnist        #keras module has a bunch of datasets that we can import directly
 from keras.models import Sequential     #sequential model lets us develop networks in sequence (in layers)
@@ -46,6 +48,7 @@ from keras.layers import Dense          #Dense is the name Keras gives to a full
 from keras.utils import to_categorical  #will make sense later!
 
 import matplotlib.pyplot as plt         #matplotlib is a library that lets us plot graphs like MATLAB would.
+import numpy as np
 
 #### Loading your data
 
