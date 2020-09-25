@@ -200,7 +200,7 @@ model.fit(X_train, Y_train, epochs=20, batch_size=250, verbose=1, validation_spl
 
 #### Results and Evaluation!
 
-Now the model has been trained and we can evaluate the results and play around with the trained model. I mentioned earlier that the metrics during trained are saved within the model variable itself, accessing them is not the most intuitive honestly, but by calling `dir(model)` you will see a big list of all the attributes you can call from that variable. One of them is history, within that we can call a secondary history attribute that stores all of the metrics stored during training. We can then plot these values using the `matplotlib` library which stores works in a very similar way to MATLAB.
+Now the model has been trained and we can evaluate the results and play around with the trained model. I mentioned earlier that the metrics during training are saved within the model variable itself, accessing them is not the most intuitive honestly, but by calling `dir(model)` you will see a big list of all the attributes you can call from that variable. One of them is history, within that we can call a secondary history attribute that stores all of the metrics stored during training. We can then plot these values using the `matplotlib` library which stores works in a very similar way to MATLAB.
 
 plt.figure(figsize=(10,6))
 plt.plot(range(20),model.history.history['val_loss'], label='Validation Loss')
