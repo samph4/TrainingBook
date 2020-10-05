@@ -1,0 +1,850 @@
+
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>3 - Generative Adversarial Network &#8212; Ai Training Manual for Maisie &amp; Filipe</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" integrity="sha384-KA6wR/X5RY4zFAHpv/CnoG2UW1uogYfdnP67Uv7eULvTveboZJg0qUpmJZb5VqzN" crossorigin="anonymous">
+    <link href="../_static/css/index.css" rel="stylesheet">
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-dropdown.css" />
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/sphinx-book-theme.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Convolution Filter Example" href="../Extras/Convolutions.html" />
+    <link rel="prev" title="2 - MNIST CNN Network" href="2_MNIST_CNN.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="docsearch:language" content="en">
+
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="../index.html">
+  
+  <img src="../_static/EdLogo.png" class="logo" alt="logo">
+  
+  
+  <h1 class="site-logo" id="site-title">Ai Training Manual for Maisie & Filipe</h1>
+  
+</a>
+</div>
+
+<form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form>
+
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+  <ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../intro.html">
+   Introduction
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Getting Started
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Getting%20Started/jupyter%20notebooks.html">
+   Jupyter Notebooks
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Python Support
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Python%20Help/Introduction%20to%20Python.html">
+   Introduction to Python
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Python%20Help/Useful%20Python%20Commands.html">
+   Useful Packages / Commands
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Python%20Help/Glossary.html">
+   Glossary
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Machine Learning Examples
+ </span>
+</p>
+<ul class="current nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="1_MNIST_MLP.html">
+   1 - MNIST MLP Network
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="2_MNIST_CNN.html">
+   2 - MNIST CNN Network
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   3 - Generative Adversarial Network
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Extra Stuff
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Extras/Convolutions.html">
+   Convolution Filter Example
+  </a>
+ </li>
+</ul>
+
+</nav>
+
+ <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="row topbar fixed-top container-xl">
+    <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show">
+    </div>
+    <div class="col pl-2 topbar-main">
+        
+        <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+            data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+            aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+            title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+            <i class="fas fa-bars"></i>
+            <i class="fas fa-arrow-left"></i>
+            <i class="fas fa-arrow-up"></i>
+        </button>
+        
+        <div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/Examples/3_GAN.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+    
+</div>
+        <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/samph4/TrainingBook"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        
+        
+    </div>
+</div>
+
+
+        <!-- Full screen (wrap in <a> to have style consistency -->
+        <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                data-placement="bottom" onclick="toggleFullScreen()" title="Fullscreen mode"><i
+                    class="fas fa-expand"></i></button></a>
+
+        <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/samph4/TrainingBook/master?urlpath=tree/Examples/3_GAN.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        <a class="colab-button" href="https://colab.research.google.com/github/samph4/TrainingBook/blob/master/Examples/3_GAN.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
+                title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
+                    src="../_static/images/logo_colab.png"
+                    alt="Interact on Colab">Colab</button></a>
+        
+        
+    </div>
+</div>
+
+    </div>
+
+    <!-- Table of contents -->
+    <div class="d-none d-md-block col-md-2 bd-toc show">
+        <div class="tocsection onthispage pt-5 pb-3">
+            <i class="fas fa-list"></i> Contents
+        </div>
+        <nav id="bd-toc-nav">
+            <ul class="nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#preface">
+   Preface
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#generative-adversarial-networks">
+   Generative Adversarial Networks
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#training-set">
+   Training Set
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#import-libraries">
+     Import Libraries
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#create-training-target-dataset">
+     Create Training (Target) Dataset
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#functions-in-python">
+     Functions in Python
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#functions-used-in-the-gan-training-algorithm">
+     Functions used in the GAN training algorithm
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#take-real-samples">
+       Take Real Samples
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#generate-points-in-latent-space-as-input-for-the-generator">
+       Generate points in latent space as input for the generator
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#use-the-generator-to-generate-n-fake-examples-with-class-labels">
+       Use the Generator to generate n fake examples, with class labels
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#define-gan-model">
+     Define GAN Model
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#discriminator">
+       Discriminator
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#generator">
+       Generator
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#combined-gan-model">
+       Combined GAN Model
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#evaluate-performance">
+   Evaluate Performance
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#execute-the-model">
+   Execute the Model!
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#some-evaluation">
+     Some evaluation
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#using-the-model-to-generate-new-data">
+       Using the model to generate new data
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#further-things-to-try">
+       Further things to try
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+        </nav>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="generative-adversarial-network">
+<h1>3 - Generative Adversarial Network<a class="headerlink" href="#generative-adversarial-network" title="Permalink to this headline">¶</a></h1>
+<p><code class="docutils literal notranslate"><span class="pre">github.com/samph4</span></code></p>
+<p>~</p>
+<div class="section" id="preface">
+<h2>Preface<a class="headerlink" href="#preface" title="Permalink to this headline">¶</a></h2>
+<p>This example will be more in-depth than the first few, but a lot of the principles that we have already applied also apply here. As always, we’ll go through it step by step and I’ll do my best to explain each part so that it makes sense and is as easy to follow as I can make it. In this final example, we will be looking at Generative Adversarial Networks - affectionately known as GANs. The concept of GANs were first introduced by Ian Goodfellow and his team in 2014 (https://arxiv.org/abs/1406.2661), where they “proposed a new framework for estimating generative models via an an adversarial process”. I’ll get into this in much more detail, but essentially what is happening here is that we are going to train two neural networks (that will be adversaries), that will compete against one another in order to improve. One will be reffered to as the Discriminator and the other will be known as the Generator. We combine both of these networks to form a combined model known as the GAN for training. Once training has been completed, we want to be able to use the <em>trained</em> Generator network independently to generate new things!</p>
+<p><img alt="Image" src="../_images/gan2.png" /></p>
+<p>The image above looks rather unassuming, it is simply a row of portraits of four different people. The interesting thing however, is that none of these people actually exist. They are not real. Each of these images has been generated by a Generative Adversarial Network known as StyleGAN. StyleGAN is a sophisticated GAN that has been curated and trained by NVIDIA and represents the state-of-the-art results in data-driven unconditional generative image modelling and is an impressive testament as to the possibilities of Generative Networks. Here is another video that demonstrates the capabilities of these methods (which is only 2 minutes long so I recommend you watch it because it’s v cool) - https://www.youtube.com/watch?v=p5U4NgVGAwg. With that being said, lets take a closer look as to how these things actually work.</p>
+</div>
+<div class="section" id="generative-adversarial-networks">
+<h2>Generative Adversarial Networks<a class="headerlink" href="#generative-adversarial-networks" title="Permalink to this headline">¶</a></h2>
+<p><img alt="Image" src="../_images/gan1.png" /></p>
+<p>The Generative Adversarial Network is a framework for estimating generative models via an adversarial process in which two neural networks compete against each other during training. It is a useful machine learning technique that learns to generate fake samples indistinguishable from real ones via a competitive game. Whilst this may sound a little confusing, the GAN is nothing more than a combined model where two neural networks are joined together; these are known as the Discriminator <span class="math notranslate nohighlight">\(D\)</span> and the Generator <span class="math notranslate nohighlight">\(G\)</span>. The Discriminator <span class="math notranslate nohighlight">\(D\)</span> is a classification network that is set up to maximise the probability of assigning the correct label to real (label 1) or fake (label 0) samples. Meanwhile, the Generator <span class="math notranslate nohighlight">\(G\)</span> is trying to fool <span class="math notranslate nohighlight">\(D\)</span> and generate new samples that the Discriminator believes came from the training set. Mathematically speaking, this corresponds to the following two-player minimax game with value function <span class="math notranslate nohighlight">\(V(G,D)\)</span>:</p>
+<p><img alt="Image" src="../_images/minmax.png" /></p>
+<p>Where <span class="math notranslate nohighlight">\(x\)</span> is the input to <span class="math notranslate nohighlight">\(D\)</span> from the training set, <span class="math notranslate nohighlight">\(z\)</span> is a vector of latent values input to <span class="math notranslate nohighlight">\(G\)</span>, <span class="math notranslate nohighlight">\(E_x\)</span> is the expected value overall real data instances, <span class="math notranslate nohighlight">\(D(x)\)</span> is the Discriminator’s estimate of the probability that real data instance <span class="math notranslate nohighlight">\(x\)</span> is real, <span class="math notranslate nohighlight">\(E_z\)</span> is the expected value over all random inputs to the generator and <span class="math notranslate nohighlight">\(D(G(z))\)</span> is the discriminator’s estimate of the probability that a fake instance is real. The diagram above should help this bit make sense. To reiterate, the primary goal of <span class="math notranslate nohighlight">\(G\)</span> is to fool <span class="math notranslate nohighlight">\(D\)</span> and generate new samples that <span class="math notranslate nohighlight">\(D\)</span> believes came from the training set (real). The primary goal of <span class="math notranslate nohighlight">\(D\)</span> is to correctly classify real/fake samples by assigning a label of 0 to generated samples indicating a fake, and a label of 1 to true samples indicating that it is real and came from the training set. The training procedure for <span class="math notranslate nohighlight">\(G\)</span> is to maximise the probablity of <span class="math notranslate nohighlight">\(D\)</span> making a mistake i.e. an incorrect classification. In the space of arbitrary functions <span class="math notranslate nohighlight">\(G\)</span> and <span class="math notranslate nohighlight">\(D\)</span>, a unique solution exists, with <span class="math notranslate nohighlight">\(G\)</span> able to reproduce data with the same distribution as the training set and the output from <span class="math notranslate nohighlight">\(D\)</span> ≈ 0.5 for all samples, which simply indicates that the discriminator can no longer differentiate between the training data and the data generated by <span class="math notranslate nohighlight">\(G\)</span>. Or in other words, the Generator <span class="math notranslate nohighlight">\(G\)</span> has got so good at generating ‘fake’ data that <span class="math notranslate nohighlight">\(D\)</span> can no longer tell the difference. The image below is taken from Google’s training documentation about GANs and is worth a read as it (obviously) does a good job at explaining some of these concepts (https://developers.google.com/machine-learning/gan).</p>
+<p><img alt="Image" src="../_images/forge.png" /></p>
+<p>~</p>
+</div>
+<div class="section" id="training-set">
+<h2>Training Set<a class="headerlink" href="#training-set" title="Permalink to this headline">¶</a></h2>
+<p>First of all, we need to decide what we want our generative network to generate. Of course, NVIDIA’s sophisticated StyleGAN is capable of generating human faces, but GANs are capable of generating new data regardless of the form that it comes in. GANs can be used to generate new audio signals, new images, new time-series data etc. GANs are capable of generating new data that is representative of the data that it was trained on (the training set). Therefore, in large, a key factor in the success of the GAN model lies in the quality of the training set. In this example, we will create a simple training set from the function <span class="math notranslate nohighlight">\(y=sin(x)\)</span> and use the trained generator to produce similar values!</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Throughout this example I may use terms such as ‘real’ and ‘fake’ when referring to data. Real refers to data samples that come from the training set and ‘fake’ samples refer to any data that is produced by the Generator.</p>
+</div>
+<div class="section" id="import-libraries">
+<h3>Import Libraries<a class="headerlink" href="#import-libraries" title="Permalink to this headline">¶</a></h3>
+<p>As always, we’ll start by importing the necessary libraries that we will use for this example. All of these functions we have used in previous examples so nothing should be too out of the ordinary, the <code class="docutils literal notranslate"><span class="pre">optimizers</span></code> and <code class="docutils literal notranslate"><span class="pre">initializers</span></code> however we will discuss later.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>                                      <span class="c1"># for working with arrays/data</span>
+<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">pyplot</span>                           <span class="c1"># for plotting!</span>
+<span class="kn">from</span> <span class="nn">numpy.random</span> <span class="kn">import</span> <span class="n">rand</span>                           <span class="c1"># explicit random number function</span>
+<span class="kn">from</span> <span class="nn">numpy.random</span> <span class="kn">import</span> <span class="n">randn</span>                          <span class="c1"># another explicit random function</span>
+<span class="kn">from</span> <span class="nn">keras.models</span> <span class="kn">import</span> <span class="n">Sequential</span>                     <span class="c1"># sequential model to create layered networks</span>
+<span class="kn">from</span> <span class="nn">keras.layers</span> <span class="kn">import</span> <span class="n">Dense</span>                          <span class="c1"># Dense layer (fully-connected MLP)</span>
+<span class="kn">from</span> <span class="nn">keras.layers</span> <span class="kn">import</span> <span class="n">LeakyReLU</span>                      <span class="c1"># LReLU Activation Function</span>
+
+<span class="kn">from</span> <span class="nn">keras</span> <span class="kn">import</span> <span class="n">optimizers</span>
+<span class="kn">from</span> <span class="nn">keras</span> <span class="kn">import</span> <span class="n">initializers</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Using TensorFlow backend.
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="create-training-target-dataset">
+<h3>Create Training (Target) Dataset<a class="headerlink" href="#create-training-target-dataset" title="Permalink to this headline">¶</a></h3>
+<p>In the previous examples we had used the MNIST handwritten digits dataset. This is nice because not only is it a comprehensive dataset, but it is also labelled, properly structured, the images have been transformed/resized to give the machine learning algorithm the best chance to learn. But of course, depending on the problem that you are considering there will not always be a perfect dataset available. More often than not, you will have to create a training set yourself and structure it appropriately. Again, in this example we are just going to use the function <span class="math notranslate nohighlight">\(y=sin(x)\)</span> to create a training set given a range of <span class="math notranslate nohighlight">\(x\)</span> values between 0 and 2<span class="math notranslate nohighlight">\(\pi\)</span>.</p>
+<p>The training data will exist as a 2-D array consisting of the <span class="math notranslate nohighlight">\(x\)</span> and corresponding <span class="math notranslate nohighlight">\(y\)</span> values of the <span class="math notranslate nohighlight">\(sin(x)\)</span> function. We can start by creating a new variable called <code class="docutils literal notranslate"><span class="pre">dataset</span></code> and preallocate an array of zero values with the number of rows dependant on the number of samples we would like, in this case I choose 20, and 2 columns for the <span class="math notranslate nohighlight">\(x\)</span> and corresponding <span class="math notranslate nohighlight">\(y\)</span> values. We use the <code class="docutils literal notranslate"><span class="pre">np.linspace()</span></code> function to create an array with <code class="docutils literal notranslate"><span class="pre">n1</span></code> equally spaced samples between 0 and 2<span class="math notranslate nohighlight">\(\pi\)</span> and allocate them to the first (index = 0) column of the preallocated <code class="docutils literal notranslate"><span class="pre">dataset</span></code> array. We then use the <code class="docutils literal notranslate"><span class="pre">np.sin()</span></code> function to compute the sin values of each of the values in the first column and allocate them to the second column (index=1) of the <code class="docutils literal notranslate"><span class="pre">dataset</span></code> array. Finally, the <code class="docutils literal notranslate"><span class="pre">pyplot.scatter()</span></code> function from the <code class="docutils literal notranslate"><span class="pre">matplotlib</span></code> library is used to plot the training set. Of course, if you would like to change the number of values in this dataset you can do so by changing the value of <code class="docutils literal notranslate"><span class="pre">n1</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n1</span> <span class="o">=</span> <span class="mi">50</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">n1</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span>
+<span class="n">dataset</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span><span class="n">n1</span><span class="p">)</span>
+<span class="n">dataset</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">dataset</span><span class="p">[:,</span><span class="mi">0</span><span class="p">])</span>
+
+<span class="n">pyplot</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">dataset</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span><span class="n">dataset</span><span class="p">[:,</span><span class="mi">1</span><span class="p">],</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;x&#39;</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">)</span>
+<span class="n">pyplot</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/3_GAN_5_0.png" src="../_images/3_GAN_5_0.png" />
+</div>
+</div>
+</div>
+<div class="section" id="functions-in-python">
+<h3>Functions in Python<a class="headerlink" href="#functions-in-python" title="Permalink to this headline">¶</a></h3>
+<p>The next section will list and talk through a bunch of different functions that we use in the training algorithm, but lets discuss how they work first. The majority of these functions are used to prepare the inputs to the Generator <span class="math notranslate nohighlight">\(G\)</span> and the Discriminator <span class="math notranslate nohighlight">\(D\)</span>. If you have worked with functions in MATLAB then you might recall the syntax looks something like <code class="docutils literal notranslate"><span class="pre">function</span> <span class="pre">[y1,...,yN]</span> <span class="pre">=</span> <span class="pre">function_name(x1,...,xN)</span></code> where <span class="math notranslate nohighlight">\(x\)</span> refers to the input variables and <span class="math notranslate nohighlight">\(y\)</span> refers to the output variables. These functions are useful because there are often blocks of code that we might wish to repeat, and isntead of repeating the entire block of code, it is much better practice to remove the clutter and call a function that computes that block of code. Also, any of the variables created within the function that are not required as output are not saved as a global variable and will not take up unecessary memory.</p>
+<p>In Python, the functionality is the same but the syntax is a little different. In order to define a function, we call <code class="docutils literal notranslate"><span class="pre">def</span></code> before naming the function. Take a look at the simple example below:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">simple_function</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">):</span>
+    <span class="n">c</span> <span class="o">=</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span>
+    <span class="k">return</span> <span class="n">c</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Here, we name the function <code class="docutils literal notranslate"><span class="pre">simple_function()</span></code>. You will notice that the function takes two inputs <code class="docutils literal notranslate"><span class="pre">a</span></code> and <code class="docutils literal notranslate"><span class="pre">b</span></code> and we define that by including them in the function parentheses and separating them with commas.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Note the colon after the function, this is important as it initalises the function and lets Python know that the next bit of code you write will define what the function will actually do!</p>
+</div>
+<p>The outputs of the function are defined by the <code class="docutils literal notranslate"><span class="pre">return</span></code> statement. In this function we perform a simple addition of two input variables <code class="docutils literal notranslate"><span class="pre">a</span></code> and <code class="docutils literal notranslate"><span class="pre">b</span></code> and label that variable <code class="docutils literal notranslate"><span class="pre">c</span></code>. Adding <code class="docutils literal notranslate"><span class="pre">return</span> <span class="pre">c</span></code> at the end of the function does two things, it tells Python that the function statement is complete and also that we wish to return the variable <code class="docutils literal notranslate"><span class="pre">c</span></code> for use in the rest of our code! Note that the function here could be much more complicated with many more operations and variables within - if we wish to return additional variables for use in the rest of the code, we can simply return more values such as <code class="docutils literal notranslate"><span class="pre">return</span> <span class="pre">c,</span> <span class="pre">d,</span> <span class="pre">e,</span> <span class="pre">f,</span> <span class="pre">g</span></code> etc. Now we have defined a function, lets use it!</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">b</span> <span class="o">=</span> <span class="mi">2</span> 
+<span class="n">c</span> <span class="o">=</span> <span class="n">simple_function</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3
+</pre></div>
+</div>
+</div>
+</div>
+<p>You can see that we can define variables <code class="docutils literal notranslate"><span class="pre">a</span></code> and <code class="docutils literal notranslate"><span class="pre">b</span></code> and insert them into the <code class="docutils literal notranslate"><span class="pre">simple_function()</span></code> that we defined previously. We can set this function equal to a new variable <code class="docutils literal notranslate"><span class="pre">c</span></code> to store the output from that function in variable <code class="docutils literal notranslate"><span class="pre">c</span></code>. If we print <code class="docutils literal notranslate"><span class="pre">c</span></code>, as expected the value is 3 (1+2). This is fine and it works, but there are a few more things you should be aware about. Python functions are very flexible! When we defined the function earlier, we named the variables <code class="docutils literal notranslate"><span class="pre">a</span></code> and <code class="docutils literal notranslate"><span class="pre">b</span></code>, but you’ll see that it doesn’t actually matter and we could have named them anything. How the variables are defined are only important in the function definition itself, so you’ll see that this also works!</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">simple_function</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>9
+</pre></div>
+</div>
+</div>
+</div>
+<p>Also, Python functions allow you to set default values. You may have already noticed that when you import functions from libraries and call the <code class="docutils literal notranslate"><span class="pre">help()</span></code> function on them, you’ll see a whole bunch of additional input options that you may or may not need/use. These parameters are often default that don’t require changing for the function to work, but if you did wish to modify the function further then the option is there to change them. Lets define another function to explain that a little better:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">new_function</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="n">c</span><span class="o">=</span><span class="mi">4</span><span class="p">):</span>
+    <span class="n">d</span> <span class="o">=</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span> <span class="o">+</span> <span class="n">c</span> 
+    <span class="k">return</span> <span class="n">d</span> 
+</pre></div>
+</div>
+</div>
+</div>
+<p>Here we define a new function that is very similar to the first, although this time we set a default parameter <code class="docutils literal notranslate"><span class="pre">c</span></code> as input and set a value of 4. We then define a new variable <code class="docutils literal notranslate"><span class="pre">d</span></code> within the function that is the sum of inputs <code class="docutils literal notranslate"><span class="pre">a</span></code>, <code class="docutils literal notranslate"><span class="pre">b</span></code> and <code class="docutils literal notranslate"><span class="pre">c</span></code> and return it for use in the rest of our code.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">new_function</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>7
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now when we call <code class="docutils literal notranslate"><span class="pre">new_function(1,2)</span></code> it returns a value of 7. This is because it is adding the values that we insert into the function (1,2) with the default parameter <code class="docutils literal notranslate"><span class="pre">c</span></code> which was equal to 4. This returns a value of 7 which is correct! We may wish to modify a default variable in the function (something we will do regurlarly when using the Keras machine learning functions) and we can easily do so as follows:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">new_function</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="n">c</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>13
+</pre></div>
+</div>
+</div>
+</div>
+<p>You’ll notice that we can simply override the default parameter by redefining its value when we call the function. By calling <code class="docutils literal notranslate"><span class="pre">new_function(1,2,c=10)</span></code> we replace the default <code class="docutils literal notranslate"><span class="pre">c</span></code> value of 4 to a value of 10. As expected, the function then returns a new value of 13 (1+2+10). To sum up, functions are a tool that are there to allow us to repeat complicated bits of code simply by calling a new function. There are two different types of input a function may require, ones that must be defined (such as <code class="docutils literal notranslate"><span class="pre">a</span></code> and <code class="docutils literal notranslate"><span class="pre">b</span></code> in this case) and ones that are default (<code class="docutils literal notranslate"><span class="pre">c</span></code>). It is important to understand that you do not have to define default values, if you don’t the function will operate with the default values that have been preset. But if you try use a function without defining one of the essential values then the function will return an error message! But they’re not that bad and once you get used to using and interacting with them you’ll struggle to image a world where you didn’t.</p>
+</div>
+<div class="section" id="functions-used-in-the-gan-training-algorithm">
+<h3>Functions used in the GAN training algorithm<a class="headerlink" href="#functions-used-in-the-gan-training-algorithm" title="Permalink to this headline">¶</a></h3>
+<p>Here we will define a bunch of the functions used for the GAN training algorithm. Although some of them might be more complicated than the simple example we considered, the idea behind them is exactly the same.</p>
+<div class="section" id="take-real-samples">
+<h4>Take Real Samples<a class="headerlink" href="#take-real-samples" title="Permalink to this headline">¶</a></h4>
+<p>To evaluate the performance of the GAN we will use the real data from the training set to train the Discriminator so that it can learn the characteristics of data that comes from the training set. This will make it easier for the Discriminator to label samples that come from the Generator as fake. We therefore create a simple function named <code class="docutils literal notranslate"><span class="pre">take_real_samples()</span></code> as it is simply taking real samples from the training set and will allow us to input them into the Discriminator for training. You will notice that the function returns two values; <code class="docutils literal notranslate"><span class="pre">X</span></code> and <code class="docutils literal notranslate"><span class="pre">y</span></code>. <code class="docutils literal notranslate"><span class="pre">X</span></code> refers to the values extracted from the training set and <code class="docutils literal notranslate"><span class="pre">y</span></code> is an array of ones to label the data as real!</p>
+<p>Note, the first part of this function extracts a pre-defined number (n) of values randomly from the dataset. This is not necessary and you can definitely pass through the entire dataset on each iteration if you wish - this simply just shows a way of mixing things up and can sometimes be a useful technique when training networks. In NVIDIA’s StyleGAN they intentionally add noise to different layers of their neural networks during training and find that the output from the trained networks become more flexible and less specific. This is often referred to as Mode Collapse and the extract from Google (below) does a good job at explaining what it means in reference to a GAN that generates faces:</p>
+<blockquote>
+<div><p>“Usually you want your GAN to produce a wide variety of outputs. You want, for example, a different face for every random input to your face generator. However, if a generator produces an especially plausible output, the generator may learn to produce only that output. In fact, the generator is always trying to find the one output that seems most plausible to the discriminator. If the generator starts producing the same output (or a small set of outputs) over and over again, the discriminator’s best strategy is to learn to always reject that output. But if the next generation of discriminator gets stuck in a local minimum and doesn’t find the best strategy, then it’s too easy for the next generator iteration to find the most plausible output for the current discriminator. Each iteration of generator over-optimizes for a particular discriminator, and the discriminator never manages to learn its way out of the trap. As a result the generators rotate through a small set of output types. This form of GAN failure is called mode collapse.” - Google GAN Tutorial (https://developers.google.com/machine-learning/gan/problems)</p>
+</div></blockquote>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">take_real_samples</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="c1">#np.random.seed(30)</span>
+    <span class="n">idx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">dataset</span><span class="p">),</span> <span class="n">size</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="n">n</span><span class="p">))</span>
+    <span class="n">X</span> <span class="o">=</span> <span class="n">dataset</span><span class="p">[</span><span class="n">idx</span><span class="p">,:]</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="n">n</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span> 
+    
+    <span class="k">return</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="generate-points-in-latent-space-as-input-for-the-generator">
+<h4>Generate points in latent space as input for the generator<a class="headerlink" href="#generate-points-in-latent-space-as-input-for-the-generator" title="Permalink to this headline">¶</a></h4>
+<p>Next, we define another function that sorts out the input to the Generator <span class="math notranslate nohighlight">\(G\)</span>. The input to the Generator in the GAN is known as the latent input. This is a weird name, but it is nothing more than a random input vector that we insert into the Generator. This is useful as it assures that the output from <span class="math notranslate nohighlight">\(G\)</span> is varied and is the reason for the stochastic nature of the generative network.</p>
+<blockquote>
+<div><p>Stochastic - “Having a random probability distribution or pattern that may be analysed statistically but may not be predicted precisely.”</p>
+</div></blockquote>
+<p>We define the <code class="docutils literal notranslate"><span class="pre">create_latent_points()</span></code> function below to generate this ‘latent’ input that we will pass into the Generator to generate new samples. It takes inputs <code class="docutils literal notranslate"><span class="pre">latent_input</span></code> and <code class="docutils literal notranslate"><span class="pre">n</span></code> that we will define later. We imported the <code class="docutils literal notranslate"><span class="pre">randn</span></code> function earlier directly from the <code class="docutils literal notranslate"><span class="pre">numpy.random</span></code> module, equally we could call <code class="docutils literal notranslate"><span class="pre">np.random.randn</span></code> for the same result. <code class="docutils literal notranslate"><span class="pre">randn</span></code> returns a sample (or samples) from the “standard normal” distribution. The function returns <code class="docutils literal notranslate"><span class="pre">x_input</span></code> which will feed into <span class="math notranslate nohighlight">\(G\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># generate points in latent space as input for the generator</span>
+<span class="k">def</span> <span class="nf">create_latent_points</span><span class="p">(</span><span class="n">latent_dim</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+    <span class="c1"># generate points in the latent space</span>
+    <span class="n">x_input</span> <span class="o">=</span> <span class="n">randn</span><span class="p">(</span><span class="n">latent_dim</span> <span class="o">*</span> <span class="n">n</span><span class="p">)</span>
+    <span class="c1"># reshape into a batch of inputs for the network</span>
+    <span class="n">x_input</span> <span class="o">=</span> <span class="n">x_input</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">latent_dim</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">x_input</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="use-the-generator-to-generate-n-fake-examples-with-class-labels">
+<h4>Use the Generator to generate n fake examples, with class labels<a class="headerlink" href="#use-the-generator-to-generate-n-fake-examples-with-class-labels" title="Permalink to this headline">¶</a></h4>
+<p>The <code class="docutils literal notranslate"><span class="pre">generate_fake_samples()</span></code> function below calls the <code class="docutils literal notranslate"><span class="pre">create_latent_points()</span></code> function within that function, it is an example of a nested function which again you may or may not be familiar with from MATLAB. It collects the <code class="docutils literal notranslate"><span class="pre">x_input</span></code> from the <code class="docutils literal notranslate"><span class="pre">create_latent_points</span></code> function we defined earlier and inserts it directly into the <code class="docutils literal notranslate"><span class="pre">generator</span></code> model. It is important to remember that this example will take us through the creation of a GAN model and that GAN model is nothing more than a combination of a Discriminator and a Generator (two neural networks). As part of the training algorithm we will work directly with the <span class="math notranslate nohighlight">\(G\)</span> and <span class="math notranslate nohighlight">\(D\)</span> models and in this function we call the <code class="docutils literal notranslate"><span class="pre">predict</span></code> attribute from the <code class="docutils literal notranslate"><span class="pre">generator</span></code> variable that contains all of the information about the generator model. The <code class="docutils literal notranslate"><span class="pre">predict</span></code> attribute, as the name suggests, is the attribute that lets us actually use the generator to make predictions (generate new data). Here we use it to generate <code class="docutils literal notranslate"><span class="pre">n</span></code> fake samples and store them in variable <code class="docutils literal notranslate"><span class="pre">X</span></code>. As with the <code class="docutils literal notranslate"><span class="pre">take_real_samples</span></code>, we create another vector that stores the class label of 1 indicating fake samples.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># use the generator to generate n fake examples, with class labels</span>
+<span class="k">def</span> <span class="nf">generate_fake_samples</span><span class="p">(</span><span class="n">generator</span><span class="p">,</span> <span class="n">latent_dim</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+    <span class="c1"># generate points in latent space</span>
+    <span class="n">x_input</span> <span class="o">=</span> <span class="n">create_latent_points</span><span class="p">(</span><span class="n">latent_dim</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
+    <span class="c1"># predict outputs</span>
+    <span class="n">X</span> <span class="o">=</span> <span class="n">generator</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">x_input</span><span class="p">)</span>
+    <span class="c1"># create class labels</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">n</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="define-gan-model">
+<h3>Define GAN Model<a class="headerlink" href="#define-gan-model" title="Permalink to this headline">¶</a></h3>
+<p>Here we will define the structure of the neural networks. Remember that a GAN consists of two neural networks, a Discriminator <span class="math notranslate nohighlight">\(D\)</span> and a Generator <span class="math notranslate nohighlight">\(G\)</span>. In this example, we are dealing with numeric data so a standard Multi-Layer Perceptron (MLP) network makes sense. We will define each network individually before creating a combined GAN model. As always, it is important for us to consider the shape of the input/output entering and leaving the networks. In the case of <span class="math notranslate nohighlight">\(D\)</span>, each input sample will be a vector containing two values - one for the <span class="math notranslate nohighlight">\(x\)</span> value and another for its corresponding <span class="math notranslate nohighlight">\(y\)</span> value - therefore 2 nodes in the input layer of the MLP network. Recall that <span class="math notranslate nohighlight">\(D\)</span> is nothing more than a classification network, it’s output will therefore be a single node that outputs a value between 0 and 1 corresponding to the confidence that it has that a sample came from a real (label = 1) or a fake (label = 0) distribution. The <span class="math notranslate nohighlight">\(G\)</span> network is the latent input we discussed earlier. Recall that the latent input is nothing more than a vector of random numbers, so it’s size will be equal to variable <code class="docutils literal notranslate"><span class="pre">latent_dim</span></code> which we can define later. The primary goal of <span class="math notranslate nohighlight">\(G\)</span> is to generate samples that $<span class="math notranslate nohighlight">\( believes came from the training set, and a single sample consists of an \)</span>x<span class="math notranslate nohighlight">\( value and a corresponding \)</span>y<span class="math notranslate nohighlight">\( value. Therefore the output of \)</span>G$ simply has two nodes in its output layer.</p>
+<div class="section" id="discriminator">
+<h4>Discriminator<a class="headerlink" href="#discriminator" title="Permalink to this headline">¶</a></h4>
+<p>Again we use Keras’ <code class="docutils literal notranslate"><span class="pre">Sequential()</span></code> model as it makes it very simple to add and play around with the layers in the network. The layers will look familiar to ones we have used in the previous examples, again the <code class="docutils literal notranslate"><span class="pre">Dense()</span></code> layer refers to a fully connected layer in which all the nodes in that layer are ‘fully connected’ to the ones in the previous and subsequent layer.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Note that here we define the discriminator in a function, of course the model could be made separately outside of the function but this allows us to exectute the whole algorithm later and if we change some parameters we will not have to execute this block of code again to reinitalise the model.</p>
+</div>
+<p>The function takes a default input that, unless changed, is of size 2 (as discussed earlier). The output layer includes a <code class="docutils literal notranslate"><span class="pre">Sigmoid</span></code> activation function that ensures that the output is modulated between 0 and 1. The key difference between this example and others is that here we have included a <code class="docutils literal notranslate"><span class="pre">kernel_initializer</span></code>. Initializers allow us to define the way to set the initial random weights of keras layers (see keras docs for more info - https://keras.io/api/layers/initializers/. Here we use the default initializer for the <code class="docutils literal notranslate"><span class="pre">Dense</span></code> layer which is <code class="docutils literal notranslate"><span class="pre">glorot_uniform</span></code>. More information about <code class="docutils literal notranslate"><span class="pre">glorot_uniform</span></code> is shown below:</p>
+<blockquote>
+<div><p>“It draws samples from a uniform distribution within <code class="docutils literal notranslate"><span class="pre">-limit,</span> <span class="pre">limit</span></code> where <code class="docutils literal notranslate"><span class="pre">limit</span></code> is <code class="docutils literal notranslate"><span class="pre">sqrt(6</span> <span class="pre">/</span> <span class="pre">(fan_in</span> <span class="pre">+</span> <span class="pre">fan_out))</span></code> where <code class="docutils literal notranslate"><span class="pre">fan_in</span></code> is the number of input units in the weight tensor and <code class="docutils literal notranslate"><span class="pre">fan_out</span></code> is the number of output units in the weight tensor.” - (Glorot Uniform, https://keras.rstudio.com/reference/initializer_glorot_uniform.html)</p>
+</div></blockquote>
+<p>As always, we must remember to <code class="docutils literal notranslate"><span class="pre">compile</span></code> the model to define the loss function we will use, the optimizer and whatever metrics we may wish to track during training. As we defined the discriminator within a function, we have to remember to <code class="docutils literal notranslate"><span class="pre">return</span> <span class="pre">model</span></code> such that the actual model parameters can be stored and used elsewhere.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">define_discriminator</span><span class="p">(</span><span class="n">n_inputs</span><span class="o">=</span><span class="mi">2</span><span class="p">):</span>
+    <span class="n">model</span> <span class="o">=</span> <span class="n">Sequential</span><span class="p">()</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Dense</span><span class="p">(</span><span class="mi">25</span><span class="p">,</span>  <span class="n">kernel_initializer</span><span class="o">=</span><span class="s1">&#39;glorot_uniform&#39;</span><span class="p">,</span> <span class="n">input_dim</span><span class="o">=</span><span class="n">n_inputs</span><span class="p">))</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">LeakyReLU</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.01</span><span class="p">))</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Dense</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span>  <span class="n">kernel_initializer</span><span class="o">=</span><span class="s1">&#39;glorot_uniform&#39;</span><span class="p">))</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">LeakyReLU</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.01</span><span class="p">))</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Dense</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span>  <span class="n">kernel_initializer</span><span class="o">=</span><span class="s1">&#39;glorot_uniform&#39;</span><span class="p">))</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">LeakyReLU</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.01</span><span class="p">))</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Dense</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span>  <span class="n">kernel_initializer</span><span class="o">=</span><span class="s1">&#39;glorot_uniform&#39;</span><span class="p">))</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">LeakyReLU</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.01</span><span class="p">))</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Dense</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s1">&#39;sigmoid&#39;</span><span class="p">))</span>
+    <span class="c1"># compile model</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">loss</span><span class="o">=</span><span class="s1">&#39;binary_crossentropy&#39;</span><span class="p">,</span> <span class="n">optimizer</span><span class="o">=</span><span class="s1">&#39;adam&#39;</span><span class="p">,</span> <span class="n">metrics</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;accuracy&#39;</span><span class="p">])</span>
+    <span class="k">return</span> <span class="n">model</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="generator">
+<h4>Generator<a class="headerlink" href="#generator" title="Permalink to this headline">¶</a></h4>
+<p>Similarly, we define the Generator <span class="math notranslate nohighlight">\(G\)</span>. Again we define it as a function taking inputs <code class="docutils literal notranslate"><span class="pre">latent_dim</span></code> and a default number of outputs, <code class="docutils literal notranslate"><span class="pre">n_outputs</span></code> equal to 2.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># define the standalone generator model</span>
+<span class="k">def</span> <span class="nf">define_generator</span><span class="p">(</span><span class="n">latent_dim</span><span class="p">,</span> <span class="n">n_outputs</span><span class="o">=</span><span class="mi">2</span><span class="p">):</span>
+    <span class="n">model</span> <span class="o">=</span> <span class="n">Sequential</span><span class="p">()</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Dense</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s1">&#39;relu&#39;</span><span class="p">,</span> <span class="n">kernel_initializer</span><span class="o">=</span><span class="s1">&#39;he_uniform&#39;</span><span class="p">,</span> <span class="n">input_dim</span><span class="o">=</span><span class="n">latent_dim</span><span class="p">))</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Dense</span><span class="p">(</span><span class="n">n_outputs</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s1">&#39;linear&#39;</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">model</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="combined-gan-model">
+<h4>Combined GAN Model<a class="headerlink" href="#combined-gan-model" title="Permalink to this headline">¶</a></h4>
+<p>Now that we have defined the <span class="math notranslate nohighlight">\(G\)</span> and <span class="math notranslate nohighlight">\(D\)</span> networks, we can combine them to form the combined GAN model. Again, we will use a function to do this and as you might expect the only inputs that it takes are the <code class="docutils literal notranslate"><span class="pre">generator</span></code> and the <code class="docutils literal notranslate"><span class="pre">discriminator</span></code>. We use Keras’ <code class="docutils literal notranslate"><span class="pre">Sequential()</span></code> model and call the <code class="docutils literal notranslate"><span class="pre">model.add</span></code> attribute to add the entire model (in the same we add individual layers we can add entire networks!). Again we compile the model to define the loss function, optimizer and metrics we wish to track during training. You may have noticed that we include <code class="docutils literal notranslate"><span class="pre">disciminator.trainable</span> <span class="pre">=</span> <span class="pre">False</span></code>, the reason for this wil be explained in more detail shortly, but in short it is because the combined GAN model is used to train the Generator only. In order to train the Geneator and update it’s parameters, the loss function requires <span class="math notranslate nohighlight">\(D(G(z))\)</span> which corresponds to the Discriminators classification of the output of the Generators output given latent input <span class="math notranslate nohighlight">\(z\)</span>. The primary goal of <span class="math notranslate nohighlight">\(G\)</span> is to generate fake samples that the Discriminator believes to be real, therefore for a given latent input <span class="math notranslate nohighlight">\(z\)</span>, we want the Discriminator to believe that a sample <span class="math notranslate nohighlight">\(G(z)\)</span> has the same represenation as an input sample from training set <span class="math notranslate nohighlight">\(x\)</span>. Therefore a combined model is necessary such that we can optimise <span class="math notranslate nohighlight">\(G\)</span> based on the output of <span class="math notranslate nohighlight">\(D\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># define the combined generator and discriminator model, for updating the generator</span>
+<span class="k">def</span> <span class="nf">define_gan</span><span class="p">(</span><span class="n">generator</span><span class="p">,</span> <span class="n">discriminator</span><span class="p">):</span>
+    <span class="c1"># make weights in the discriminator not trainable</span>
+    <span class="n">discriminator</span><span class="o">.</span><span class="n">trainable</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="c1"># connect them</span>
+    <span class="n">model</span> <span class="o">=</span> <span class="n">Sequential</span><span class="p">()</span>
+    <span class="c1"># add generator</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">generator</span><span class="p">)</span>
+    <span class="c1"># add the discriminator</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">discriminator</span><span class="p">)</span>
+    <span class="c1"># compile model</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">loss</span><span class="o">=</span><span class="s1">&#39;binary_crossentropy&#39;</span><span class="p">,</span> <span class="n">optimizer</span><span class="o">=</span><span class="s1">&#39;adam&#39;</span><span class="p">,</span><span class="n">metrics</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;accuracy&#39;</span><span class="p">])</span>
+    <span class="k">return</span> <span class="n">model</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="evaluate-performance">
+<h2>Evaluate Performance<a class="headerlink" href="#evaluate-performance" title="Permalink to this headline">¶</a></h2>
+<p>At this point, the bulk of the code is written. We have defined functions that let us extract data from the training set and label it as real data accordingly (label = 0), a function that defines a random latent input from a Gaussian distribution, and finally a function that allows us to use <span class="math notranslate nohighlight">\(G\)</span> to make predictions! We have also defined the acrhitecture of the Discriminator <span class="math notranslate nohighlight">\(D\)</span>, Generator <span class="math notranslate nohighlight">\(G\)</span> and the combined GAN model. We can now start to develop the algorithm that controls the training procedure by defining a <code class="docutils literal notranslate"><span class="pre">train()</span></code> function and we will monitor the performance of the network during training with an additional function named <code class="docutils literal notranslate"><span class="pre">check_performance()</span></code>.</p>
+<p>First, lets consider the <code class="docutils literal notranslate"><span class="pre">check_performance()</span></code> function. You can see that it takes inputs <code class="docutils literal notranslate"><span class="pre">epoch</span></code>, <code class="docutils literal notranslate"><span class="pre">generator</span></code>, <code class="docutils literal notranslate"><span class="pre">discriminator</span></code>, <code class="docutils literal notranslate"><span class="pre">latent_dim</span></code> and a default setting <code class="docutils literal notranslate"><span class="pre">n=10</span></code>. Variables <code class="docutils literal notranslate"><span class="pre">epochs</span></code> and <code class="docutils literal notranslate"><span class="pre">latent_dim</span></code> will be defined later. The function begins by calling the <code class="docutils literal notranslate"><span class="pre">take_real_samples(n)</span></code> function to extract real samples from the training set. We make the function equal to <code class="docutils literal notranslate"><span class="pre">x_real</span></code> and <code class="docutils literal notranslate"><span class="pre">y_real</span></code> as the function returns two variables, the first of which is the training data itself, and the second is the corresponding label (label=1 for real data). The value <code class="docutils literal notranslate"><span class="pre">n</span></code> simply dictates the number of samples we take from the training set. If <code class="docutils literal notranslate"><span class="pre">n</span></code> &gt; than the number of samples in the training set, it will simply take all of the values from the training set. Next we call the <code class="docutils literal notranslate"><span class="pre">discriminator.evaluate()</span></code> attribute from the <span class="math notranslate nohighlight">\(D\)</span> model to evaluate the performance of <span class="math notranslate nohighlight">\(D\)</span> at that point during the training process. The <code class="docutils literal notranslate"><span class="pre">discriminator.evaluate()</span></code> function is useful as the model will not train on any data passed into the network. It takes both the training data and the label as input, we set the <code class="docutils literal notranslate"><span class="pre">verbose=0</span></code> simply to prevent any output. The evaluate function returns the values of any metrics that are being tracked, if we call <code class="docutils literal notranslate"><span class="pre">discriminator.metrics_names</span></code> we will see <code class="docutils literal notranslate"><span class="pre">['loss',</span> <span class="pre">'accuracy']</span></code> printed. We can choose to monitor either, neither or both of these values if we wish. But lets say that we just want to monitor the accuracy, we can use the <code class="docutils literal notranslate"><span class="pre">_</span></code> command to ignore the first returned variable (in this case the loss) so that <code class="docutils literal notranslate"><span class="pre">_,</span> <span class="pre">acc_real</span></code> will only return the accuracy from that evaluation of the discriminator. We do a similar thing by calling <code class="docutils literal notranslate"><span class="pre">generate_fake_samples()</span></code> to store the fake data generated by <span class="math notranslate nohighlight">\(G\)</span> and the fake label (label=0). We then call the <code class="docutils literal notranslate"><span class="pre">discriminator.evaluate()</span></code> once again but this time we evaluate the discriminator on the fake samples and test its performance! Again, we use the <code class="docutils literal notranslate"><span class="pre">_</span></code> command in Python to ignore the first returned variable (loss) and we stored the accuracy of the discriminator on the fake data (from generator) into variable <code class="docutils literal notranslate"><span class="pre">acc_fake</span></code>. We can then call the <code class="docutils literal notranslate"><span class="pre">print()</span></code> function to output the accuracies during training for that given epoch number. Finally, we can use the <code class="docutils literal notranslate"><span class="pre">matplotlib</span></code> library to plot some of the results. We plot the <code class="docutils literal notranslate"><span class="pre">real</span></code> data we used from the training set (as red crosses) and the <code class="docutils literal notranslate"><span class="pre">fake</span></code> data too!</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># evaluate the discriminator and plot real and fake points</span>
+<span class="k">def</span> <span class="nf">check_performance</span><span class="p">(</span><span class="n">epoch</span><span class="p">,</span> <span class="n">generator</span><span class="p">,</span> <span class="n">discriminator</span><span class="p">,</span> <span class="n">latent_dim</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">10</span><span class="p">):</span>
+    <span class="c1"># prepare real samples</span>
+    <span class="n">x_real</span><span class="p">,</span> <span class="n">y_real</span> <span class="o">=</span> <span class="n">take_real_samples</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+    <span class="c1"># evaluate discriminator on real examples</span>
+    <span class="n">_</span><span class="p">,</span> <span class="n">acc_real</span> <span class="o">=</span> <span class="n">discriminator</span><span class="o">.</span><span class="n">evaluate</span><span class="p">(</span><span class="n">x_real</span><span class="p">,</span> <span class="n">y_real</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="c1"># prepare fake examples</span>
+    <span class="n">x_fake</span><span class="p">,</span> <span class="n">y_fake</span> <span class="o">=</span> <span class="n">generate_fake_samples</span><span class="p">(</span><span class="n">generator</span><span class="p">,</span> <span class="n">latent_dim</span><span class="p">,</span> <span class="n">n</span><span class="o">*</span><span class="mi">4</span><span class="p">)</span>
+    <span class="c1"># evaluate discriminator on fake examples</span>
+    <span class="n">_</span><span class="p">,</span> <span class="n">acc_fake</span> <span class="o">=</span> <span class="n">discriminator</span><span class="o">.</span><span class="n">evaluate</span><span class="p">(</span><span class="n">x_fake</span><span class="p">,</span> <span class="n">y_fake</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="c1"># summarize discriminator performance</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">epoch</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">acc_real</span><span class="p">,</span> <span class="n">acc_fake</span><span class="p">)</span>
+    <span class="c1"># scatter plot real and fake data points</span>
+    <span class="n">pyplot</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x_real</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">x_real</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;training set&#39;</span><span class="p">)</span>
+    <span class="n">pyplot</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x_fake</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">x_fake</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;$</span><span class="se">\u25EF</span><span class="s1">$&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;grey&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;generated&#39;</span><span class="p">)</span>
+    <span class="n">pyplot</span><span class="o">.</span><span class="n">xlim</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">6</span><span class="p">])</span>
+    <span class="n">pyplot</span><span class="o">.</span><span class="n">ylim</span><span class="p">([</span><span class="o">-</span><span class="mf">1.5</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">])</span>
+    <span class="n">pyplot</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+    <span class="n">pyplot</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The last function we need to define is the <code class="docutils literal notranslate"><span class="pre">train</span></code> function itself. This function is an integral part of the algorithm and pieces together all of the functions that we have previously defined. As a result, it takes quite a few inputs in order to make it work. As you would expect, it requires information about the models so the <code class="docutils literal notranslate"><span class="pre">generator</span></code>, <code class="docutils literal notranslate"><span class="pre">discriminator</span></code> and the combined <code class="docutils literal notranslate"><span class="pre">gan_model</span></code> are called. Again, we need to define the size of the latent input to <span class="math notranslate nohighlight">\(G\)</span> so <code class="docutils literal notranslate"><span class="pre">latent_dim</span></code> is also defined. The default variables include <code class="docutils literal notranslate"><span class="pre">n_epochs</span> <span class="pre">=</span> <span class="pre">50000</span></code>, <code class="docutils literal notranslate"><span class="pre">n_batch=256</span></code> and <code class="docutils literal notranslate"><span class="pre">check_it=1000</span></code>. <code class="docutils literal notranslate"><span class="pre">n_epochs</span></code> defines the maximum number of epochs that the model will train for, in this case it is set to 50,000 but this is arbitrary. Obviously you can train for shorter or longer if you wish. <code class="docutils literal notranslate"><span class="pre">n_batch</span></code> determines the number of samples that are input to the network in that iteration, this is important when working with big data as you may need to lower the batch size so that you do not exceed the memory limits of your hardware (CPU/GPU). <code class="docutils literal notranslate"><span class="pre">check_it</span></code> is another default value that we use to trigger the <code class="docutils literal notranslate"><span class="pre">check_performance</span></code> function.</p>
+<p>We start the function by creating a new variable <code class="docutils literal notranslate"><span class="pre">half_batch</span></code>. This <code class="docutils literal notranslate"><span class="pre">half_batch</span></code> variable is used to split the batch_size in half and is exclusively used to train <span class="math notranslate nohighlight">\(D\)</span>. This is because we train <span class="math notranslate nohighlight">\(D\)</span> on both the real data (from training set) and the fake data (from the generator), if we didn’t half the batch size, then the discriminator would be exposed to twice as as much data as the generator and would therefore have a competitive advantage whereby the discriminator learns faster than generator and outcompetes the network. This makes it even more difficult for <span class="math notranslate nohighlight">\(G\)</span> to produce samples that <span class="math notranslate nohighlight">\(D\)</span> believes to be real and as such can result in unsuccessful training.  With this being said, to intiate the training algorithm we loop over the <code class="docutils literal notranslate"><span class="pre">n_epochs</span></code> that we defined. Only once 50,000 epochs have been met can we exit the loop and cease training.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>We could include <code class="docutils literal notranslate"><span class="pre">break</span></code> statements into the loop a way to add additional stopping criteria such that once certain user-defined conditions have been met, the training will be terminated.</p>
+</div>
+<p>Inside the loop, we prepare our real and fake data in the same we defined in the previous function. However, this time we will actually use this data to train and update the parameters of the network. We train <span class="math notranslate nohighlight">\(D\)</span> by calling the <code class="docutils literal notranslate"><span class="pre">discriminator.train_on_batch()</span></code> attribute from Keras. This function requires both the training data and its associated label. Therefore we call this function twice, first on the real data and next on the fake data! Next, we want to train the Generator <span class="math notranslate nohighlight">\(G\)</span>. We define the <code class="docutils literal notranslate"><span class="pre">x_gan</span></code> variable from the function <code class="docutils literal notranslate"><span class="pre">create_latent_points()</span></code> that we defined earlier that contains the latent input that we will input to the <span class="math notranslate nohighlight">\(G\)</span>. Similarly, we define <code class="docutils literal notranslate"><span class="pre">y_gan</span></code> as the label data for the fake samples!</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Remember that the naming convention typically used refers to X as the input, and Y as the output.</p>
+</div>
+<p>We can then call the same <code class="docutils literal notranslate"><span class="pre">train_on_batch</span></code> attribute on the <span class="math notranslate nohighlight">\(G\)</span> model to train the generator. Note that within the GAN model we made the layers of the discriminator untrainable so they will not update during this step! Finally, we define a condition where if the current interation is a multiple of <code class="docutils literal notranslate"><span class="pre">check_it</span></code> (equal to 1,000), then it will execute the <code class="docutils literal notranslate"><span class="pre">check_performance()</span></code> which prints all the graphs etc and some of the performance metrics during training!</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># train the generator and discriminator</span>
+<span class="k">def</span> <span class="nf">train</span><span class="p">(</span><span class="n">generator</span><span class="p">,</span> <span class="n">discriminator</span><span class="p">,</span> <span class="n">gan_model</span><span class="p">,</span> <span class="n">latent_dim</span><span class="p">,</span> <span class="n">n_epochs</span><span class="o">=</span><span class="mi">50000</span><span class="p">,</span> <span class="n">n_batch</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">check_it</span><span class="o">=</span><span class="mi">1000</span><span class="p">):</span>
+    <span class="c1"># determine half the size of one batch, for updating the discriminator</span>
+    <span class="n">half_batch</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">n_batch</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span>
+    <span class="c1"># manually enumerate epochs</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_epochs</span><span class="p">):</span>
+        <span class="c1"># prepare real samples</span>
+        <span class="n">x_real</span><span class="p">,</span> <span class="n">y_real</span> <span class="o">=</span> <span class="n">take_real_samples</span><span class="p">(</span><span class="n">half_batch</span><span class="p">)</span>
+        <span class="c1"># prepare fake examples</span>
+        <span class="n">x_fake</span><span class="p">,</span> <span class="n">y_fake</span> <span class="o">=</span> <span class="n">generate_fake_samples</span><span class="p">(</span><span class="n">generator</span><span class="p">,</span> <span class="n">latent_dim</span><span class="p">,</span> <span class="n">half_batch</span><span class="p">)</span>
+        <span class="c1"># update discriminator</span>
+        <span class="n">discriminator</span><span class="o">.</span><span class="n">train_on_batch</span><span class="p">(</span><span class="n">x_real</span><span class="p">,</span> <span class="n">y_real</span><span class="p">)</span>
+        <span class="n">discriminator</span><span class="o">.</span><span class="n">train_on_batch</span><span class="p">(</span><span class="n">x_fake</span><span class="p">,</span> <span class="n">y_fake</span><span class="p">)</span>
+        <span class="c1"># prepare points in latent space as input for the generator</span>
+        <span class="n">x_gan</span> <span class="o">=</span> <span class="n">create_latent_points</span><span class="p">(</span><span class="n">latent_dim</span><span class="p">,</span> <span class="n">n_batch</span><span class="p">)</span>
+        <span class="c1"># create inverted labels for the fake samples</span>
+        <span class="n">y_gan</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="n">n_batch</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+        <span class="c1"># update the generator via the discriminator&#39;s error</span>
+        <span class="n">gan_model</span><span class="o">.</span><span class="n">train_on_batch</span><span class="p">(</span><span class="n">x_gan</span><span class="p">,</span> <span class="n">y_gan</span><span class="p">)</span>
+        <span class="c1"># evaluate the model every n_eval epochs</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="o">%</span> <span class="n">check_it</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">check_performance</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">generator</span><span class="p">,</span> <span class="n">discriminator</span><span class="p">,</span> <span class="n">latent_dim</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="execute-the-model">
+<h2>Execute the Model!<a class="headerlink" href="#execute-the-model" title="Permalink to this headline">¶</a></h2>
+<p>Running this cell block will initiate and execute the algorithm. We start by (finally) defining <code class="docutils literal notranslate"><span class="pre">latent_dim</span></code> which is simply the size of the random Gaussian vector that we input to <span class="math notranslate nohighlight">\(G\)</span>. Next we decide the names that we will use for each of the models, (creatively named <code class="docutils literal notranslate"><span class="pre">discriminator</span></code>, <code class="docutils literal notranslate"><span class="pre">generator</span></code> and <code class="docutils literal notranslate"><span class="pre">gan_model</span></code>). Finally calling the <code class="docutils literal notranslate"><span class="pre">train</span></code> function is the last step to execute the algorithm!</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>I include the %%capture command here to prevent the output as there was an error when running it in the JupyterBook (because of hardware incompatibilities etc). If you run the notebook independently though on your computer it will work fine. Instead, I include an image below that shows some of the output you should expect to see.</p>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%capture</span>
+<span class="c1"># size of the latent space</span>
+<span class="n">latent_dim</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="c1"># create the discriminator</span>
+<span class="n">discriminator</span> <span class="o">=</span> <span class="n">define_discriminator</span><span class="p">()</span>
+<span class="c1"># create the generator</span>
+<span class="n">generator</span> <span class="o">=</span> <span class="n">define_generator</span><span class="p">(</span><span class="n">latent_dim</span><span class="p">)</span>
+<span class="c1"># create the gan</span>
+<span class="n">gan_model</span> <span class="o">=</span> <span class="n">define_gan</span><span class="p">(</span><span class="n">generator</span><span class="p">,</span> <span class="n">discriminator</span><span class="p">)</span>
+<span class="c1"># train model</span>
+<span class="n">train</span><span class="p">(</span><span class="n">generator</span><span class="p">,</span> <span class="n">discriminator</span><span class="p">,</span> <span class="n">gan_model</span><span class="p">,</span> <span class="n">latent_dim</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><img alt="Image" src="../_images/gan_out2.png" /></p>
+<div class="section" id="some-evaluation">
+<h3>Some evaluation<a class="headerlink" href="#some-evaluation" title="Permalink to this headline">¶</a></h3>
+<p>The grey points on the graph represnt points generated by the GAN network. The red scatter points represent 10 points (defined earlier as <code class="docutils literal notranslate"><span class="pre">n</span></code>) randomly taken from the training set (which was 50 points on a sin wave from 0 - 2<span class="math notranslate nohighlight">\(\pi\)</span>). You can see that early in the training cycle (1000 iterations), the points generated by the Generator is not representative of the training set. Instead, it appears as a cloud of points with no real correlation or pattern. As training progresses, you can see that at 10,000 iterations the generated samples match the shape of the sin curve much more closely. This shows that the GAN network is learning from the training set and the generator is optimising such that it is able to generate realistic points! Over time, the network continues to improve and at 50,000 iterations the generated samples match very closely with the sin function across the entire range!</p>
+<div class="section" id="using-the-model-to-generate-new-data">
+<h4>Using the model to generate new data<a class="headerlink" href="#using-the-model-to-generate-new-data" title="Permalink to this headline">¶</a></h4>
+<p>We can call the <code class="docutils literal notranslate"><span class="pre">generate_fake_samples</span></code> function that we defined earlier to generate new samples. The function takes the <code class="docutils literal notranslate"><span class="pre">generator</span></code> model as input (obviously as it needs to use the trained generator to generate new points), as well as the latent input (10) and number of points we would like to be generated (100). We make the function equal to <code class="docutils literal notranslate"><span class="pre">A,</span> <span class="pre">_</span></code> as the function returns two values; the generated samples and their label. In this case, we’re only interested in the generated samples so we can ignore the labels (second returned variable) by using Pythons built in <code class="docutils literal notranslate"><span class="pre">_</span></code> function. We can then plot the generated samples against the sin curve to visualise the results!</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">generate_fake_samples</span><span class="p">(</span><span class="n">generator</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+<span class="n">pyplot</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">A</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span><span class="n">A</span><span class="p">[:,</span><span class="mi">1</span><span class="p">],</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;x&#39;</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;green&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;gen&#39;</span><span class="p">)</span>
+<span class="n">pyplot</span><span class="o">.</span><span class="n">ylim</span><span class="p">([</span><span class="o">-</span><span class="mf">1.5</span><span class="p">,</span><span class="mf">1.5</span><span class="p">])</span>
+<span class="n">pyplot</span><span class="o">.</span><span class="n">xlim</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">6</span><span class="p">])</span>
+<span class="n">pyplot</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">dataset</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span><span class="n">dataset</span><span class="p">[:,</span><span class="mi">1</span><span class="p">],</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;sin x&#39;</span><span class="p">)</span>
+<span class="n">pyplot</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">pyplot</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/3_GAN_39_0.png" src="../_images/3_GAN_39_0.png" />
+</div>
+</div>
+</div>
+<div class="section" id="further-things-to-try">
+<h4>Further things to try<a class="headerlink" href="#further-things-to-try" title="Permalink to this headline">¶</a></h4>
+<p>This model was successful as the output spans across the entire distribution of the training set. We would be less pleased if there was a lot of localisation, i.e. majority of generated points focussed around a small part of the sin function. This would be an example of mode collapse! We are also satisfied as the generated samples lie very closely to the sin function indicating that the Generator is able to produce accurate samples. If you are wanting to play around with the model further, perhaps try some of the following suggestions and run the model again:</p>
+<ol class="simple">
+<li><p>Play around with the size of the latent input - what happens to the output if we reduce the input size to 3?</p></li>
+<li><p>See what happens when <code class="docutils literal notranslate"><span class="pre">n</span></code> is higher - i.e. taking more samples from the training set. Set <code class="docutils literal notranslate"><span class="pre">n</span></code> to a high value to use the entire training data.</p></li>
+<li><p>Change the architecture of <span class="math notranslate nohighlight">\(G\)</span> and <span class="math notranslate nohighlight">\(D\)</span>: Experiment with different activation functions, more layers, less nodes etc.</p></li>
+<li><p>See what happens when we use different initialisers when defining the model</p></li>
+</ol>
+<p>~ <code class="docutils literal notranslate"><span class="pre">Finished!</span></code></p>
+</div>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "tensorflow"
+        },
+        kernelOptions: {
+            kernelName: "tensorflow",
+            path: "./Examples"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'tensorflow'</script>
+
+              </div>
+              
+        </div>
+    </div>
+    
+    
+    <div class='prev-next-bottom'>
+        
+    <a class='left-prev' id="prev-link" href="2_MNIST_CNN.html" title="previous page">2 - MNIST CNN Network</a>
+    <a class='right-next' id="next-link" href="../Extras/Convolutions.html" title="next page">Convolution Filter Example</a>
+
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Samuel Thompson<br/>
+        
+            &copy; Copyright 2020.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    <script src="../_static/js/index.js"></script>
+    
+  </body>
+</html>

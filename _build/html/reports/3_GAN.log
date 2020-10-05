@@ -32,7 +32,8 @@ nbclient.exceptions.CellTimeoutError: A cell timed out while it was being execut
 The message was: Cell execution timed out.
 Here is a preview of the cell contents:
 -------------------
-num_epochs = 10
-model.fit(train_images,to_categorical(train_labels, num_classes), epochs=num_epochs,validation_data=(test_images, to_categorical(test_labels, num_classes)))
+['%%capture', '# size of the latent space', 'latent_dim = 10', '# create the discriminator', 'discriminator = define_discriminator()']
+...
+['generator = define_generator(latent_dim)', '# create the gan', 'gan_model = define_gan(generator, discriminator)', '# train model', 'train(generator, discriminator, gan_model, latent_dim)']
 -------------------
 

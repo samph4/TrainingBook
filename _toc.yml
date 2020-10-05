@@ -14,8 +14,7 @@
   chapters:
   - file: Examples/1_MNIST_MLP   
   - file: Examples/2_MNIST_CNN
-  - file: Examples/3_LSTM
-  - file: Examples/4_GAN
+  - file: Examples/3_GAN
   
 - part: Extra Stuff
   chapters:
